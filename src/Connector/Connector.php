@@ -91,9 +91,9 @@ abstract class Connector
         $document = new \DOMDocument('1.0', 'UTF-8');
         if ($xmlContent !== null) {
             $document->loadXML($xmlContent);
-        } else {
-            $document->loadXML('<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"><SOAP-ENV:Header/><SOAP-ENV:Body></SOAP-ENV:Body></SOAP-ENV:Envelope>');
+            return $document;
         }
+        $document->loadXML('<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"><SOAP-ENV:Header/><SOAP-ENV:Body></SOAP-ENV:Body></SOAP-ENV:Envelope>');
         return $document;
     }
 
