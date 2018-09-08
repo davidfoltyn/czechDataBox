@@ -68,7 +68,7 @@ class DataMessage extends Connector
             }
         }
         if ($sumFileSize > 26214400) {
-            throw new FileSizeOverflow(sprintf('Maximum size of all files can be maximal 25MB. Current size is %s.', BinarySuffix::convert($sumFileSize, 2)));
+            throw new FileSizeOverflow(sprintf('Maximum size of all files can be maximal 25MB. Current size is %s.', BinarySuffix::convert($sumFileSize)));
         }
         if (!$input->getMainFile() instanceof File) {
             throw new MissingMainFile('The message can\'t be send without main attachment');
