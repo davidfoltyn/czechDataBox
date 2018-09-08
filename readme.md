@@ -61,9 +61,6 @@ Základní pomoc je poskytována zcela zdarma pomocí Issues.
 ### Proč CURL a ne SoapClient?
 Důvod je jednoduchý. Jelikož PHP nedokázalo správně zpracovávat pomocí ClassMap request/response viz [bug](https://bugs.php.net/bug.php?id=45404). Z toho důvodu, jsme zvolili využití curl a serializeru. Problém byl například v CreateMessage a proto jsme na internetu nikde nenašli knihovnu, která by umožňovala odesílání datových zpráv.
 
-## Licence
-MIT - https://opensource.org/licenses/MIT
-
 ## Donations
 
 [<img src="http://icons.iconarchive.com/icons/designbolts/credit-card-payment/256/Paypal-icon.png" width="120">](https://paypal.me/helppc)
