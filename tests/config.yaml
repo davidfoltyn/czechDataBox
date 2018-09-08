@@ -1,0 +1,12 @@
+ovm:
+  login: 'OVMLOGIN'
+  password: 'PWD'
+  id: 'OVMBOXID'
+po:
+  login: 'POLOGIN'
+  password: 'PWD'
+  id: 'POBOXID'
+fo:
+  login: 'FOLOGIN'
+  password: 'PWD'
+  id: 'FOBOXID'
