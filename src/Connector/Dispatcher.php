@@ -32,17 +32,15 @@ class Dispatcher extends \GuzzleHttp\Client
         }
 
         $caFile = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'CAfile.crt';
-        $curl[CURLOPT_SSL_VERIFYPEER] = false;
 
-        if (is_file($caFile)) {//todo nejaky problem s certifikatem, mozna problem s CA. 1.zari 2018 byla odstavka kvuli zmene CA
+        $curl[CURLOPT_SSL_VERIFYPEER] = false;
+        if (is_file($caFile)) {
             $curl[CURLOPT_SSL_VERIFYPEER] = true;
-            $curl[CURLOPT_SSL_VERIFYHOST] = 2;
+            $curl[CURLOPT_SSL_VERIFYHOST] = 0;
             $curl[CURLOPT_CAINFO] = $caFile;
-            $curl[CURLOPT_SSLVERSION] = CURL_SSLVERSION_TLSv1_2;
-            if (PHP_MAJOR_VERSION >= 7 && PHP_MINOR_VERSION >= 2) {
-                $curl[CURLOPT_SSLVERSION] = CURL_SSLVERSION_TLSv1;
-            }
-            $curl[CURLOPT_SSL_CIPHER_LIST] = 'ALL!EXPORT!EXPORT40!EXPORT56!aNULL!LOW!RC4';
+            $curl[CURLOPT_CAPATH] = $caFile;
+            $curl[CURLOPT_SSLVERSION] = CURL_SSLVERSION_TLSv1_2; //1.zari 2018 byla odstavka kvuli zmene TLS na verzi 1.2
+            //$curl[CURLOPT_SSL_CIPHER_LIST] = 'ALL!EXPORT!EXPORT40!EXPORT56!aNULL!LOW!RC4';
         }
 
         if (isset($proxyHost)) {

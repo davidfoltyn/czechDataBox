@@ -20,7 +20,7 @@ use Psr\Http\Message\ResponseInterface;
 abstract class Connector
 {
     /** @var \GuzzleHttp\Client */
-    private $guzzleHttp;
+    private static $guzzleHttp;
     /** @var Serializer */
     private $serializer;
 
@@ -157,7 +157,7 @@ abstract class Connector
         );
         try {
             /** @var ResponseInterface $response */
-            $response = $this->guzzleHttp->post($location, ['headers' => $headers, 'body' => $requestDocument->saveXml()]);
+            $response = self::$guzzleHttp->post($location, ['headers' => $headers, 'body' => $requestDocument->saveXml()]);
             $response = $response->getBody()->getContents();
             $soapResponse = $this->getXmlDocument($response);
             $response = $this->getValueByXpath($soapResponse, '//' . $soapResponse->documentElement->prefix . ':Body');
@@ -203,8 +203,8 @@ abstract class Connector
                  ] as $type) {
             $this->locations[$type] = $this->getServiceURL($account->getPortalType(), $type, $account->getLoginType());
         }
-        if (!$this->guzzleHttp instanceof Client) {
-            $this->guzzleHttp = new Dispatcher($account, $proxyHost, $proxyPort, $proxyLogin, $proxyPassword);
+        if (!self::$guzzleHttp instanceof Client) {
+            self::$guzzleHttp = new Dispatcher($account, $proxyHost, $proxyPort, $proxyLogin, $proxyPassword);
         }
         $this->connected = true;
     }
