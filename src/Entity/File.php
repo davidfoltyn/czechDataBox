@@ -66,7 +66,7 @@ class File
     protected $format;
     /**
      * @var SplFileInfo|null
-     * @Serializer\Type("base64Binary")
+     * @Serializer\Type("base64File")
      * @Serializer\SerializedName("p:dmEncodedContent")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SkipWhenEmpty()
