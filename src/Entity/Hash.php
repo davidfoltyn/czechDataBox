@@ -21,7 +21,7 @@ class Hash
 
     /**
      * @var SplFileInfo
-     * @Serializer\Type("HelpPC\Serializer\Utils\SplFileInfo")
+     * @Serializer\Type("base64Binary")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\XmlValue()
      */
