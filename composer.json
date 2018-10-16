@@ -33,7 +33,7 @@
     "guzzlehttp/guzzle": "^6.3",
     "doctrine/collections": "^1.5",
     "symfony/yaml": "^4.1",
-    "helppc/serializer": "^1.0"
+    "helppc/serializer": "^1.1"
   },
   "autoload": {
     "psr-4": {
