@@ -32,7 +32,7 @@
     "ext-dom": "*",
     "guzzlehttp/guzzle": "^6.3",
     "doctrine/collections": "^1.5",
-    "symfony/yaml": "^4.1",
+    "symfony/yaml": "^4.2",
     "helppc/serializer": "^1.1"
   },
   "autoload": {
