@@ -28,11 +28,11 @@ class DataMessage extends Connector
 
     /**
      * Ověření kopie uložené zprávy proti originálu v ISDS
-     * @deprecated
      * @param Request\VerifyMessage $input
      * @return Response\VerifyMessage
      * @throws \HelpPC\CzechDataBox\Exception\ConnectionException
      * @throws \HelpPC\CzechDataBox\Exception\SystemExclusion
+     * @deprecated
      */
     public function VerifyMessage(Request\VerifyMessage $input): Response\VerifyMessage
     {
@@ -221,11 +221,11 @@ class DataMessage extends Connector
 
     /**
      * Potvrzeni doruceni komercni zpravy
-     * @deprecated
      * @param Request\ConfirmDelivery $input
      * @return Response\ConfirmDelivery
      * @throws \HelpPC\CzechDataBox\Exception\ConnectionException
      * @throws \HelpPC\CzechDataBox\Exception\SystemExclusion
+     * @deprecated
      */
     function ConfirmDelivery(Request\ConfirmDelivery $input): Response\ConfirmDelivery
     {

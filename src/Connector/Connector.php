@@ -46,18 +46,6 @@ abstract class Connector
 
     private function getServiceURL($portaltype, $ServiceType, $LoginType)
     {
-        if ($portaltype == Account::ENV_FAKE) {
-            if ($ServiceType >= self::SUPPLEMENTARYWS) {
-                return 'https://' . $portaltype . '/fakeDS.php';
-            } elseif ($ServiceType == self::OPERATIONSWS) {
-                return 'https://' . $portaltype . '/fakeDZ.php';
-            } elseif ($ServiceType == self::INFOWS) {
-                return 'https://' . $portaltype . '/fakeDX.php';
-            } elseif ($ServiceType == self::SEARCHWS) {
-                return 'https://' . $portaltype . '/fakeDF.php';
-            }
-            return 'https://' . $portaltype . '/fake.php';
-        }
         $res = "https://ws1";
         if ($LoginType > Account::LOGIN_NAME_PASSWORD) {
             $res .= 'c';
@@ -148,13 +136,13 @@ abstract class Connector
             $bodyNode[0]->appendChild($new);
         }
 
-        $headers = array(
+        $headers = [
             'Connection' => 'Keep-Alive',
             'Accept-Encoding' => 'gzip,deflate',
             'Content-Type' => 'text/xml; charset=utf-8',
             'SOAPAction' => '""',
             // 'User-Agent' => 'HelpPC PHP Client'
-        );
+        ];
         try {
             /** @var ResponseInterface $response */
             $response = self::$guzzleHttp->post($location, ['headers' => $headers, 'body' => $requestDocument->saveXml()]);
@@ -199,7 +187,7 @@ abstract class Connector
                      self::INFOWS,
                      self::SEARCHWS,
                      self::SUPPLEMENTARYWS,
-                     self::ACCESSWS
+                     self::ACCESSWS,
                  ] as $type) {
             $this->locations[$type] = $this->getServiceURL($account->getPortalType(), $type, $account->getLoginType());
         }

@@ -1,10 +1,4 @@
 <?php declare(strict_types=1);
-/**
- * Created by PhpStorm.
- * User: Tomas Kulhanek
- * Email: info@tirus.cz
- *
- */
 
 namespace HelpPC\Test\CzechDataBox;
 
@@ -15,7 +9,6 @@ use HelpPC\CzechDataBox\Exception\BadOptionException;
 use HelpPC\CzechDataBox\Manager;
 use Tester\Assert;
 use Tester\TestCase;
-
 
 require_once __DIR__ . '/bootstrap.php';
 

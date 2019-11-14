@@ -102,7 +102,7 @@ class DataBoxStatus
             self::PFO_DANPOR => 'Daňový poradce',
             self::PFO_AUDITOR => 'Statutární auditor',
             self::FO => 'Fyzická osoba',
-            null => 'Technická skupina'
+            null => 'Technická skupina',
         ];
     }
 

@@ -36,7 +36,7 @@ class MessageStatus
                 self::FILTER_READ,
                 self::FILTER_UNDELIVERED,
                 self::FILTER_DELETED,
-                self::FILTER_IN_VAULT
+                self::FILTER_IN_VAULT,
             ]))
                 throw new BadOptionException(sprintf('The value %s is not allowed. Use one of the %s::FILTER_*', $status, self::class));
 
@@ -49,7 +49,7 @@ class MessageStatus
 
     public static function getStateList()
     {
-        return array(
+        return [
             0 => 'Nelze zjístit stav zprávy',
             self::FILTER_SUBMITTED => 'Datová zpráva byla podána (vznikla v ISDS).',
             self::FILTER_STAMPED => 'Datová zpráva včetně písemností podepsána podacím časovým razítkem.',
@@ -60,8 +60,8 @@ class MessageStatus
             self::FILTER_READ => 'Zpráva byla přečtena (na portále nebo akcí ESS).',
             self::FILTER_UNDELIVERED => 'Zpráva byla označena jako nedoručitelná, protože schránka adresáta byla zpětně znepřístupněna; netýká se systémových zpráv.',
             self::FILTER_DELETED => 'Obsah zprávy byl smazán, obálka zprávy včetně hashů přesunuta do archivu (jen některé služby umí přistupovat k archivním obálkám zpráv)',
-            self::FILTER_IN_VAULT => 'Zpráva byla přesunuta do Datového trezoru odesílatele nebo adresáta (nebo obou); netýká se systémových zpráv.'
-        );
+            self::FILTER_IN_VAULT => 'Zpráva byla přesunuta do Datového trezoru odesílatele nebo adresáta (nebo obou); netýká se systémových zpráv.',
+        ];
     }
 
     /**

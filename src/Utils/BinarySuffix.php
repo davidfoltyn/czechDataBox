@@ -22,14 +22,14 @@ class BinarySuffix
     /**
      * @var array
      */
-    private $binaryPrefixes = array(
+    private $binaryPrefixes = [
         1125899906842624 => '%d PB',
         1099511627776 => '%d TB',
         1073741824 => '%d GB',
         1048576 => '%d MB',
         1024 => '%d kB',
         0 => '%d bytes',
-    );
+    ];
 
     /**
      * @param int $number
@@ -64,7 +64,7 @@ class BinarySuffix
         }
         foreach ($this->binaryPrefixes as $size => $unitPattern) {
             if ($size <= $this->number) {
-                $value = ($this->number >= self::CONVERT_THRESHOLD) ? $this->number / (double)$size : $this->number;
+                $value = ($this->number >= self::CONVERT_THRESHOLD) ? $this->number / (double) $size : $this->number;
 
                 return sprintf($unitPattern, $value);
             }

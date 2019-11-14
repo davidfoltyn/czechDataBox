@@ -1,20 +1,11 @@
 <?php declare(strict_types=1);
-/**
- * Created by PhpStorm.
- * User: Tomas Kulhanek
- * Email: info@tirus.cz
- */
 
 namespace HelpPC\Test\CzechDataBox;
-
 
 use HelpPC\CzechDataBox\Exception\MissingMainFile;
 use HelpPC\CzechDataBox\Exception\MissingRequiredField;
 use HelpPC\CzechDataBox\Manager;
-use HelpPC\Serializer\SerializerFactory;
-use HelpPC\Test\FakeConnector;
 use Tester\Assert;
-use Tester\Environment;
 use Tester\TestCase;
 
 require_once __DIR__ . '/bootstrap.php';
@@ -32,7 +23,7 @@ class CreateMessageTest extends TestCase
             $account->setPassword('fake')
                 ->setLoginName('fake')
                 ->setLoginType(\HelpPC\CzechDataBox\Connector\Account::LOGIN_NAME_PASSWORD)
-                ->setPortalType(\HelpPC\CzechDataBox\Connector\Account::ENV_FAKE);
+                ->setPortalType(\HelpPC\CzechDataBox\Connector\Account::ENV_TEST);
             $self->manager = Manager::create();
             $self->manager->connect($account);
         });

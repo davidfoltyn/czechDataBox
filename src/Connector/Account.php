@@ -26,7 +26,6 @@ class Account
 
     const ENV_PROD = 'mojedatovaschranka.cz';
     const ENV_TEST = 'czebox.cz';
-    const ENV_FAKE = 'isds.helppc.cz';
 
     /**
      * @return mixed
@@ -101,7 +100,7 @@ class Account
      */
     public function setPortalType($portalType)
     {
-        if (!in_array($portalType, [self::ENV_PROD, self::ENV_TEST, self::ENV_FAKE])) {
+        if (!in_array($portalType, [self::ENV_PROD, self::ENV_TEST])) {
             throw  new BadOptionException(sprintf('The value %s is not allowed. Use one of Account::ENV_PROD Account::ENV_TEST', $portalType));
         }
         $this->portalType = $portalType;
