@@ -1,0 +1,25 @@
+before_script:
+  - php -v
+  - apt-get -y update
+  - apt-get -y install git zip unzip
+  - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+  - php composer-setup.php
+  - php -r "unlink('composer-setup.php');"
+
+my_app:7.1:
+  image: php:7.1
+  script:
+    - php composer.phar install --no-progress --no-interaction --no-suggest
+    - vendor/bin/phpstan analyse -c phpstan.neon -l 7 src/
+
+my_app:7.2:
+  image: php:7.2
+  script:
+    - php composer.phar install --no-progress --no-interaction --no-suggest
+    - vendor/bin/phpstan analyse -c phpstan.neon -l 7 src/
+
+my_app:7.3:
+  image: php:7.3
+  script:
+    - php composer.phar install --no-progress --no-interaction --no-suggest
+    - vendor/bin/phpstan analyse -c phpstan.neon -l 7 src/

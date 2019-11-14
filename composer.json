@@ -11,10 +11,14 @@
   "type": "library",
   "support": {
     "email": "info@tirus.cz",
-    "issues": "https://github.com/HelpPC/czechDataBox/issues",
-    "source": "https://github.com/HelpPC/czechDataBox"
+    "issues": "https://gitlab.com/helppc/czechDataBox/issues",
+    "source": "https://gitlab.com/helppc/czechDataBox/"
   },
-  "license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
+  "license": [
+    "BSD-3-Clause",
+    "GPL-2.0",
+    "GPL-3.0"
+  ],
   "authors": [
     {
       "name": "Tomas Kulhanek",
