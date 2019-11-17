@@ -108,7 +108,7 @@ abstract class Connector
 
     /**
      * @param Account $account
-     * @param string $operationType
+     * @param int $operationType
      * @param IRequest $request
      * @param string $responseClass
      * @return array|\JMS\Serializer\scalar|mixed|object

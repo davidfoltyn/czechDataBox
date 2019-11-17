@@ -124,7 +124,7 @@ class DataMessage extends Connector
 
     /**
      * Přepodepsání zprávy, dodejky či doručenky
-     * @param $account
+     * @param Account $account
      * @param Request\ResignISDSDocument $input
      * @return Response\ResignISDSDocument
      * @throws \HelpPC\CzechDataBox\Exception\ConnectionException
