@@ -23,7 +23,7 @@ if (file_exists(__DIR__ . '/../tests/config.local.yaml')) {
 } else {
     $config = \Symfony\Component\Yaml\Yaml::parse(file_get_contents(__DIR__ . '/../tests/config.yaml'));
 }
-$type = 'ovm';
+$type = 'fo';
 define('ISDS_USER', $config[$type]['login']);
 define('ISDS_PASS', $config[$type]['password']);
 define('ISDS_ID', $config[$type]['id']);

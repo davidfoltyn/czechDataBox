@@ -24,7 +24,7 @@ class AuthenticateMessage implements IRequest
 
     /**
      * @var SplFileInfo
-     * @Serializer\Type("HelpPC\Serializer\Utils\SplFileInfo")
+     * @Serializer\Type("base64File")
      * @Serializer\SerializedName("p:dmMessage")
      * @Serializer\XmlElement(cdata=false)
      */

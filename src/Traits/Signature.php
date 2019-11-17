@@ -16,7 +16,7 @@ trait Signature
     /**
      * @var SplFileInfo|null
      * @Serializer\SkipWhenEmpty
-     * @Serializer\Type("HelpPC\Serializer\Utils\SplFileInfo")
+     * @Serializer\Type("base64File")
      * @Serializer\SerializedName("p:dmSignature")
      * @Serializer\XmlElement(cdata=false)
      */

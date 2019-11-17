@@ -174,7 +174,6 @@ abstract class Connector
                 $response = preg_replace($regex, $replace, $response);
             }
 
-
         } catch (ServerException $exception) {
             if ($exception->getCode() === 503) {
                 throw new SystemExclusion($exception->getMessage(), $exception->getCode(), $exception);
