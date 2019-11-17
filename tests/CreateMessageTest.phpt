@@ -8,6 +8,10 @@
 namespace HelpPC\Test\CzechDataBox;
 
 
+use HelpPC\CzechDataBox\Connector\DataBox;
+use HelpPC\CzechDataBox\Connector\DataMessage;
+use HelpPC\CzechDataBox\Connector\Dispatcher;
+use HelpPC\CzechDataBox\Connector\SearchDataBox;
 use HelpPC\CzechDataBox\Exception\MissingMainFile;
 use HelpPC\CzechDataBox\Exception\MissingRequiredField;
 use HelpPC\CzechDataBox\Manager;
@@ -21,28 +25,21 @@ require_once __DIR__ . '/bootstrap.php';
 
 class CreateMessageTest extends TestCase
 {
-    /** @var Manager */
-    private $manager;
-
-    public function setUp()
-    {
-        $self = $this;
-        Assert::noError(function () use ($self) {
-            $account = new \HelpPC\CzechDataBox\Connector\Account();
-            $account->setPassword('fake')
-                ->setLoginName('fake')
-                ->setLoginType(\HelpPC\CzechDataBox\Connector\Account::LOGIN_NAME_PASSWORD)
-                ->setPortalType(\HelpPC\CzechDataBox\Connector\Account::ENV_FAKE);
-            $self->manager = Manager::create();
-            $self->manager->connect($account);
-        });
-    }
-
     public function testOne()
     {
-        $self = $this;
+        $account = new \HelpPC\CzechDataBox\Connector\Account();
+        $account->setPassword(getenv('ISDS_PASSWORD'))
+            ->setLoginName(getenv('ISDS_LOGIN'))
+            ->setLoginType(\HelpPC\CzechDataBox\Connector\Account::LOGIN_NAME_PASSWORD)
+            ->setPortalType(\HelpPC\CzechDataBox\Connector\Account::ENV_TEST);
+        $client = new Dispatcher();
+        $serializer = SerializerFactory::create();
+        $dataBox = new DataBox($serializer, $client);
+        $dataMessage = new DataMessage($serializer, $client);
+        $searchDataBox = new SearchDataBox($serializer, $client);
+        $manager = new \HelpPC\CzechDataBox\Manager($dataBox, $dataMessage, $searchDataBox);
 
-        Assert::exception(function () use ($self) {
+        Assert::exception(function () use ($account, $manager) {
             $createMessage = new \HelpPC\CzechDataBox\Request\CreateMessage();
             $createMessage
                 ->setEnvelope((new \HelpPC\CzechDataBox\Entity\Envelope()));
@@ -55,10 +52,10 @@ class CreateMessageTest extends TestCase
                 ->setOrgUnit('orgUnitRec');
             $createMessage->addRecipient($recipient);
             /** @var \HelpPC\CzechDataBox\Response\CreateMessage $res */
-            $self->manager->message()->CreateMessage($createMessage);
+            $manager->CreateMessage($account, $createMessage);
         }, MissingMainFile::class);
 
-        Assert::exception(function () use ($self) {
+        Assert::exception(function () use ($account, $manager) {
             $createMessage = new \HelpPC\CzechDataBox\Request\CreateMessage();
             $createMessage
                 ->setEnvelope((new \HelpPC\CzechDataBox\Entity\Envelope()));
@@ -78,10 +75,10 @@ class CreateMessageTest extends TestCase
                 ->setOrgUnit('orgUnitRec');
             $createMessage->addRecipient($recipient);
             /** @var \HelpPC\CzechDataBox\Response\CreateMessage $res */
-            $self->manager->message()->CreateMessage($createMessage);
+            $manager->CreateMessage($account, $createMessage);
         }, MissingRequiredField::class);
 
-        Assert::noError(function () use ($self) {
+        Assert::noError(function () use ($manager, $account) {
 
             $createMessage = new \HelpPC\CzechDataBox\Request\CreateMessage();
             $createMessage
@@ -132,7 +129,7 @@ class CreateMessageTest extends TestCase
                 ->setOrgUnit('orgUnitRec');
             $createMessage->addRecipient($recipient);
             /** @var \HelpPC\CzechDataBox\Response\CreateMessage $res */
-            $res = $self->manager->message()->CreateMessage($createMessage);
+            $res = $manager->CreateMessage($account, $createMessage);
 
             Assert::true($res->isOk());
             Assert::false($res->getMultipleStatus()[1]->getStatus()->isOk());

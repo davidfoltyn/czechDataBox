@@ -10,9 +10,10 @@ namespace HelpPC\Test\CzechDataBox;
 
 use HelpPC\CzechDataBox\Connector\DataBox;
 use HelpPC\CzechDataBox\Connector\DataMessage;
+use HelpPC\CzechDataBox\Connector\Dispatcher;
 use HelpPC\CzechDataBox\Connector\SearchDataBox;
 use HelpPC\CzechDataBox\Exception\BadOptionException;
-use HelpPC\CzechDataBox\Manager;
+use HelpPC\Serializer\SerializerFactory;
 use Tester\Assert;
 use Tester\TestCase;
 
@@ -21,10 +22,7 @@ require_once __DIR__ . '/bootstrap.php';
 
 class GreetingTest extends TestCase
 {
-    /** @var Manager */
-    private $manager;
-
-    public function testOne()
+     public function testOne()
     {
         $badOption = 'badOption';
         Assert::exception(function () use ($badOption) {
@@ -43,25 +41,17 @@ class GreetingTest extends TestCase
             $config = \Symfony\Component\Yaml\Yaml::parse(file_get_contents(__DIR__ . '/config.yaml'));
 
             $account = new \HelpPC\CzechDataBox\Connector\Account();
-            $account->setPassword($config['ovm']['password'])
-                ->setLoginName($config['ovm']['login'])
+            $account->setPassword(getenv('ISDS_PASSWORD'))
+                ->setLoginName(getenv('ISDS_LOGIN'))
                 ->setLoginType(\HelpPC\CzechDataBox\Connector\Account::LOGIN_NAME_PASSWORD)
                 ->setPortalType(\HelpPC\CzechDataBox\Connector\Account::ENV_TEST);
-            $self->manager = Manager::create();
-            $self->manager->connect($account);
+            $client = new Dispatcher();
+            $serializer = SerializerFactory::create();
+            $dataBox = new DataBox($serializer, $client);
+            $dataMessage = new DataMessage($serializer, $client);
+            $searchDataBox = new SearchDataBox($serializer, $client);
+            $manager = new \HelpPC\CzechDataBox\Manager($dataBox, $dataMessage, $searchDataBox);
         });
-    }
-
-    public function testTwo()
-    {
-        Assert::type(DataMessage::class, $this->manager->message());
-        Assert::type(SearchDataBox::class, $this->manager->search());
-        Assert::type(DataBox::class, $this->manager->box());
-    }
-
-    public function testThree()
-    {
-        Assert::true($this->manager->message()->isConnected());
     }
 
 }

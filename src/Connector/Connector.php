@@ -20,7 +20,7 @@ use Psr\Http\Message\ResponseInterface;
 abstract class Connector
 {
     /** @var \GuzzleHttp\Client */
-    private static $guzzleHttp;
+    private $guzzleHttp;
     /** @var Serializer */
     private $serializer;
 
@@ -31,11 +31,9 @@ abstract class Connector
     protected const ACCESSWS = 5;
     private $connected = false;
 
-
-    private $locations = [];
-
-    public function __construct(Serializer $serializer)
+    public function __construct(Serializer $serializer, \GuzzleHttp\Client $guzzleHttp)
     {
+        $this->guzzleHttp = $guzzleHttp;
         $this->serializer = $serializer;
     }
 
@@ -44,27 +42,15 @@ abstract class Connector
         return $this->connected;
     }
 
-    private function getServiceURL($portaltype, $ServiceType, $LoginType)
+    private function getServiceURL(string $portalType, int $ServiceType, string $LoginType)
     {
-        if ($portaltype == Account::ENV_FAKE) {
-            if ($ServiceType >= self::SUPPLEMENTARYWS) {
-                return 'https://' . $portaltype . '/fakeDS.php';
-            } elseif ($ServiceType == self::OPERATIONSWS) {
-                return 'https://' . $portaltype . '/fakeDZ.php';
-            } elseif ($ServiceType == self::INFOWS) {
-                return 'https://' . $portaltype . '/fakeDX.php';
-            } elseif ($ServiceType == self::SEARCHWS) {
-                return 'https://' . $portaltype . '/fakeDF.php';
-            }
-            return 'https://' . $portaltype . '/fake.php';
-        }
         $res = "https://ws1";
         if ($LoginType > Account::LOGIN_NAME_PASSWORD) {
             $res .= 'c';
         }
-        if ($portaltype == Account::ENV_TEST) {
+        if ($portalType == Account::ENV_TEST) {
             $res .= '.czebox.cz/';
-        } elseif ($portaltype == Account::ENV_PROD) {
+        } elseif ($portalType == Account::ENV_PROD) {
             $res .= '.mojedatovaschranka.cz/';
         }
         if ($LoginType == Account::LOGIN_CERT) {
@@ -121,15 +107,18 @@ abstract class Connector
 
 
     /**
-     * @param string $location
+     * @param Account $account
+     * @param string $operationType
      * @param IRequest $request
      * @param string $responseClass
      * @return array|\JMS\Serializer\scalar|mixed|object
      * @throws ConnectionException
      * @throws SystemExclusion
      */
-    protected function send(string $location, IRequest $request, string $responseClass)
+    protected function send(Account $account, int $operationType, IRequest $request, string $responseClass)
     {
+        $location = $this->getLocation($account, $operationType);
+
         if (!in_array(IResponse::class, class_implements($responseClass))) {
             throw new ConnectionException();
         }
@@ -148,16 +137,29 @@ abstract class Connector
             $bodyNode[0]->appendChild($new);
         }
 
-        $headers = array(
+        $curl = [];
+        if ($account->getLogintype() != Account::LOGIN_CERT) {
+            $curl[CURLOPT_USERPWD] = $account->getLoginname() . ":" . $account->getPassword();
+        }
+
+        //todo otestovat prihlasovani pomoci certifikatu
+        if ($account->getLoginType() != Account::LOGIN_NAME_PASSWORD) {
+            $curl[CURLOPT_SSLCERT] = $account->getCertfilename();
+            $curl[CURLOPT_SSLCERTPASSWD] = $account->getPassphrase();
+        }
+        $headers = [
             'Connection' => 'Keep-Alive',
             'Accept-Encoding' => 'gzip,deflate',
             'Content-Type' => 'text/xml; charset=utf-8',
             'SOAPAction' => '""',
             // 'User-Agent' => 'HelpPC PHP Client'
-        );
+
+        ];
+
+
         try {
             /** @var ResponseInterface $response */
-            $response = self::$guzzleHttp->post($location, ['headers' => $headers, 'body' => $requestDocument->saveXml()]);
+            $response = $this->guzzleHttp->post($location, ['curl' => $curl, 'headers' => $headers, 'body' => $requestDocument->saveXml()]);
             $response = $response->getBody()->getContents();
             $soapResponse = $this->getXmlDocument($response);
             $response = $this->getValueByXpath($soapResponse, '//' . $soapResponse->documentElement->prefix . ':Body');
@@ -186,26 +188,8 @@ abstract class Connector
         return $this->serializer->deserialize($response, $responseClass, 'xml');
     }
 
-
-    protected function getLocation($portalType)
+    protected function getLocation(Account $account, $portalType)
     {
-        return $this->locations[$portalType];
-    }
-
-    public function connect(Account $account, $proxyHost = null, $proxyPort = null, $proxyLogin = null, $proxyPassword = null)
-    {
-        foreach ([
-                     self::OPERATIONSWS,
-                     self::INFOWS,
-                     self::SEARCHWS,
-                     self::SUPPLEMENTARYWS,
-                     self::ACCESSWS
-                 ] as $type) {
-            $this->locations[$type] = $this->getServiceURL($account->getPortalType(), $type, $account->getLoginType());
-        }
-        if (!self::$guzzleHttp instanceof Client) {
-            self::$guzzleHttp = new Dispatcher($account, $proxyHost, $proxyPort, $proxyLogin, $proxyPassword);
-        }
-        $this->connected = true;
+        return $this->getServiceURL($account->getPortalType(), $portalType, $account->getLoginType());
     }
 }

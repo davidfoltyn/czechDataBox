@@ -1,5 +1,4 @@
 <?php
-require_once '../vendor/autoload.php';
 require 'credentials.php';
 $console->writeln(sprintf('Komunikovat bude probihat vuci %s za datovou schranku s id %s typu %s ', ($account->getPortalType() == $account::ENV_PROD ? 'mojedatovaschranka.cz' : 'czebox.cz'), ISDS_ID, $type));
 /** @var \HelpPC\CzechDataBox\Manager $manager */
@@ -13,7 +12,7 @@ $input->setSearchText('Ministerstvo')
     ->setSearchType(\HelpPC\CzechDataBox\Utils\DataBoxStatus::TYPE_GENERAL)
     ->setSearchScope(\HelpPC\CzechDataBox\Utils\DataBoxStatus::SCOPE_OVM);
 /** @var \HelpPC\CzechDataBox\Response\ISDSSearch2 */
-$res = $manager->search()->ISDSSearch2($input);
+$res = $manager->ISDSSearch2($account, $input);
 if ($res->getStatus()->isOk()) {
     $console->writeln(' -> OK ' . sprintf('Bylo nalezeno celkem %d zaznamu a nacteno je %d', $res->getTotalCount(), $res->getCurrentCount()));
     /** @var \HelpPC\CzechDataBox\Entity\DataBoxResult $result */
@@ -24,7 +23,7 @@ if ($res->getStatus()->isOk()) {
             $ch = new \HelpPC\CzechDataBox\Request\CheckDataBox();
             $ch->setDataBoxId($result->getDataBoxId());
             /** @var \HelpPC\CzechDataBox\Response\CheckDataBox $resT */
-            $resT = $manager->search()->CheckDataBox($ch);
+            $resT = $manager->CheckDataBox($account, $ch);
             if ($res->getStatus()->isOk()) {
                 $console->writeln('         -> schranka ' . ($resT->getState() == 1 ? 'je' : 'neni') . ' aktivni');
             } else {
@@ -40,7 +39,7 @@ $console->write('   - hledani dle FindDataBox');
 $input = new \HelpPC\CzechDataBox\Request\FindDataBox();
 $input->setOwnerInfo($ownerInfo);
 /** @var \HelpPC\CzechDataBox\Response\FindDataBox $res */
-$res = $manager->search()->FindDataBox($input);
+$res = $manager->FindDataBox($account, $input);
 if ($res->getStatus()->isOk()) {
     $console->writeln(' -> OK - bylo nalezeno celkem ' . $res->getResult()->count());
 } else {
@@ -51,7 +50,7 @@ $console->write('   - zjistovani informaci o PDZ');
 /** @var \HelpPC\CzechDataBox\Response\VerifyMessage $res */
 $input = new \HelpPC\CzechDataBox\Request\PDZInfo();
 $input->setSender(($type == 'ovm' ? $config['ovm']['id'] : $config['fo']['id']));
-$res = $manager->search()->PDZInfo($input);
+$res = $manager->PDZInfo($account, $input);
 if ($res->getStatus()->isOk()) {
     $console->writeln(' -> OK');
 } else {
@@ -64,7 +63,7 @@ $input = new \HelpPC\CzechDataBox\Request\DataBoxCreditInfo();
 $input->setDataBoxId(($type == 'ovm' ? $config['ovm']['id'] : $config['fo']['id']))
     ->setFromDate((new \DateTime())->modify('-3 month'))
     ->setToDate((new DateTime()));
-$res = $manager->search()->DataBoxCreditInfo($input);
+$res = $manager->DataBoxCreditInfo($account, $input);
 if ($res->getStatus()->isOk()) {
     $console->writeln(' -> OK ' . sprintf('aktualni stav je %s', $res->getCurrentCredit()));
 } else {
@@ -77,7 +76,7 @@ $input->setDataBoxId(($type == 'ovm' ? $config['ovm']['id'] : $config['fo']['id'
     ->setFrom((new \DateTime())->modify('-3 month'))
     ->setTo((new DateTime()));
 /** @var \HelpPC\CzechDataBox\Response\GetDataBoxActivityStatus $res */
-$res = $manager->search()->GetDataBoxActivityStatus($input);
+$res = $manager->GetDataBoxActivityStatus($account, $input);
 if ($res->getStatus()->isOk()) {
     $console->writeln(' -> OK');
 } else {
@@ -88,7 +87,7 @@ $console->write('   - zjistovani informaci o datovem trezoru');
 $input = new \HelpPC\CzechDataBox\Request\DTInfo();
 $input->setDataBoxId(($type == 'ovm' ? $config['ovm']['id'] : $config['fo']['id']));
 /** @var \HelpPC\CzechDataBox\Response\DTInfo $res */
-$res = $manager->search()->DTInfo($input);
+$res = $manager->DTInfo($account, $input);
 if ($res->getStatus()->isOk()) {
     $console->writeln(' -> OK');
 } else {
@@ -99,7 +98,7 @@ $console->write('   - zjistovani, zda muze subjekt odesilat postovni datove zpra
 $input = new \HelpPC\CzechDataBox\Request\PDZSendInfo();
 $input->setDataBoxID(($type == 'ovm' ? $config['ovm']['id'] : $config['fo']['id']));
 /** @var \HelpPC\CzechDataBox\Response\PDZSendInfo $res */
-$res = $manager->search()->PDZSendInfo($input);
+$res = $manager->PDZSendInfo($account, $input);
 if ($res->getStatus()->isOk()) {
     $console->writeln(' -> OK - subjekt ' . ($res->isResult() ? 'muze' : 'nemuze') . ' odesilat PDZ');
 } else {
@@ -111,7 +110,7 @@ $input = new \HelpPC\CzechDataBox\Request\FindPersonalDataBox();
 $input->setOwnerInfo((new \HelpPC\CzechDataBox\Entity\PersonalOwnerInfo()));
 $input->getOwnerInfo()->setDataBoxId($config['fo']['id']);
 /** @var \HelpPC\CzechDataBox\Response\FindPersonalDataBox $res */
-$res = $manager->search()->FindPersonalDataBox($input);
+$res = $manager->FindPersonalDataBox($account, $input);
 if ($res->getStatus()->isOk()) {
     $console->writeln(' -> OK  nalezeno celkem ' . $res->getRecord()->count() . ' subjektu');
 } else {
@@ -122,7 +121,7 @@ $console->write('   - GetDataBoxList');
 $input = new \HelpPC\CzechDataBox\Request\GetDataBoxList();
 $input->setType(\HelpPC\CzechDataBox\Utils\DataBoxStatus::ALL);
 /** @var \HelpPC\CzechDataBox\Response\GetDataBoxList $res */
-$res = $manager->search()->GetDataBoxList($input);
+$res = $manager->GetDataBoxList($account, $input);
 if ($res->getStatus()->isOk()) {
     $console->writeln(' -> OK');
 } else {

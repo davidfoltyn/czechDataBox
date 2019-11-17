@@ -1,5 +1,4 @@
 <?php
-require_once '../vendor/autoload.php';
 require 'credentials.php';
 $console->writeln(sprintf('Komunikovat bude probihat vuci %s za datovou schranku s id %s typu %s ', ($account->getPortalType() == $account::ENV_PROD ? 'mojedatovaschranka.cz' : 'czebox.cz'), ISDS_ID, $type));
 /** @var \HelpPC\CzechDataBox\Manager $manager */
@@ -54,7 +53,7 @@ $recipient->setDataBoxId(($type == 'fo' ? $config['fo']['id'] : $config['ovm']['
     ->setOrgUnitNum(1000)
     ->setOrgUnit('orgUnitRec');
 $createMessage->addRecipient($recipient);
-for ($i = 0; $i <= 100; $i++) {
+for ($i = 0; $i <= 1; $i++) {
     $recipient = new \HelpPC\CzechDataBox\Entity\Recipient();
     $recipient->setDataBoxId(($type == 'fo' ? $config['fo']['id'] : $config['ovm']['id']))
         ->setToHand('toHandRec')
@@ -65,7 +64,7 @@ for ($i = 0; $i <= 100; $i++) {
 
 $console->write('Probiha odesilani DZ');
 /** @var \HelpPC\CzechDataBox\Response\CreateMessage $res */
-$res = $manager->message()->CreateMessage($createMessage);
+$res = $manager->CreateMessage($account, $createMessage);
 if ($res->isOk()) {
     $console->writeln(' -> OK');
     /** @var \HelpPC\CzechDataBox\Entity\MessageStatus $messageStatus */

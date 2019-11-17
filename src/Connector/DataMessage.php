@@ -16,32 +16,35 @@ class DataMessage extends Connector
 
     /**
      * Ověření platnosti uložené datové zprávy
+     * @param Account $account
      * @param Request\AuthenticateMessage $input
      * @return Response\AuthenticateMessage
      * @throws \HelpPC\CzechDataBox\Exception\ConnectionException
      * @throws \HelpPC\CzechDataBox\Exception\SystemExclusion
      */
-    public function AuthenticateMessage(Request\AuthenticateMessage $input): Response\AuthenticateMessage
+    public function AuthenticateMessage(Account $account, Request\AuthenticateMessage $input): Response\AuthenticateMessage
     {
-        return $this->send($this->getLocation(self::OPERATIONSWS), $input, Response\AuthenticateMessage::class);
+        return $this->send($account, self::OPERATIONSWS, $input, Response\AuthenticateMessage::class);
     }
 
     /**
      * Ověření kopie uložené zprávy proti originálu v ISDS
-     * @deprecated
+     * @param Account $account
      * @param Request\VerifyMessage $input
      * @return Response\VerifyMessage
      * @throws \HelpPC\CzechDataBox\Exception\ConnectionException
      * @throws \HelpPC\CzechDataBox\Exception\SystemExclusion
+     * @deprecated
      */
-    public function VerifyMessage(Request\VerifyMessage $input): Response\VerifyMessage
+    public function VerifyMessage(Account $account, Request\VerifyMessage $input): Response\VerifyMessage
     {
-        return $this->send($this->getLocation(self::INFOWS), $input, Response\VerifyMessage::class);
+        return $this->send($account, self::INFOWS, $input, Response\VerifyMessage::class);
     }
 
 
     /**
      * Vytvoření a odeslání nové zprávy pro více adresátů
+     * @param Account $account
      * @param Request\CreateMessage $input
      * @return Response\CreateMessage
      * @throws FileSizeOverflow
@@ -51,7 +54,7 @@ class DataMessage extends Connector
      * @throws \HelpPC\CzechDataBox\Exception\ConnectionException
      * @throws \HelpPC\CzechDataBox\Exception\SystemExclusion
      */
-    public function CreateMessage(Request\CreateMessage $input): Response\CreateMessage
+    public function CreateMessage(Account $account, Request\CreateMessage $input): Response\CreateMessage
     {
         $recipientsCount = $input->getRecipients()->count();
         if ($recipientsCount < 1) {
@@ -76,120 +79,128 @@ class DataMessage extends Connector
         if ($input->getEnvelope()->getAnnotation() == null) {
             throw new MissingRequiredField('annotation');
         }
-        return $this->send($this->getLocation(self::OPERATIONSWS), $input, Response\CreateMessage::class);
+        return $this->send($account, self::OPERATIONSWS, $input, Response\CreateMessage::class);
     }
 
     /**
      * Stažení došlé zprávy
+     * @param Account $account
      * @param Request\MessageDownload $input
      * @return Response\MessageDownload
      * @throws \HelpPC\CzechDataBox\Exception\ConnectionException
      * @throws \HelpPC\CzechDataBox\Exception\SystemExclusion
      */
-    public function MessageDownload(Request\MessageDownload $input): Response\MessageDownload
+    public function MessageDownload(Account $account, Request\MessageDownload $input): Response\MessageDownload
     {
-        return $this->send($this->getLocation(self::OPERATIONSWS), $input, Response\MessageDownload::class);
+        return $this->send($account, self::OPERATIONSWS, $input, Response\MessageDownload::class);
     }
 
     /**
      * Stažení došlé zprávy s podpisem značkou MV
+     * @param Account $account
      * @param Request\SignedMessageDownload $input
      * @return Response\SignedMessageDownload
      * @throws \HelpPC\CzechDataBox\Exception\ConnectionException
      * @throws \HelpPC\CzechDataBox\Exception\SystemExclusion
      */
-    public function SignedMessageDownload(Request\SignedMessageDownload $input): Response\SignedMessageDownload
+    public function SignedMessageDownload(Account $account, Request\SignedMessageDownload $input): Response\SignedMessageDownload
     {
-        return $this->send($this->getLocation(self::OPERATIONSWS), $input, Response\SignedMessageDownload::class);
+        return $this->send($account, self::OPERATIONSWS, $input, Response\SignedMessageDownload::class);
     }
 
     /**
      * Stažení odeslané zprávy s podpisem MV
+     * @param Account $account
      * @param Request\SignedSentMessageDownload $input
      * @return Response\SignedSentMessageDownload
      * @throws \HelpPC\CzechDataBox\Exception\ConnectionException
      * @throws \HelpPC\CzechDataBox\Exception\SystemExclusion
      */
-    public function SignedSentMessageDownload(Request\SignedSentMessageDownload $input): Response\SignedSentMessageDownload
+    public function SignedSentMessageDownload(Account $account, Request\SignedSentMessageDownload $input): Response\SignedSentMessageDownload
     {
-        return $this->send($this->getLocation(self::OPERATIONSWS), $input, Response\SignedSentMessageDownload::class);
+        return $this->send($account, self::OPERATIONSWS, $input, Response\SignedSentMessageDownload::class);
     }
 
 
     /**
      * Přepodepsání zprávy, dodejky či doručenky
+     * @param $account
      * @param Request\ResignISDSDocument $input
      * @return Response\ResignISDSDocument
      * @throws \HelpPC\CzechDataBox\Exception\ConnectionException
      * @throws \HelpPC\CzechDataBox\Exception\SystemExclusion
      */
-    public function ResignISDSDocument(Request\ResignISDSDocument $input): Response\ResignISDSDocument
+    public function ResignISDSDocument(Account $account, Request\ResignISDSDocument $input): Response\ResignISDSDocument
     {
-        return $this->send($this->getLocation(self::OPERATIONSWS), $input, Response\ResignISDSDocument::class);
+        return $this->send($account, self::OPERATIONSWS, $input, Response\ResignISDSDocument::class);
     }
 
     /**
      * Stažení obálky došlé zprávy
+     * @param Account $account
      * @param Request\MessageEnvelopeDownload $input
      * @return Response\MessageEnvelopeDownload
      * @throws \HelpPC\CzechDataBox\Exception\ConnectionException
      * @throws \HelpPC\CzechDataBox\Exception\SystemExclusion
      */
-    public function MessageEnvelopeDownload(Request\MessageEnvelopeDownload $input): Response\MessageEnvelopeDownload
+    public function MessageEnvelopeDownload(Account $account, Request\MessageEnvelopeDownload $input): Response\MessageEnvelopeDownload
     {
-        return $this->send($this->getLocation(self::INFOWS), $input, Response\MessageEnvelopeDownload::class);
+        return $this->send($account, self::INFOWS, $input, Response\MessageEnvelopeDownload::class);
     }
 
     /**
      * Označení zprávy jako „Přečtená“
+     * @param Account $account
      * @param Request\MarkMessageAsDownloaded $input
      * @return Response\MarkMessageAsDownloaded
      * @throws \HelpPC\CzechDataBox\Exception\ConnectionException
      * @throws \HelpPC\CzechDataBox\Exception\SystemExclusion
      */
-    public function MarkMessageAsDownloaded(Request\MarkMessageAsDownloaded $input): Response\MarkMessageAsDownloaded
+    public function MarkMessageAsDownloaded(Account $account, Request\MarkMessageAsDownloaded $input): Response\MarkMessageAsDownloaded
     {
-        return $this->send($this->getLocation(self::INFOWS), $input, Response\MarkMessageAsDownloaded::class);
+        return $this->send($account, self::INFOWS, $input, Response\MarkMessageAsDownloaded::class);
     }
 
 
     /**
      * Stažení informace o dodání a doručování zprávy
+     * @param Account $account
      * @param Request\GetDeliveryInfo $input
      * @return Response\GetDeliveryInfo
      * @throws \HelpPC\CzechDataBox\Exception\ConnectionException
      * @throws \HelpPC\CzechDataBox\Exception\SystemExclusion
      */
-    public function GetDeliveryInfo(Request\GetDeliveryInfo $input): Response\GetDeliveryInfo
+    public function GetDeliveryInfo(Account $account, Request\GetDeliveryInfo $input): Response\GetDeliveryInfo
     {
-        return $this->send($this->getLocation(self::INFOWS), $input, Response\GetDeliveryInfo::class);
+        return $this->send($account, self::INFOWS, $input, Response\GetDeliveryInfo::class);
     }
 
     /**
      * Stažení informace o dodání a doručování zprávy, s podpisem značkou MV
+     * @param Account $account
      * @param Request\GetSignedDeliveryInfo $input
      * @return Response\GetSignedDeliveryInfo
      * @throws \HelpPC\CzechDataBox\Exception\ConnectionException
      * @throws \HelpPC\CzechDataBox\Exception\SystemExclusion
      */
-    public function GetSignedDeliveryInfo(Request\GetSignedDeliveryInfo $input): Response\GetSignedDeliveryInfo
+    public function GetSignedDeliveryInfo(Account $account, Request\GetSignedDeliveryInfo $input): Response\GetSignedDeliveryInfo
     {
-        return $this->send($this->getLocation(self::INFOWS), $input, Response\GetSignedDeliveryInfo::class);
+        return $this->send($account, self::INFOWS, $input, Response\GetSignedDeliveryInfo::class);
     }
 
 
     /**
      * Stazeni seznamu odeslanych zprav urceneho casovym intervalem, organizacni jednotkou odesilatele,
      * filtrem na stav zprav a usekem poradovych cisel zaznamu. Vrati seznam zprav.
-     *
+     * @param Account $account
      * @param Request\GetListOfSentMessages $input
      * @return Response\GetListOfSentMessages
      * @throws \HelpPC\CzechDataBox\Exception\ConnectionException
      * @throws \HelpPC\CzechDataBox\Exception\SystemExclusion
      */
-    public function GetListOfSentMessages(Request\GetListOfSentMessages $input): Response\GetListOfSentMessages
+    public function GetListOfSentMessages(Account $account, Request\GetListOfSentMessages $input): Response\GetListOfSentMessages
     {
-        return $this->send($this->getLocation(self::INFOWS), $input, Response\GetListOfSentMessages::class);
+        return $this->send($account, self::INFOWS, $input, Response\GetListOfSentMessages::class);
     }
 
     /**
@@ -197,39 +208,42 @@ class DataMessage extends Connector
      * zpresnenim organizacni jednotky adresata (pouze ESS), filtrem na stav zprav
      * a usekem poradovych cisel zaznamu
      *
+     * @param Account $account
      * @param Request\GetListOfReceivedMessages $input
      * @return Response\GetListOfReceivedMessages
      * @throws \HelpPC\CzechDataBox\Exception\ConnectionException
      * @throws \HelpPC\CzechDataBox\Exception\SystemExclusion
      */
-    public function GetListOfReceivedMessages(Request\GetListOfReceivedMessages $input): Response\GetListOfReceivedMessages
+    public function GetListOfReceivedMessages(Account $account, Request\GetListOfReceivedMessages $input): Response\GetListOfReceivedMessages
     {
-        return $this->send($this->getLocation(self::INFOWS), $input, Response\GetListOfReceivedMessages::class);
+        return $this->send($account, self::INFOWS, $input, Response\GetListOfReceivedMessages::class);
     }
 
     /**
      * Stažení seznamu odeslaných zpráv, u nichž došlo ke změně stavu
+     * @param Account $account
      * @param Request\GetMessageStateChanges $input
      * @return Response\GetMessageStateChanges
      * @throws \HelpPC\CzechDataBox\Exception\ConnectionException
      * @throws \HelpPC\CzechDataBox\Exception\SystemExclusion
      */
-    public function GetMessageStateChanges(Request\GetMessageStateChanges $input): Response\GetMessageStateChanges
+    public function GetMessageStateChanges(Account $account, Request\GetMessageStateChanges $input): Response\GetMessageStateChanges
     {
-        return $this->send($this->getLocation(self::INFOWS), $input, Response\GetMessageStateChanges::class);
+        return $this->send($account, self::INFOWS, $input, Response\GetMessageStateChanges::class);
     }
 
     /**
      * Potvrzeni doruceni komercni zpravy
-     * @deprecated
+     * @param Account $account
      * @param Request\ConfirmDelivery $input
      * @return Response\ConfirmDelivery
      * @throws \HelpPC\CzechDataBox\Exception\ConnectionException
      * @throws \HelpPC\CzechDataBox\Exception\SystemExclusion
+     * @deprecated
      */
-    function ConfirmDelivery(Request\ConfirmDelivery $input): Response\ConfirmDelivery
+    function ConfirmDelivery(Account $account, Request\ConfirmDelivery $input): Response\ConfirmDelivery
     {
-        return $this->send($this->getLocation(self::INFOWS), $input, Response\ConfirmDelivery::class);
+        return $this->send($account, self::INFOWS, $input, Response\ConfirmDelivery::class);
     }
 
 }

@@ -10,7 +10,7 @@ namespace HelpPC\CzechDataBox\Connector;
 
 class Dispatcher extends \GuzzleHttp\Client
 {
-    public function __construct(Account $account, $proxyHost = null, $proxyPort = null, $proxyLogin = null, $proxyPassword = null)
+    public function __construct($proxyHost = null, $proxyPort = null, $proxyLogin = null, $proxyPassword = null)
     {
         $curl = [];
         $config['curl'] =& $curl;
@@ -21,15 +21,7 @@ class Dispatcher extends \GuzzleHttp\Client
         $curl[CURLINFO_HEADER_OUT] = true;
         $curl[CURLOPT_UNRESTRICTED_AUTH] = false;
         $curl[CURLOPT_NOBODY] = false;
-        if ($account->getLogintype() != Account::LOGIN_CERT) {
-            $curl[CURLOPT_USERPWD] = $account->getLoginname() . ":" . $account->getPassword();
-        }
 
-        //todo otestovat prihlasovani pomoci certifikatu
-        if ($account->getLoginType() != Account::LOGIN_NAME_PASSWORD) {
-            $curl[CURLOPT_SSLCERT] = $account->getCertfilename();
-            $curl[CURLOPT_SSLCERTPASSWD] = $account->getPassphrase();
-        }
 
         $caFile = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'CAfile.crt';
 
@@ -51,6 +43,19 @@ class Dispatcher extends \GuzzleHttp\Client
             }
         }
         parent::__construct($config);
+    }
+
+    public function setAccount(Account $account){
+
+        if ($account->getLogintype() != Account::LOGIN_CERT) {
+            $curl[CURLOPT_USERPWD] = $account->getLoginname() . ":" . $account->getPassword();
+        }
+
+        //todo otestovat prihlasovani pomoci certifikatu
+        if ($account->getLoginType() != Account::LOGIN_NAME_PASSWORD) {
+            $curl[CURLOPT_SSLCERT] = $account->getCertfilename();
+            $curl[CURLOPT_SSLCERTPASSWD] = $account->getPassphrase();
+        }
     }
 
 }
