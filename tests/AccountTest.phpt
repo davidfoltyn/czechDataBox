@@ -1,21 +1,13 @@
 <?php declare(strict_types=1);
-/**
- * Created by PhpStorm.
- * User: Tomas Kulhanek
- * Email: info@tirus.cz
- */
-
 namespace HelpPC\Test\CzechDataBox;
 
 use HelpPC\CzechDataBox\Connector\DataBox;
 use HelpPC\CzechDataBox\Connector\DataMessage;
 use HelpPC\CzechDataBox\Connector\Dispatcher;
 use HelpPC\CzechDataBox\Connector\SearchDataBox;
-use HelpPC\CzechDataBox\Manager;
 use HelpPC\Serializer\SerializerFactory;
 use HelpPC\Test\FakeConnector;
 use Tester\Assert;
-use Tester\Environment;
 use Tester\TestCase;
 
 require_once __DIR__ . '/bootstrap.php';

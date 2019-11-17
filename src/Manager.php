@@ -3,13 +3,10 @@
 namespace HelpPC\CzechDataBox;
 
 use HelpPC\CzechDataBox\Connector\{Account, DataBox, DataMessage, SearchDataBox};
-use HelpPC\CzechDataBox\Entity\File;
-use HelpPC\CzechDataBox\Exception\ConnectionNotEstablish;
 use HelpPC\CzechDataBox\Exception\FileSizeOverflow;
 use HelpPC\CzechDataBox\Exception\MissingMainFile;
 use HelpPC\CzechDataBox\Exception\MissingRequiredField;
 use HelpPC\CzechDataBox\Exception\RecipientCountOverflow;
-use HelpPC\CzechDataBox\Utils\BinarySuffix;
 
 class Manager
 {
