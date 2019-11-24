@@ -38,6 +38,7 @@ class DataMessage extends Connector
      */
     public function VerifyMessage(Account $account, Request\VerifyMessage $input): Response\VerifyMessage
     {
+        trigger_error(__METHOD__ . ' is deprecated', E_USER_DEPRECATED);
         return $this->send($account, self::INFOWS, $input, Response\VerifyMessage::class);
     }
 
@@ -243,6 +244,7 @@ class DataMessage extends Connector
      */
     function ConfirmDelivery(Account $account, Request\ConfirmDelivery $input): Response\ConfirmDelivery
     {
+        trigger_error(__METHOD__ . ' is deprecated', E_USER_DEPRECATED);
         return $this->send($account, self::INFOWS, $input, Response\ConfirmDelivery::class);
     }
 

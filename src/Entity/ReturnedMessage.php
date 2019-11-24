@@ -29,8 +29,8 @@ class ReturnedMessage
      */
     protected $type;
     /**
-     * @var MessageEnvelope
-     * @Serializer\Type("HelpPC\CzechDataBox\Entity\MessageEnvelope")
+     * @var ReceivedMessageEnvelope
+     * @Serializer\Type("HelpPC\CzechDataBox\Entity\ReceivedMessageEnvelope")
      * @Serializer\SerializedName("p:dmDm")
      * @Serializer\XmlElement(cdata=false)
      */
@@ -43,15 +43,15 @@ class ReturnedMessage
      */
     protected $hash;
     /**
-     * @var \DateTime|null
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @var \DateTimeImmutable|null
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmDeliveryTime")
      */
     protected $deliveryTime;
     /**
-     * @var \DateTime|null
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @var \DateTimeImmutable|null
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmAcceptanceTime")
      */
@@ -91,9 +91,9 @@ class ReturnedMessage
     }
 
     /**
-     * @return MessageEnvelope
+     * @return ReceivedMessageEnvelope
      */
-    public function getDataMessage(): MessageEnvelope
+    public function getDataMessage(): ReceivedMessageEnvelope
     {
         return $this->dataMessage;
     }
@@ -127,36 +127,36 @@ class ReturnedMessage
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getDeliveryTime(): ?\DateTime
+    public function getDeliveryTime(): ?\DateTimeImmutable
     {
         return $this->deliveryTime;
     }
 
     /**
-     * @param \DateTime|null $deliveryTime
+     * @param \DateTimeImmutable|null $deliveryTime
      * @return ReturnedMessage
      */
-    public function setDeliveryTime(?\DateTime $deliveryTime): ReturnedMessage
+    public function setDeliveryTime(?\DateTimeImmutable $deliveryTime): ReturnedMessage
     {
         $this->deliveryTime = $deliveryTime;
         return $this;
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getAcceptanceTime(): ?\DateTime
+    public function getAcceptanceTime(): ?\DateTimeImmutable
     {
         return $this->acceptanceTime;
     }
 
     /**
-     * @param \DateTime|null $acceptanceTime
+     * @param \DateTimeImmutable|null $acceptanceTime
      * @return ReturnedMessage
      */
-    public function setAcceptanceTime(?\DateTime $acceptanceTime): ReturnedMessage
+    public function setAcceptanceTime(?\DateTimeImmutable $acceptanceTime): ReturnedMessage
     {
         $this->acceptanceTime = $acceptanceTime;
         return $this;

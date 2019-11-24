@@ -42,8 +42,8 @@ class DataBoxResult
      */
     protected $dataBoxAddress;
     /**
-     * @var \DateTime|null
-     * @Serializer\Type("DateTime<'Y-m-d'>")
+     * @var \DateTimeImmutable|null
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dbBiDate")
      */
@@ -125,18 +125,18 @@ class DataBoxResult
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getDataBoxBiDate(): ?\DateTime
+    public function getDataBoxBiDate(): ?\DateTimeImmutable
     {
         return $this->dataBoxBiDate;
     }
 
     /**
-     * @param \DateTime|null $dataBoxBiDate
+     * @param \DateTimeImmutable|null $dataBoxBiDate
      * @return DataBoxResult
      */
-    public function setDataBoxBiDate(?\DateTime $dataBoxBiDate): DataBoxResult
+    public function setDataBoxBiDate(?\DateTimeImmutable $dataBoxBiDate): DataBoxResult
     {
         $this->dataBoxBiDate = $dataBoxBiDate;
         return $this;

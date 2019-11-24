@@ -48,9 +48,9 @@ class OwnerInfo
      */
     protected $firmName;
     /**
-     * @var \DateTime|null
+     * @var \DateTimeImmutable|null
      * @Serializer\XmlElement(cdata=false)
-     * @Serializer\Type("DateTime<'Y-m-d'>")
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SerializedName("p:biDate")
      */
     protected $biDate;
@@ -208,18 +208,18 @@ class OwnerInfo
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getBiDate(): ?\DateTime
+    public function getBiDate(): ?\DateTimeImmutable
     {
         return $this->biDate;
     }
 
     /**
-     * @param \DateTime|null $biDate
+     * @param \DateTimeImmutable|null $biDate
      * @return OwnerInfo
      */
-    public function setBiDate(?\DateTime $biDate): OwnerInfo
+    public function setBiDate(?\DateTimeImmutable $biDate): OwnerInfo
     {
         $this->biDate = $biDate;
         return $this;

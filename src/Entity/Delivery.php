@@ -37,15 +37,15 @@ class Delivery
      */
     protected $hash;
     /**
-     * @var \DateTime|null
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @var \DateTimeImmutable|null
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmDeliveryTime")
      */
     protected $deliveryTime;
     /**
-     * @var \DateTime|null
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @var \DateTimeImmutable|null
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmAcceptanceTime")
      */
@@ -60,8 +60,9 @@ class Delivery
     /**
      * @var ArrayCollection
      * @Serializer\Type("ArrayCollection<HelpPC\CzechDataBox\Entity\DataMessageEvent>")
-     * @Serializer\XmlList(entry="dmEvent", inline=false)
-     * @Serializer\SerializedName("p:dmEvents")
+     * @Serializer\XmlList(entry="dmEvent", inline=false,namespace="http://isds.czechpoint.cz/v20")
+     * @Serializer\SerializedName("dmEvents")
+     * @Serializer\XmlElement(cdata=false,namespace="http://isds.czechpoint.cz/v20")
      */
     protected $events;
 
@@ -79,17 +80,17 @@ class Delivery
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getDeliveryTime(): ?\DateTime
+    public function getDeliveryTime(): ?\DateTimeImmutable
     {
         return $this->deliveryTime;
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getAcceptanceTime(): ?\DateTime
+    public function getAcceptanceTime(): ?\DateTimeImmutable
     {
         return $this->acceptanceTime;
     }

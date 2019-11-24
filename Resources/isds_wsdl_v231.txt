@@ -226,12 +226,44 @@ dodateènì pøidána klasifikace informací, nezmìnìno èíslo verze
 
 verze 2.28
 datum nasazeni na TEST: 13.5.2018
-datum nasazeni na PRODUKCI: 2.9.2018
+datum nasazeni na PRODUKCI: 2.9.2018  - poslední wsdl starého formátu pro uživatele
 ============================================================
  Novinky a zmeny:
 ----------------
 dbTypes.xsd - pøidány definice pro službu GetDataBoxUsers2, odstranìny služby Activate, SetEffectiveOVM, ClearEffectiveOVM
 db_manipulations.wsdl - pøidána služba GetDataBoxUsers2, odstranìny služby Activate, SetEffectiveOVM, ClearEffectiveOVM
+- vydáno Info pro vývojáøe (kvìten 2018)
 
- 
+
+verze 2.29
+datum nasazeni na TEST: 2.9.2018
+datum nasazeni na PRODUKCI: 2.9.2018  - pouze pro Czech POINT, neveøejné, není tøeba publikovat
+============================================================
+ Novinky a zmeny:
+----------------
+dbTypes.xsd - CzP atributy guid, subject a branch  pro služby CzP 
+
             
+verze 2.30     
+datum nasazeni na TEST: 2.9.2018 , druhý den staženo
+datum nasazeni na PRODUKCI: nikdy
+============================================================
+ Novinky a zmeny:
+----------------
+- ZÁSADNÍ ZMÌNY ve strukturách, staré služby zùstávají funkèní, ale nedokumentované
+- jiný namespace, nový formát WS pro správu schránek a vyhledávání (UserInfo a OwnerInfo)
+- pøidáno idOVM i do vyhledávání
+- z wsdl odstranìna GetDataBoxUsers a Activate
+- pøesuny mezi wsdl
+
+
+verze 2.31     
+datum nasazeni na TEST: 6.9.2018
+datum nasazeni na PRODUKCI: 4.11.2018
+============================================================
+ Novinky a zmeny:
+----------------
+- slouèení starých (2.28) a nových (2.30) verzí do jediného wsdl
+- jediný namespace /v20
+- dokumentovány již jen nové verze služeb - pøíruèky od verze 2.64; staré služby jsou popsány v pøíruèkách do verze 2.63 (Provozní øád k odstávce záøí 2018)
+- vydáno Info pro vývojáøe  (záøí 2018)

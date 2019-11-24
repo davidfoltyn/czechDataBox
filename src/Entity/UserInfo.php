@@ -23,9 +23,9 @@ class UserInfo
     use PersonName;
     use Address;
     /**
-     * @var \DateTime|null
+     * @var \DateTimeImmutable|null
      * @Serializer\XmlElement(cdata=false)
-     * @Serializer\Type("DateTime<'Y-m-d'>")
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SerializedName("p:biDate")
      */
     protected $biDate;
@@ -87,18 +87,18 @@ class UserInfo
     protected $caZipCode;
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getBiDate(): ?\DateTime
+    public function getBiDate(): ?\DateTimeImmutable
     {
         return $this->biDate;
     }
 
     /**
-     * @param \DateTime|null $biDate
+     * @param \DateTimeImmutable|null $biDate
      * @return UserInfo
      */
-    public function setBiDate(?\DateTime $biDate): UserInfo
+    public function setBiDate(?\DateTimeImmutable $biDate): UserInfo
     {
         $this->biDate = $biDate;
         return $this;

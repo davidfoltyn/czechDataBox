@@ -20,53 +20,53 @@ use JMS\Serializer\Annotation as Serializer;
 class GetMessageStateChanges implements IRequest
 {
     /**
-     * @var \DateTime|null
+     * @var \DateTimeImmutable|null
      * @Serializer\SkipWhenEmpty()
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\SerializedName("p:dmFromTime")
      * @Serializer\XmlElement(cdata=false)
      */
     protected $changesFrom;
     /**
-     * @var \DateTime|null
+     * @var \DateTimeImmutable|null
      * @Serializer\SkipWhenEmpty()
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\SerializedName("p:dmToTime")
      * @Serializer\XmlElement(cdata=false)
      */
     protected $changesTo;
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getChangesFrom(): ?\DateTime
+    public function getChangesFrom(): ?\DateTimeImmutable
     {
         return $this->changesFrom;
     }
 
     /**
-     * @param \DateTime|null $changesFrom
+     * @param \DateTimeImmutable|null $changesFrom
      * @return GetMessageStateChanges
      */
-    public function setChangesFrom(?\DateTime $changesFrom): GetMessageStateChanges
+    public function setChangesFrom(?\DateTimeImmutable $changesFrom): GetMessageStateChanges
     {
         $this->changesFrom = $changesFrom;
         return $this;
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getChangesTo(): ?\DateTime
+    public function getChangesTo(): ?\DateTimeImmutable
     {
         return $this->changesTo;
     }
 
     /**
-     * @param \DateTime|null $changesTo
+     * @param \DateTimeImmutable|null $changesTo
      * @return GetMessageStateChanges
      */
-    public function setChangesTo(?\DateTime $changesTo): GetMessageStateChanges
+    public function setChangesTo(?\DateTimeImmutable $changesTo): GetMessageStateChanges
     {
         $this->changesTo = $changesTo;
         return $this;

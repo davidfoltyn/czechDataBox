@@ -44,15 +44,15 @@ class MessageRecord
      */
     protected $attachmentSize;
     /**
-     * @var \DateTime|null
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @var \DateTimeImmutable|null
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmDeliveryTime")
      */
     protected $deliveryTime;
     /**
-     * @var \DateTime|null
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @var \DateTimeImmutable|null
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmAcceptanceTime")
      */
@@ -128,36 +128,36 @@ class MessageRecord
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getDeliveryTime(): ?\DateTime
+    public function getDeliveryTime(): ?\DateTimeImmutable
     {
         return $this->deliveryTime;
     }
 
     /**
-     * @param \DateTime|null $deliveryTime
+     * @param \DateTimeImmutable|null $deliveryTime
      * @return MessageRecord
      */
-    public function setDeliveryTime(?\DateTime $deliveryTime): MessageRecord
+    public function setDeliveryTime(?\DateTimeImmutable $deliveryTime): MessageRecord
     {
         $this->deliveryTime = $deliveryTime;
         return $this;
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getAcceptanceTime(): ?\DateTime
+    public function getAcceptanceTime(): ?\DateTimeImmutable
     {
         return $this->acceptanceTime;
     }
 
     /**
-     * @param \DateTime|null $acceptanceTime
+     * @param \DateTimeImmutable|null $acceptanceTime
      * @return MessageRecord
      */
-    public function setAcceptanceTime(?\DateTime $acceptanceTime): MessageRecord
+    public function setAcceptanceTime(?\DateTimeImmutable $acceptanceTime): MessageRecord
     {
         $this->acceptanceTime = $acceptanceTime;
         return $this;

@@ -19,8 +19,8 @@ use JMS\Serializer\Annotation as Serializer;
 class CreditRecord
 {
     /**
-     * @var \DateTime
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @var \DateTimeImmutable
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:ciEventTime")
      */
@@ -81,16 +81,16 @@ class CreditRecord
      */
     protected $newCapacity;
     /**
-     * @var \DateTime|null
-     * @Serializer\Type("DateTime<'Y-m-d'>")
+     * @var \DateTimeImmutable|null
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:ciNewFrom")
      * @Serializer\XmlElement(cdata=false)
      */
     protected $newFrom;
     /**
-     * @var \DateTime|null
-     * @Serializer\Type("DateTime<'Y-m-d'>")
+     * @var \DateTimeImmutable|null
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:ciNewTo")
      * @Serializer\XmlElement(cdata=false)
@@ -105,16 +105,16 @@ class CreditRecord
      */
     protected $oldCapacity;
     /**
-     * @var \DateTime|null
-     * @Serializer\Type("DateTime<'Y-m-d'>")
+     * @var \DateTimeImmutable|null
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:ciOldFrom")
      * @Serializer\XmlElement(cdata=false)
      */
     protected $oldFrom;
     /**
-     * @var \DateTime|null
-     * @Serializer\Type("DateTime<'Y-m-d'>")
+     * @var \DateTimeImmutable|null
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:ciOldTo")
      * @Serializer\XmlElement(cdata=false)

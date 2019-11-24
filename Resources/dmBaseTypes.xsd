@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- ************************************************************************
    XSD schema typů použitých ve WSDL pro manipulaci s datovými zprávami
-                       verze 2.26      
+
+   verze: 2.31
+   klasifikace: Veřejný dokument    
                        
  Změny:  
      5.2.2009  verze 0.1   základní verze
@@ -34,6 +36,9 @@
     12.09.2015  verze 2.20 - sjednocení verzí
     14.10.2015  verze 2.22 - sjednocení verzí
      31.1.2017  verze 2.26 - sjednocení verzí
+    21.11.2017  verze 2.27 - sjednocení verzí
+    2.9.2018  verze 2.30 - sjednocení verzí
+    4.9.2018  verze 2.31 - sjednocení verzí
     ******************************************************************* -->
 <xs:schema xmlns:tns="http://isds.czechpoint.cz/v20" elementFormDefault="qualified" targetNamespace="http://isds.czechpoint.cz/v20" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:simpleType name="tIdDm">

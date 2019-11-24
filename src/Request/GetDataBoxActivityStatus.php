@@ -23,15 +23,15 @@ class GetDataBoxActivityStatus implements IRequest
 {
     use DataBoxId;
     /**
-     * @var \DateTime
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @var \DateTimeImmutable
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:baFrom")
      */
     private $from;
     /**
-     * @var \DateTime
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @var \DateTimeImmutable
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:baTo")
      */
@@ -39,41 +39,41 @@ class GetDataBoxActivityStatus implements IRequest
 
     public function __construct()
     {
-        $this->setTo((new \DateTime()));
-        $this->setFrom((new \DateTime('-3 month')));
+        $this->setTo((new \DateTimeImmutable()));
+        $this->setFrom((new \DateTimeImmutable('-3 month')));
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeImmutable
      */
-    public function getFrom(): \DateTime
+    public function getFrom(): \DateTimeImmutable
     {
         return $this->from;
     }
 
     /**
-     * @param \DateTime $from
+     * @param \DateTimeImmutable $from
      * @return GetDataBoxActivityStatus
      */
-    public function setFrom(\DateTime $from): GetDataBoxActivityStatus
+    public function setFrom(\DateTimeImmutable $from): GetDataBoxActivityStatus
     {
         $this->from = $from;
         return $this;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeImmutable
      */
-    public function getTo(): \DateTime
+    public function getTo(): \DateTimeImmutable
     {
         return $this->to;
     }
 
     /**
-     * @param \DateTime $to
+     * @param \DateTimeImmutable $to
      * @return GetDataBoxActivityStatus
      */
-    public function setTo(\DateTime $to): GetDataBoxActivityStatus
+    public function setTo(\DateTimeImmutable $to): GetDataBoxActivityStatus
     {
         $this->to = $to;
         return $this;

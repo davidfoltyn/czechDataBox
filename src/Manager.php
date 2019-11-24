@@ -63,6 +63,7 @@ class Manager
      */
     public function VerifyMessage(Account $account, Request\VerifyMessage $input): Response\VerifyMessage
     {
+        trigger_error(__METHOD__ . ' is deprecated', E_USER_DEPRECATED);
         return $this->dataMessage->VerifyMessage($account, $input);
     }
 
@@ -244,6 +245,7 @@ class Manager
      */
     function ConfirmDelivery(Account $account, Request\ConfirmDelivery $input): Response\ConfirmDelivery
     {
+        trigger_error(__METHOD__ . ' is deprecated', E_USER_DEPRECATED);
         return $this->dataMessage->ConfirmDelivery($account, $input);
     }
 

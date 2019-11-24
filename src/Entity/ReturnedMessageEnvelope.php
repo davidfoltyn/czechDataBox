@@ -42,15 +42,15 @@ class ReturnedMessageEnvelope
      */
     protected $hash;
     /**
-     * @var \DateTime|null
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @var \DateTimeImmutable|null
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmDeliveryTime")
      */
     protected $deliveryTime;
     /**
-     * @var \DateTime|null
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @var \DateTimeImmutable|null
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmAcceptanceTime")
      */
@@ -125,36 +125,36 @@ class ReturnedMessageEnvelope
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getDeliveryTime(): ?\DateTime
+    public function getDeliveryTime(): ?\DateTimeImmutable
     {
         return $this->deliveryTime;
     }
 
     /**
-     * @param \DateTime|null $deliveryTime
+     * @param \DateTimeImmutable|null $deliveryTime
      * @return ReturnedMessageEnvelope
      */
-    public function setDeliveryTime(?\DateTime $deliveryTime): ReturnedMessageEnvelope
+    public function setDeliveryTime(?\DateTimeImmutable $deliveryTime): ReturnedMessageEnvelope
     {
         $this->deliveryTime = $deliveryTime;
         return $this;
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getAcceptanceTime(): ?\DateTime
+    public function getAcceptanceTime(): ?\DateTimeImmutable
     {
         return $this->acceptanceTime;
     }
 
     /**
-     * @param \DateTime|null $acceptanceTime
+     * @param \DateTimeImmutable|null $acceptanceTime
      * @return ReturnedMessageEnvelope
      */
-    public function setAcceptanceTime(?\DateTime $acceptanceTime): ReturnedMessageEnvelope
+    public function setAcceptanceTime(?\DateTimeImmutable $acceptanceTime): ReturnedMessageEnvelope
     {
         $this->acceptanceTime = $acceptanceTime;
         return $this;

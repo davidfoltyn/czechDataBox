@@ -21,8 +21,8 @@ class StateChangeRecord
 {
     use DataMessageId;
     /**
-     * @var \DateTime
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @var \DateTimeImmutable
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmEventTime")
      */
@@ -36,18 +36,18 @@ class StateChangeRecord
     protected $messageStatus;
 
     /**
-     * @return \DateTime
+     * @return \DateTimeImmutable
      */
-    public function getEventTime(): \DateTime
+    public function getEventTime(): \DateTimeImmutable
     {
         return $this->eventTime;
     }
 
     /**
-     * @param \DateTime $eventTime
+     * @param \DateTimeImmutable $eventTime
      * @return StateChangeRecord
      */
-    public function setEventTime(\DateTime $eventTime): StateChangeRecord
+    public function setEventTime(\DateTimeImmutable $eventTime): StateChangeRecord
     {
         $this->eventTime = $eventTime;
         return $this;

@@ -30,9 +30,9 @@ class PersonalOwnerInfo
      */
     protected $aifoIsds;
     /**
-     * @var \DateTime|null
+     * @var \DateTimeImmutable|null
      * @Serializer\XmlElement(cdata=false)
-     * @Serializer\Type("DateTime<'Y-m-d'>")
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SerializedName("p:biDate")
      */
     protected $biDate;
@@ -140,18 +140,18 @@ class PersonalOwnerInfo
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getBiDate(): ?\DateTime
+    public function getBiDate(): ?\DateTimeImmutable
     {
         return $this->biDate;
     }
 
     /**
-     * @param \DateTime|null $biDate
+     * @param \DateTimeImmutable|null $biDate
      * @return PersonalOwnerInfo
      */
-    public function setBiDate(?\DateTime $biDate): PersonalOwnerInfo
+    public function setBiDate(?\DateTimeImmutable $biDate): PersonalOwnerInfo
     {
         $this->biDate = $biDate;
         return $this;

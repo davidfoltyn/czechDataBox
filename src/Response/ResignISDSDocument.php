@@ -30,9 +30,9 @@ class ResignISDSDocument implements IResponse
      */
     protected $document;
     /**
-     * @var \DateTime|null
+     * @var \DateTimeImmutable|null
      * @Serializer\SkipWhenEmpty()
-     * @Serializer\Type("DateTime<'Y-m-d'>")
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SerializedName("p:dmValidTo")
      * @Serializer\XmlElement(cdata=false)
      */
@@ -75,18 +75,18 @@ class ResignISDSDocument implements IResponse
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getValidTo(): ?\DateTime
+    public function getValidTo(): ?\DateTimeImmutable
     {
         return $this->validTo;
     }
 
     /**
-     * @param \DateTime|null $validTo
+     * @param \DateTimeImmutable|null $validTo
      * @return ResignISDSDocument
      */
-    public function setValidTo(?\DateTime $validTo): ResignISDSDocument
+    public function setValidTo(?\DateTimeImmutable $validTo): ResignISDSDocument
     {
         $this->validTo = $validTo;
         return $this;

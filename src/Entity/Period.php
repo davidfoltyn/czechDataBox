@@ -19,15 +19,15 @@ use JMS\Serializer\Annotation as Serializer;
 class Period
 {
     /**
-     * @var \DateTime
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @var \DateTimeImmutable
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:PeriodFrom")
      */
     protected $from;
     /**
-     * @var \DateTime
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @var \DateTimeImmutable
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:PeriodTo")
      */
@@ -41,17 +41,17 @@ class Period
     protected $state;
 
     /**
-     * @return \DateTime
+     * @return \DateTimeImmutable
      */
-    public function getFrom(): \DateTime
+    public function getFrom(): \DateTimeImmutable
     {
         return $this->from;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeImmutable
      */
-    public function getTo(): \DateTime
+    public function getTo(): \DateTimeImmutable
     {
         return $this->to;
     }

@@ -39,8 +39,8 @@ class PDZRecord
      */
     protected $payer;
     /**
-     * @var \DateTime|null
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @var \DateTimeImmutable|null
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\SerializedName("p:PDZExpire")
      * @Serializer\XmlElement(cdata=false)
      */
@@ -115,18 +115,18 @@ class PDZRecord
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getExpire(): ?\DateTime
+    public function getExpire(): ?\DateTimeImmutable
     {
         return $this->expire;
     }
 
     /**
-     * @param \DateTime|null $expire
+     * @param \DateTimeImmutable|null $expire
      * @return PDZRecord
      */
-    public function setExpire(?\DateTime $expire): PDZRecord
+    public function setExpire(?\DateTimeImmutable $expire): PDZRecord
     {
         $this->expire = $expire;
         return $this;

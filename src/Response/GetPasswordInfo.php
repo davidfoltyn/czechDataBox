@@ -23,26 +23,26 @@ class GetPasswordInfo implements IResponse
     use DataBoxStatus;
 
     /**
-     * @var \DateTime|null
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @var \DateTimeImmutable|null
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:pswExpDate")
      */
     protected $passwordExpiry;
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getPasswordExpiry(): ?\DateTime
+    public function getPasswordExpiry(): ?\DateTimeImmutable
     {
         return $this->passwordExpiry;
     }
 
     /**
-     * @param \DateTime|null $passwordExpiry
+     * @param \DateTimeImmutable|null $passwordExpiry
      * @return GetPasswordInfo
      */
-    public function setPasswordExpiry(?\DateTime $passwordExpiry): GetPasswordInfo
+    public function setPasswordExpiry(?\DateTimeImmutable $passwordExpiry): GetPasswordInfo
     {
         $this->passwordExpiry = $passwordExpiry;
         return $this;

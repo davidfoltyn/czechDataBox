@@ -14,11 +14,6 @@ use HelpPC\CzechDataBox\Entity\File;
 trait GetMainFile
 {
 
-    public function getFiles()
-    {
-        return new ArrayCollection();
-    }
-
     public function getMainFile()
     {
         /** @var File $file */

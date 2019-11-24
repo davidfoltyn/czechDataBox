@@ -45,17 +45,4 @@ class Dispatcher extends \GuzzleHttp\Client
         parent::__construct($config);
     }
 
-    public function setAccount(Account $account){
-
-        if ($account->getLogintype() != Account::LOGIN_CERT) {
-            $curl[CURLOPT_USERPWD] = $account->getLoginname() . ":" . $account->getPassword();
-        }
-
-        //todo otestovat prihlasovani pomoci certifikatu
-        if ($account->getLoginType() != Account::LOGIN_NAME_PASSWORD) {
-            $curl[CURLOPT_SSLCERT] = $account->getCertfilename();
-            $curl[CURLOPT_SSLCERTPASSWD] = $account->getPassphrase();
-        }
-    }
-
 }

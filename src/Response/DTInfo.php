@@ -38,16 +38,16 @@ class DTInfo implements IResponse
      */
     protected $ActDTCapacity;
     /**
-     * @var \DateTime|null
-     * @Serializer\Type("DateTime<'Y-m-d'>")
+     * @var \DateTimeImmutable|null
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:ActDTFrom")
      * @Serializer\XmlElement(cdata=false)
      */
     protected $ActDTFrom;
     /**
-     * @var \DateTime|null
-     * @Serializer\Type("DateTime<'Y-m-d'>")
+     * @var \DateTimeImmutable|null
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:ActDTTo")
      * @Serializer\XmlElement(cdata=false)
@@ -78,16 +78,16 @@ class DTInfo implements IResponse
      */
     protected $FutDTCapacity;
     /**
-     * @var \DateTime|null
-     * @Serializer\Type("DateTime<'Y-m-d'>")
+     * @var \DateTimeImmutable|null
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:FutDTFrom")
      * @Serializer\XmlElement(cdata=false)
      */
     protected $FutDTFrom;
     /**
-     * @var \DateTime|null
-     * @Serializer\Type("DateTime<'Y-m-d'>")
+     * @var \DateTimeImmutable|null
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:FutDTTo")
      * @Serializer\XmlElement(cdata=false)
@@ -119,17 +119,17 @@ class DTInfo implements IResponse
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getActDTFrom(): ?\DateTime
+    public function getActDTFrom(): ?\DateTimeImmutable
     {
         return $this->ActDTFrom;
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getActDTTo(): ?\DateTime
+    public function getActDTTo(): ?\DateTimeImmutable
     {
         return $this->ActDTTo;
     }
@@ -159,17 +159,17 @@ class DTInfo implements IResponse
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getFutDTFrom(): ?\DateTime
+    public function getFutDTFrom(): ?\DateTimeImmutable
     {
         return $this->FutDTFrom;
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getFutDTTo(): ?\DateTime
+    public function getFutDTTo(): ?\DateTimeImmutable
     {
         return $this->FutDTTo;
     }

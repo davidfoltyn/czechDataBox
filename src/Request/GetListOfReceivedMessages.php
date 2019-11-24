@@ -20,17 +20,17 @@ use JMS\Serializer\Annotation as Serializer;
 class GetListOfReceivedMessages implements IRequest
 {
     /**
-     * @var \DateTime|null
+     * @var \DateTimeImmutable|null
      * @Serializer\SkipWhenEmpty()
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\SerializedName("p:dmFromTime")
      * @Serializer\XmlElement(cdata=false)
      */
     protected $listFrom;
     /**
-     * @var \DateTime|null
+     * @var \DateTimeImmutable|null
      * @Serializer\SkipWhenEmpty()
-     * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\SerializedName("p:dmToTime")
      * @Serializer\XmlElement(cdata=false)
      */
@@ -68,36 +68,36 @@ class GetListOfReceivedMessages implements IRequest
     protected $limit;
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getListFrom(): ?\DateTime
+    public function getListFrom(): ?\DateTimeImmutable
     {
         return $this->listFrom;
     }
 
     /**
-     * @param \DateTime|null $listFrom
+     * @param \DateTimeImmutable|null $listFrom
      * @return GetListOfReceivedMessages
      */
-    public function setListFrom(?\DateTime $listFrom): GetListOfReceivedMessages
+    public function setListFrom(?\DateTimeImmutable $listFrom): GetListOfReceivedMessages
     {
         $this->listFrom = $listFrom;
         return $this;
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getListTo(): ?\DateTime
+    public function getListTo(): ?\DateTimeImmutable
     {
         return $this->listTo;
     }
 
     /**
-     * @param \DateTime|null $listTo
+     * @param \DateTimeImmutable|null $listTo
      * @return GetListOfReceivedMessages
      */
-    public function setListTo(?\DateTime $listTo): GetListOfReceivedMessages
+    public function setListTo(?\DateTimeImmutable $listTo): GetListOfReceivedMessages
     {
         $this->listTo = $listTo;
         return $this;
