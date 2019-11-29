@@ -24,7 +24,7 @@ class GetDataBoxList implements IResponse
     /**
      * @var SplFileInfo|null
      * @Serializer\SkipWhenEmpty()
-     * @Serializer\Type("base64File")
+     * @Serializer\Type("HelpPC\Serializer\Utils\SplFileInfo")
      * @Serializer\SerializedName("p:dblData")
      * @Serializer\XmlElement(cdata=false)
      */

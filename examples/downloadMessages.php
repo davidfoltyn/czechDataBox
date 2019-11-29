@@ -4,8 +4,8 @@ $console->writeln(sprintf('Komunikovat bude probihat vuci %s za datovou schranku
 
 
 $messageStatus = new \HelpPC\CzechDataBox\Request\GetMessageStateChanges();
-$messageStatus->setChangesFrom((new \DateTime())->modify('-3 month'))
-    ->setChangesTo((new \DateTime()));
+$messageStatus->setChangesFrom((new \DateTimeImmutable())->modify('-3 month'))
+    ->setChangesTo((new \DateTimeImmutable()));
 
 $a = $manager->GetMessageStateChanges($account, $messageStatus);
 
@@ -14,8 +14,8 @@ $a = $manager->GetMessageStateChanges($account, $messageStatus);
 $console->writeln('Probiha stahovani seznamu odeslanych DZ');
 $listSended = new \HelpPC\CzechDataBox\Request\GetListOfSentMessages();
 $listSended->setStatusFilter(\HelpPC\CzechDataBox\Utils\MessageStatus::getDecEntryForStatus(\HelpPC\CzechDataBox\Utils\MessageStatus::FILTER_ALL))
-    ->setListTo(new \DateTime())
-    ->setListFrom((new \DateTime())->modify('-3 month'));
+    ->setListTo(new \DateTimeImmutable())
+    ->setListFrom((new \DateTimeImmutable())->modify('-3 month'));
 
 $listSendedRes = $manager->GetListOfSentMessages($account, $listSended);
 
@@ -30,7 +30,7 @@ if ($listSendedRes->getStatus()->isOk()) {
             $record->getRecipient(),
             $record->getAnnotation(),
             $record->getDeliveryTime()->format('j.n.Y, G:i'),
-            ($record->getAcceptanceTime() instanceof \DateTime ? $record->getAcceptanceTime()->format('j.n.Y, G:i') : '')));
+            ($record->getAcceptanceTime() instanceof \DateTimeImmutable ? $record->getAcceptanceTime()->format('j.n.Y, G:i') : '')));
         if ($listSendedRes->getRecord()->indexOf($record) > 0) {
             continue;
         }
@@ -100,8 +100,8 @@ if ($listSendedRes->getStatus()->isOk()) {
 $console->writeln('Probiha stahovani seznamu prijatych DZ');
 $listrec = new \HelpPC\CzechDataBox\Request\GetListOfReceivedMessages();
 $listrec->setStatusFilter(\HelpPC\CzechDataBox\Utils\MessageStatus::getDecEntryForStatus(\HelpPC\CzechDataBox\Utils\MessageStatus::FILTER_ALL))
-    ->setListTo(new \DateTime())
-    ->setListFrom((new \DateTime())->modify('-3 month'));
+    ->setListTo(new \DateTimeImmutable())
+    ->setListFrom((new \DateTimeImmutable())->modify('-3 month'));
 
 $listrecRes = $manager->GetListOfReceivedMessages($account, $listrec);
 if ($listrecRes->getStatus()->isOk()) {
@@ -114,7 +114,7 @@ if ($listrecRes->getStatus()->isOk()) {
             $record->getSender(),
             $record->getAnnotation(),
             $record->getDeliveryTime()->format('j.n.Y, G:i'),
-            ($record->getAcceptanceTime() instanceof \DateTime ? $record->getAcceptanceTime()->format('j.n.Y, G:i') : '')));
+            ($record->getAcceptanceTime() instanceof \DateTimeImmutable ? $record->getAcceptanceTime()->format('j.n.Y, G:i') : '')));
         if ($listrecRes->getRecord()->indexOf($record) > 0) {
             continue;
         }

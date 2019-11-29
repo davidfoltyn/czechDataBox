@@ -29,8 +29,8 @@ class ReturnedMessage
      */
     protected $type;
     /**
-     * @var ReceivedMessageEnvelope
-     * @Serializer\Type("HelpPC\CzechDataBox\Entity\ReceivedMessageEnvelope")
+     * @var MessageEnvelope
+     * @Serializer\Type("HelpPC\CzechDataBox\Entity\MessageEnvelope")
      * @Serializer\SerializedName("p:dmDm")
      * @Serializer\XmlElement(cdata=false)
      */
@@ -91,9 +91,9 @@ class ReturnedMessage
     }
 
     /**
-     * @return ReceivedMessageEnvelope
+     * @return MessageEnvelope
      */
-    public function getDataMessage(): ReceivedMessageEnvelope
+    public function getDataMessage(): MessageEnvelope
     {
         return $this->dataMessage;
     }

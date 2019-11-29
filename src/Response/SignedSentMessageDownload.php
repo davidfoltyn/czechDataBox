@@ -18,7 +18,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @package HelpPC\CzechDataBox\Response
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:SignedSentMessageDownloadResponse", namespace="http://isds.czechpoint.cz/v20")
- * @Serializer\AccessorOrder("custom",custom={"signature","status"})
  */
 class SignedSentMessageDownload implements IResponse
 {

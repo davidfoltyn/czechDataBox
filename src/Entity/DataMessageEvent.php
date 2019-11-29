@@ -14,14 +14,14 @@ use JMS\Serializer\Annotation as Serializer;
  * @package HelpPC\CzechDataBox\Entity
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:dmEvent")
- **/
+ */
 class DataMessageEvent
 {
     /**
      * @var \DateTimeImmutable
      * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:dmEventTime")
+     * @Serializer\SerializedName("p:dnEventTime")
      */
     protected $time;
     /**

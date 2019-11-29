@@ -39,7 +39,7 @@ trait DataMessageEnvelope
 
     /**
      * @var int
-     * @Serializer\Type("int")
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("p:dmSenderType")
      * @Serializer\XmlElement(cdata=false)
      */

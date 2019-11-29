@@ -60,9 +60,8 @@ class Delivery
     /**
      * @var ArrayCollection
      * @Serializer\Type("ArrayCollection<HelpPC\CzechDataBox\Entity\DataMessageEvent>")
-     * @Serializer\XmlList(entry="dmEvent", inline=false,namespace="http://isds.czechpoint.cz/v20")
-     * @Serializer\SerializedName("dmEvents")
-     * @Serializer\XmlElement(cdata=false,namespace="http://isds.czechpoint.cz/v20")
+     * @Serializer\XmlList(entry="dmEvent", inline=false)
+     * @Serializer\SerializedName("p:dmEvents")
      */
     protected $events;
 

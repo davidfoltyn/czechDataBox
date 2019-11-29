@@ -1,28 +1,23 @@
+image: phpdockerio/php73-cli
+
+cache:
+  paths:
+    - ./vendor/
+
 before_script:
-  - php -v
-  - apt-get -y update
-  - apt-get -y install git zip unzip
-  - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-  - php composer-setup.php
-  - php -r "unlink('composer-setup.php');"
-
-my_app:7.1:
-  image: php:7.1
-  script:
-    - php composer.phar install --no-progress --no-interaction --no-suggest
-    - vendor/bin/phpstan analyse -c phpstan.neon -l 7 src/
-    - vendor/bin/tester -C tests/php.ini tests/
-
-my_app:7.2:
-  image: php:7.2
-  script:
-    - php composer.phar install --no-progress --no-interaction --no-suggest
-    - vendor/bin/phpstan analyse -c phpstan.neon -l 7 src/
-    - vendor/bin/tester -C tests/php.ini tests/
+  - apt-get update
+  - apt-get install -yqq git php-memcached php7.3-mysql php7.3-pgsql php-redis php7.3-sqlite3 php-xdebug php7.3-bcmath php7.3-bz2 php7.3-gd php7.3-gmp php-imagick php7.3-imap php7.3-intl php7.3-soap php-ssh2 php7.3-xsl
+  - apt-get clean
+  - rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+  - apt-get update -yqq
+  - composer config cache-files-dir ./cache/composer
+  - composer install --no-progress --no-suggest
 
 my_app:7.3:
-  image: php:7.3
+  only:
+    - merge_requests
+    - pipelines
+    - pushes
   script:
-    - php composer.phar install --no-progress --no-interaction --no-suggest
-    - vendor/bin/phpstan analyse -c phpstan.neon -l 7 src/
-    - vendor/bin/tester -C tests/php.ini tests/
+    - composer phpstan
+    - composer tester

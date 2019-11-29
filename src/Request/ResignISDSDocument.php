@@ -23,7 +23,7 @@ class ResignISDSDocument implements IRequest
 
     /**
      * @var SplFileInfo
-     * @Serializer\Type("base64File")
+     * @Serializer\Type("HelpPC\Serializer\Utils\SplFileInfo")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmDoc")
      */

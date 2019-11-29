@@ -61,8 +61,8 @@ $console->write('   - zjistovani informaci o stavu creditu');
 /** @var \HelpPC\CzechDataBox\Response\DataBoxCreditInfo $res */
 $input = new \HelpPC\CzechDataBox\Request\DataBoxCreditInfo();
 $input->setDataBoxId(($type == 'ovm' ? $config['ovm']['id'] : $config['fo']['id']))
-    ->setFromDate((new \DateTime())->modify('-3 month'))
-    ->setToDate((new DateTime()));
+    ->setFromDate((new \DateTimeImmutable())->modify('-3 month'))
+    ->setToDate((new DateTimeImmutable()));
 $res = $manager->DataBoxCreditInfo($account, $input);
 if ($res->getStatus()->isOk()) {
     $console->writeln(' -> OK ' . sprintf('aktualni stav je %s', $res->getCurrentCredit()));
@@ -73,8 +73,8 @@ if ($res->getStatus()->isOk()) {
 $console->write('   - GetDataBoxActivityStatus');
 $input = new \HelpPC\CzechDataBox\Request\GetDataBoxActivityStatus();
 $input->setDataBoxId(($type == 'ovm' ? $config['ovm']['id'] : $config['fo']['id']))
-    ->setFrom((new \DateTime())->modify('-3 month'))
-    ->setTo((new DateTime()));
+    ->setFrom((new \DateTimeImmutable())->modify('-3 month'))
+    ->setTo((new DateTimeImmutable()));
 /** @var \HelpPC\CzechDataBox\Response\GetDataBoxActivityStatus $res */
 $res = $manager->GetDataBoxActivityStatus($account, $input);
 if ($res->getStatus()->isOk()) {

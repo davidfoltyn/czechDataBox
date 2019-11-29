@@ -23,25 +23,17 @@ class ReceivedMessageEnvelope
      */
     protected $files;
 
-
     public function __construct()
     {
         $this->files = new ArrayCollection();
     }
 
-    /**
-     * @return ArrayCollection
-     */
     public function getFiles(): ArrayCollection
     {
         return $this->files;
     }
 
-    /**
-     * @param ArrayCollection $files
-     * @return MessageEnvelope
-     */
-    public function setFiles(ArrayCollection $files): MessageEnvelope
+    public function setFiles(ArrayCollection $files): ReceivedMessageEnvelope
     {
         $this->files = $files;
         return $this;
