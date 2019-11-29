@@ -24,7 +24,7 @@ class ResignISDSDocument implements IResponse
     use DataMessageStatus;
     /**
      * @var SplFileInfo
-     * @Serializer\Type("HelpPC\Serializer\Utils\SplFileInfo")
+     * @Serializer\Type("base64File")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmResultDoc")
      */

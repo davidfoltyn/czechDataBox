@@ -10,24 +10,24 @@ namespace HelpPC\CzechDataBox\Connector;
 
 class Dispatcher extends \GuzzleHttp\Client
 {
-    public function __construct($proxyHost = null, $proxyPort = null, $proxyLogin = null, $proxyPassword = null)
+    public function __construct($proxyHost = NULL, $proxyPort = NULL, $proxyLogin = NULL, $proxyPassword = NULL)
     {
         $curl = [];
         $config['curl'] =& $curl;
-        $curl[CURLOPT_POST] = true;
-        $curl[CURLOPT_RETURNTRANSFER] = true;
-        $curl[CURLOPT_FAILONERROR] = false;
-        $curl[CURLOPT_FOLLOWLOCATION] = true;
-        $curl[CURLINFO_HEADER_OUT] = true;
-        $curl[CURLOPT_UNRESTRICTED_AUTH] = false;
-        $curl[CURLOPT_NOBODY] = false;
+        $curl[CURLOPT_POST] = TRUE;
+        $curl[CURLOPT_RETURNTRANSFER] = TRUE;
+        $curl[CURLOPT_FAILONERROR] = FALSE;
+        $curl[CURLOPT_FOLLOWLOCATION] = TRUE;
+        $curl[CURLINFO_HEADER_OUT] = TRUE;
+        $curl[CURLOPT_UNRESTRICTED_AUTH] = FALSE;
+        $curl[CURLOPT_NOBODY] = FALSE;
 
 
         $caFile = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'CAfile.crt';
 
-        $curl[CURLOPT_SSL_VERIFYPEER] = false;
+        $curl[CURLOPT_SSL_VERIFYPEER] = FALSE;
         if (is_file($caFile)) {
-            $curl[CURLOPT_SSL_VERIFYPEER] = true;
+            $curl[CURLOPT_SSL_VERIFYPEER] = TRUE;
             $curl[CURLOPT_SSL_VERIFYHOST] = 0;
             $curl[CURLOPT_CAINFO] = $caFile;
             $curl[CURLOPT_CAPATH] = $caFile;
@@ -37,25 +37,12 @@ class Dispatcher extends \GuzzleHttp\Client
 
         if (isset($proxyHost)) {
             $curl[CURLOPT_PROXY] = 'http://' . $proxyHost . ':' . $proxyPort;
-            $curl[CURLOPT_HTTPPROXYTUNNEL] = true;
-            if ($proxyLogin != null || $proxyPassword != null) {
+            $curl[CURLOPT_HTTPPROXYTUNNEL] = TRUE;
+            if ($proxyLogin != NULL || $proxyPassword != NULL) {
                 $curl[CURLOPT_PROXYUSERPWD] = $proxyLogin . ':' . $proxyPassword;
             }
         }
         parent::__construct($config);
-    }
-
-    public function setAccount(Account $account){
-
-        if ($account->getLogintype() != Account::LOGIN_CERT) {
-            $curl[CURLOPT_USERPWD] = $account->getLoginname() . ":" . $account->getPassword();
-        }
-
-        //todo otestovat prihlasovani pomoci certifikatu
-        if ($account->getLoginType() != Account::LOGIN_NAME_PASSWORD) {
-            $curl[CURLOPT_SSLCERT] = $account->getCertfilename();
-            $curl[CURLOPT_SSLCERTPASSWD] = $account->getPassphrase();
-        }
     }
 
 }
