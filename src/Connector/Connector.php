@@ -7,21 +7,19 @@
 
 namespace HelpPC\CzechDataBox\Connector;
 
-
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ServerException;
 use HelpPC\CzechDataBox\Exception\ConnectionException;
 use HelpPC\CzechDataBox\Exception\SystemExclusion;
 use HelpPC\CzechDataBox\IRequest;
 use HelpPC\CzechDataBox\IResponse;
-use JMS\Serializer\Serializer;
+use JMS\Serializer\SerializerInterface;
 use Psr\Http\Message\ResponseInterface;
 
 abstract class Connector
 {
     /** @var \GuzzleHttp\Client */
     private $guzzleHttp;
-    /** @var Serializer */
+    /** @var SerializerInterface */
     private $serializer;
 
     protected const OPERATIONSWS = 0;
@@ -31,7 +29,7 @@ abstract class Connector
     protected const ACCESSWS = 5;
     private $connected = false;
 
-    public function __construct(Serializer $serializer, \GuzzleHttp\Client $guzzleHttp)
+    public function __construct(SerializerInterface $serializer, \GuzzleHttp\Client $guzzleHttp)
     {
         $this->guzzleHttp = $guzzleHttp;
         $this->serializer = $serializer;

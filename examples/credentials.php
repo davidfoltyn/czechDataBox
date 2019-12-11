@@ -8,15 +8,10 @@ use HelpPC\Serializer\SerializerFactory;
 
 if(file_exists('../../../autoload.php')){
     require_once '../../../autoload.php';
-    \Doctrine\Common\Annotations\AnnotationRegistry::registerAutoloadNamespace(
-        'JMS\Serializer\Annotation', __DIR__ . '/../../../jms/serializer/src'
-    );
 }else{
     require_once '../vendor/autoload.php';
-    \Doctrine\Common\Annotations\AnnotationRegistry::registerAutoloadNamespace(
-        'JMS\Serializer\Annotation', __DIR__ . '/../vendor/jms/serializer/src'
-    );
 }
+\Doctrine\Common\Annotations\AnnotationRegistry::registerLoader('class_exists');
 $console = new \Symfony\Component\Console\Output\ConsoleOutput();
 if (file_exists(__DIR__ . '/../tests/config.local.yaml')) {
     $config = \Symfony\Component\Yaml\Yaml::parse(file_get_contents(__DIR__ . '/../tests/config.local.yaml'));

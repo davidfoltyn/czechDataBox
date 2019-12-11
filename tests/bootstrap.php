@@ -3,8 +3,6 @@
 use Tester\Environment;
 
 require_once '../vendor/autoload.php';
-\Doctrine\Common\Annotations\AnnotationRegistry::registerAutoloadNamespace(
-    'JMS\Serializer\Annotation', __DIR__ . '/../vendor/jms/serializer/src'
-);
+\Doctrine\Common\Annotations\AnnotationRegistry::registerLoader('class_exists');
 Environment::setup();
 date_default_timezone_set('Europe/Prague');
