@@ -7,58 +7,61 @@ use HelpPC\CzechDataBox\Exception\BadOptionException;
 
 class DataBoxStatus
 {
-    const GENERAL = 'GENERAL';
-    const ADDRESS = 'ADDRESS';
-    const ICO = 'ICO';
-    const DBID = 'DBID';
-    const ALL = 'ALL';
-    const OVM = 'OVM';
-    const OVM_MAIN = 'OVM_MAIN';
-    const OVM_REQ = 'OVM_REQ';
-    const OVM_NOTAR = 'OVM_NOTAR';
-    const OVM_EXEKUT = 'OVM_EXEKUT';
-    const OVM_FO = 'OVM_FO';
-    const OVM_PFO = 'OVM_PFO';
-    const OVM_PO = 'OVM_PO';
-    const PO = 'PO';
-    const PO_ZAK = 'PO_ZAK';
-    const PO_REQ = 'PO_REQ';
-    const PFO = 'PFO';
-    const PFO_ADVOK = 'PFO_ADVOK';
-    const PFO_INSSPR = 'PFO_INSSPR';
-    const PFO_DANPOR = 'PFO_DANPOR';
-    const PFO_AUDITOR = 'PFO_AUDITOR';
-    const FO = 'FO';
+    public const GENERAL = 'GENERAL';
+    public const ADDRESS = 'ADDRESS';
+    public const ICO = 'ICO';
+    public const DBID = 'DBID';
+    public const ALL = 'ALL';
+    public const OVM = 'OVM';
+    public const OVM_MAIN = 'OVM_MAIN';
+    public const OVM_REQ = 'OVM_REQ';
+    public const OVM_NOTAR = 'OVM_NOTAR';
+    public const OVM_EXEKUT = 'OVM_EXEKUT';
+    public const OVM_FO = 'OVM_FO';
+    public const OVM_PFO = 'OVM_PFO';
+    public const OVM_PO = 'OVM_PO';
+    public const PO = 'PO';
+    public const PO_ZAK = 'PO_ZAK';
+    public const PO_REQ = 'PO_REQ';
+    public const PFO = 'PFO';
+    public const PFO_ADVOK = 'PFO_ADVOK';
+    public const PFO_INSSPR = 'PFO_INSSPR';
+    public const PFO_DANPOR = 'PFO_DANPOR';
+    public const PFO_AUDITOR = 'PFO_AUDITOR';
+    public const FO = 'FO';
 
-    const TYPE_GENERAL = 'GENERAL';
-    const TYPE_ADDRESS = 'ADDRESS';
-    const TYPE_ICO = 'ICO';
-    const TYPE_DBID = 'DBID';
-    const SCOPE_ALL = 'ALL';
-    const SCOPE_OVM = 'OVM';
-    const SCOPE_OVM_MAIN = 'OVM_MAIN';
-    const SCOPE_OVM_REQ = 'OVM_REQ';
-    const SCOPE_OVM_NOTAR = 'OVM_NOTAR';
-    const SCOPE_OVM_EXEKUT = 'OVM_EXEKUT';
-    const SCOPE_OVM_FO = 'OVM_FO';
-    const SCOPE_OVM_PFO = 'OVM_PFO';
-    const SCOPE_OVM_PO = 'OVM_PO';
-    const SCOPE_PO = 'PO';
-    const SCOPE_PO_ZAK = 'PO_ZAK';
-    const SCOPE_PO_REQ = 'PO_REQ';
-    const SCOPE_PFO = 'PFO';
-    const SCOPE_PFO_ADVOK = 'PFO_ADVOK';
-    const SCOPE_PFO_INSSPR = 'PFO_INSSPR';
-    const SCOPE_PFO_DANPOR = 'PFO_DANPOR';
-    const SCOPE_PFO_AUDITOR = 'PFO_AUDITOR';
-    const SCOPE_FO = 'FO';
+    public const TYPE_GENERAL = 'GENERAL';
+    public const TYPE_ADDRESS = 'ADDRESS';
+    public const TYPE_ICO = 'ICO';
+    public const TYPE_DBID = 'DBID';
+    public const SCOPE_ALL = 'ALL';
+    public const SCOPE_OVM = 'OVM';
+    public const SCOPE_OVM_MAIN = 'OVM_MAIN';
+    public const SCOPE_OVM_REQ = 'OVM_REQ';
+    public const SCOPE_OVM_NOTAR = 'OVM_NOTAR';
+    public const SCOPE_OVM_EXEKUT = 'OVM_EXEKUT';
+    public const SCOPE_OVM_FO = 'OVM_FO';
+    public const SCOPE_OVM_PFO = 'OVM_PFO';
+    public const SCOPE_OVM_PO = 'OVM_PO';
+    public const SCOPE_PO = 'PO';
+    public const SCOPE_PO_ZAK = 'PO_ZAK';
+    public const SCOPE_PO_REQ = 'PO_REQ';
+    public const SCOPE_PFO = 'PFO';
+    public const SCOPE_PFO_ADVOK = 'PFO_ADVOK';
+    public const SCOPE_PFO_INSSPR = 'PFO_INSSPR';
+    public const SCOPE_PFO_DANPOR = 'PFO_DANPOR';
+    public const SCOPE_PFO_AUDITOR = 'PFO_AUDITOR';
+    public const SCOPE_FO = 'FO';
 
-    const PDZ_K = 'K';
-    const PDZ_O = 'O';
-    const PDZ_G = 'G';
-    const PDZ_E = 'E';
+    public const PDZ_K = 'K';
+    public const PDZ_O = 'O';
+    public const PDZ_G = 'G';
+    public const PDZ_E = 'E';
 
-    public static function getPDZTypes()
+    /**
+     * @return array<string, string>
+     */
+    public static function getPDZTypes(): array
     {
         return [
             self::PDZ_E => 'PDZ z kreditu',
@@ -81,7 +84,10 @@ class DataBoxStatus
         throw new BadOptionException(sprintf('The value %s is not allowed', $type));
     }
 
-    public static function getDataBoxTypes()
+    /**
+     * @return array<int|string, string>
+     */
+    public static function getDataBoxTypes(): array
     {
         return [
             self::OVM,
@@ -102,18 +108,17 @@ class DataBoxStatus
             self::PFO_DANPOR => 'Daňový poradce',
             self::PFO_AUDITOR => 'Statutární auditor',
             self::FO => 'Fyzická osoba',
-            null => 'Technická skupina'
+            NULL => 'Technická skupina',
         ];
     }
 
     /**
      * @param string $type
-     * @return mixed
+     * @return string
      * @throws BadOptionException
      */
-    public static function getDataBoxTypeAsString(string $type)
+    public static function getDataBoxTypeAsString(string $type): string
     {
-
         if (in_array($type, self::getDataBoxTypes())) {
             return self::getDataBoxTypes()[$type];
         }

@@ -14,30 +14,23 @@ use HelpPC\CzechDataBox\Traits\Signature;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * todo order
  * Class SignedMessageDownload
  * @package HelpPC\CzechDataBox\Response
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:SignedMessageDownloadResponse", namespace="http://isds.czechpoint.cz/v20")
+ * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataMessageStatus>
  */
-class SignedMessageDownload implements IResponse
+class SignedMessageDownload extends IResponse
 {
 
     use DataMessageStatus;
     use Signature;
 
-    /**
-     * @return \HelpPC\CzechDataBox\Entity\DataMessageStatus
-     */
     public function getStatus(): \HelpPC\CzechDataBox\Entity\DataMessageStatus
     {
         return $this->status;
     }
 
-    /**
-     * @param \HelpPC\CzechDataBox\Entity\DataMessageStatus $status
-     * @return SignedMessageDownload
-     */
     public function setStatus(\HelpPC\CzechDataBox\Entity\DataMessageStatus $status): SignedMessageDownload
     {
         $this->status = $status;

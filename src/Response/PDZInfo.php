@@ -9,6 +9,8 @@ namespace HelpPC\CzechDataBox\Response;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use HelpPC\CzechDataBox\Entity\PDZRecord;
 use HelpPC\CzechDataBox\IResponse;
 use HelpPC\CzechDataBox\Traits\DataBoxStatus;
 use JMS\Serializer\Annotation as Serializer;
@@ -18,55 +20,50 @@ use JMS\Serializer\Annotation as Serializer;
  * @package HelpPC\CzechDataBox\Response
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:PDZInfoResponse", namespace="http://isds.czechpoint.cz/v20")
+ * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataBoxStatus>
  */
-class PDZInfo implements IResponse
+class PDZInfo extends IResponse
 {
 
     use DataBoxStatus;
     /**
-     * @var ArrayCollection
+     * @var Collection<int, PDZRecord>
      * @Serializer\Type("ArrayCollection<HelpPC\CzechDataBox\Entity\PDZRecord>")
      * @Serializer\XmlList(entry="dbPDZRecord", inline=false)
      * @Serializer\SerializedName("p:dbPDZRecords")
      */
-    protected $pdzRecord;
+    protected Collection $pdzRecord;
 
     public function __construct()
     {
         $this->pdzRecord = new ArrayCollection();
     }
 
-    /**
-     * @return \HelpPC\CzechDataBox\Entity\DataBoxStatus
-     */
     public function getStatus(): \HelpPC\CzechDataBox\Entity\DataBoxStatus
     {
         return $this->status;
     }
 
-    /**
-     * @param \HelpPC\CzechDataBox\Entity\DataBoxStatus $status
-     * @return PDZInfo
-     */
     public function setStatus(\HelpPC\CzechDataBox\Entity\DataBoxStatus $status): PDZInfo
     {
         $this->status = $status;
         return $this;
     }
 
+
     /**
-     * @return ArrayCollection
+     * @return Collection<int, PDZRecord>
      */
-    public function getPdzRecord(): ArrayCollection
+    public function getPdzRecord(): Collection
     {
         return $this->pdzRecord;
     }
 
     /**
-     * @param ArrayCollection $pdzRecord
+     * @param Collection<int, PDZRecord> $pdzRecord
      * @return PDZInfo
      */
-    public function setPdzRecord(ArrayCollection $pdzRecord): PDZInfo
+    public function setPdzRecord(Collection $pdzRecord): PDZInfo
     {
         $this->pdzRecord = $pdzRecord;
         return $this;

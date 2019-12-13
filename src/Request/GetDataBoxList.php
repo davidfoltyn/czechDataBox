@@ -19,25 +19,17 @@ use JMS\Serializer\Annotation as Serializer;
 class GetDataBoxList implements IRequest
 {
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("p:dblType")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $type;
+    protected string $type;
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     * @return GetDataBoxList
-     */
     public function setType(string $type): GetDataBoxList
     {
         $this->type = $type;

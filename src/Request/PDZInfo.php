@@ -20,25 +20,17 @@ use JMS\Serializer\Annotation as Serializer;
 class PDZInfo implements IRequest
 {
     /**
-     * @var string 7
      * @Serializer\Type("string")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:PDZSender")
      */
-    protected $sender;
+    protected string $sender;
 
-    /**
-     * @return string
-     */
     public function getSender(): string
     {
         return $this->sender;
     }
 
-    /**
-     * @param string $sender
-     * @return PDZInfo
-     */
     public function setSender(string $sender): PDZInfo
     {
         $this->sender = $sender;

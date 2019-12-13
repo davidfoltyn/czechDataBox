@@ -13,12 +13,12 @@ use HelpPC\CzechDataBox\Exception\BadOptionException;
 
 class Account
 {
-    private $loginName;
-    private $password;
-    private $loginType;
-    private $portalType;
-    private $certFileName;
-    private $passPhrase;
+    private ?string $loginName;
+    private ?string $password;
+    private ?string $loginType;
+    private ?string $portalType;
+    private ?string $certFileName;
+    private ?string $passPhrase;
 
     const LOGIN_NAME_PASSWORD = 'password';
     const LOGIN_CERT = 'cert';
@@ -28,56 +28,34 @@ class Account
     const ENV_TEST = 'czebox.cz';
     const ENV_FAKE = 'isds.helppc.cz';
 
-    /**
-     * @return mixed
-     */
-    public function getLoginName()
+    public function getLoginName(): ?string
     {
         return $this->loginName;
     }
 
-    /**
-     * @param mixed $loginName
-     * @return Account
-     */
-    public function setLoginName($loginName)
+    public function setLoginName(string $loginName): Account
     {
         $this->loginName = $loginName;
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    /**
-     * @param mixed $password
-     * @return Account
-     */
-    public function setPassword($password)
+    public function setPassword(string $password): Account
     {
         $this->password = $password;
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLoginType()
+    public function getLoginType(): ?string
     {
         return $this->loginType;
     }
 
-    /**
-     * @param mixed $loginType
-     * @return Account
-     * @throws BadOptionException
-     */
-    public function setLoginType($loginType)
+    public function setLoginType(string $loginType): Account
     {
         if (!in_array($loginType, [self::LOGIN_CERT, self::LOGIN_HOSTED_SPIS, self::LOGIN_NAME_PASSWORD])) {
             throw  new BadOptionException(sprintf('The value %s is not allowed. Use one of Account::LOGIN_CERT Account::LOGIN_HOSTED_SPIS Account::LOGIN_NAME_PASSWORD', $loginType));
@@ -86,20 +64,12 @@ class Account
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPortalType()
+    public function getPortalType(): ?string
     {
         return $this->portalType;
     }
 
-    /**
-     * @param mixed $portalType
-     * @return Account
-     * @throws BadOptionException
-     */
-    public function setPortalType($portalType)
+    public function setPortalType(string $portalType): Account
     {
         if (!in_array($portalType, [self::ENV_PROD, self::ENV_TEST, self::ENV_FAKE])) {
             throw  new BadOptionException(sprintf('The value %s is not allowed. Use one of Account::ENV_PROD Account::ENV_TEST', $portalType));
@@ -108,37 +78,23 @@ class Account
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCertFileName()
+    public function getCertFileName(): ?string
     {
         return $this->certFileName;
     }
 
-    /**
-     * @param mixed $certFileName
-     * @return Account
-     */
-    public function setCertFileName($certFileName)
+    public function setCertFileName(string $certFileName): Account
     {
         $this->certFileName = $certFileName;
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPassPhrase()
+    public function getPassPhrase(): ?string
     {
         return $this->passPhrase;
     }
 
-    /**
-     * @param mixed $passPhrase
-     * @return Account
-     */
-    public function setPassPhrase($passPhrase)
+    public function setPassPhrase(string $passPhrase): Account
     {
         $this->passPhrase = $passPhrase;
         return $this;

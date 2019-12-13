@@ -23,25 +23,17 @@ class AuthenticateMessage implements IRequest
 {
 
     /**
-     * @var SplFileInfo
      * @Serializer\Type("base64File")
      * @Serializer\SerializedName("p:dmMessage")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $dataMessage;
+    protected SplFileInfo $dataMessage;
 
-    /**
-     * @return SplFileInfo
-     */
     public function getDataMessage(): SplFileInfo
     {
         return $this->dataMessage;
     }
 
-    /**
-     * @param SplFileInfo $dataMessage
-     * @return AuthenticateMessage
-     */
     public function setDataMessage(SplFileInfo $dataMessage): AuthenticateMessage
     {
         $this->dataMessage = $dataMessage;

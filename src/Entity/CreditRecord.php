@@ -19,113 +19,99 @@ use JMS\Serializer\Annotation as Serializer;
 class CreditRecord
 {
     /**
-     * @var \DateTimeImmutable
      * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:ciEventTime")
      */
-    protected $eventTime;
+    protected \DateTimeImmutable $eventTime;
     /**
-     * @var int
      * @Serializer\Type("int")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:ciEventType")
      */
-    protected $eventType;
+    protected int $eventType;
     /**
-     * @var int
      * @Serializer\Type("int")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:ciCreditChange")
      */
-    protected $creditChange;
+    protected int $creditChange;
     /**
-     * @var int
      * @Serializer\Type("int")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:ciCreditAfter")
      */
-    protected $creditAfter;
+    protected int $creditAfter;
 
     /**
-     * @var string|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("string")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:ciTransID")
      */
-    protected $transID;
+    protected ?string $transID = null;
     /**
-     * @var string|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("string")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:ciRecipientID")
      */
-    protected $recipientID;
+    protected ?string $recipientID = null;
     /**
-     * @var string|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("string")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:ciPDZID")
      */
-    protected $PDZID;
+    protected ?string $PDZID = null;
 
     /**
-     * @var int|null
      * @Serializer\Type("int")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:ciNewCapacity")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $newCapacity;
+    protected ?int $newCapacity = null;
     /**
-     * @var \DateTimeImmutable|null
      * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:ciNewFrom")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $newFrom;
+    protected ?\DateTimeImmutable $newFrom = null;
     /**
-     * @var \DateTimeImmutable|null
      * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:ciNewTo")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $newTo;
+    protected ?\DateTimeImmutable $newTo = null;
     /**
-     * @var int|null
      * @Serializer\Type("int")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:ciOldCapacity")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $oldCapacity;
+    protected ?int $oldCapacity = null;
     /**
-     * @var \DateTimeImmutable|null
      * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:ciOldFrom")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $oldFrom;
+    protected ?\DateTimeImmutable $oldFrom = null;
     /**
-     * @var \DateTimeImmutable|null
      * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:ciOldTo")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $oldTo;
+    protected ?\DateTimeImmutable $oldTo = null;
     /**
-     * @var string|null
      * @Serializer\Type("string")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:ciDoneBy")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $doneBy;
+    protected ?string $doneBy = null;
 }

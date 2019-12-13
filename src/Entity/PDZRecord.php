@@ -18,150 +18,105 @@ use JMS\Serializer\Annotation as Serializer;
 class PDZRecord
 {
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("p:PDZType")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $type;
+    protected string $type;
     /**
-     * @var string|null
+     * @Serializer\SkipWhenEmpty
      * @Serializer\Type("string")
      * @Serializer\SerializedName("p:PDZRecip")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $recipient;
+    protected ?string $recipient = null;
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("p:PDZPayer")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $payer;
+    protected string $payer;
     /**
-     * @var \DateTimeImmutable|null
+     * @Serializer\SkipWhenEmpty
      * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\SerializedName("p:PDZExpire")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $expire;
+    protected ?\DateTimeImmutable $expire = null;
     /**
-     * @var int|null
+     * @Serializer\SkipWhenEmpty
      * @Serializer\Type("int")
      * @Serializer\SerializedName("p:PDZCnt")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $count;
+    protected ?int $count = null;
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("p:ODZIdent")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $ident;
+    protected string $ident;
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     * @return PDZRecord
-     */
     public function setType(string $type): PDZRecord
     {
         $this->type = $type;
         return $this;
     }
 
-    /**
-     * @return null|string
-     */
     public function getRecipient(): ?string
     {
         return $this->recipient;
     }
 
-    /**
-     * @param null|string $recipient
-     * @return PDZRecord
-     */
     public function setRecipient(?string $recipient): PDZRecord
     {
         $this->recipient = $recipient;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getPayer(): string
     {
         return $this->payer;
     }
 
-    /**
-     * @param string $payer
-     * @return PDZRecord
-     */
     public function setPayer(string $payer): PDZRecord
     {
         $this->payer = $payer;
         return $this;
     }
 
-    /**
-     * @return \DateTimeImmutable|null
-     */
     public function getExpire(): ?\DateTimeImmutable
     {
         return $this->expire;
     }
 
-    /**
-     * @param \DateTimeImmutable|null $expire
-     * @return PDZRecord
-     */
     public function setExpire(?\DateTimeImmutable $expire): PDZRecord
     {
         $this->expire = $expire;
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getCount(): ?int
     {
         return $this->count;
     }
 
-    /**
-     * @param int|null $count
-     * @return PDZRecord
-     */
     public function setCount(?int $count): PDZRecord
     {
         $this->count = $count;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getIdent(): string
     {
         return $this->ident;
     }
 
-    /**
-     * @param string $ident
-     * @return PDZRecord
-     */
     public function setIdent(string $ident): PDZRecord
     {
         $this->ident = $ident;

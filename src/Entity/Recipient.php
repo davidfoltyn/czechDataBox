@@ -19,103 +19,71 @@ class Recipient
 {
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dbIDRecipient")
      */
-    protected $dataBoxId;
+    protected string $dataBoxId;
     /**
-     * @var string|null
      * @Serializer\Type("string")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmRecipientOrgUnit")
      * @Serializer\SkipWhenEmpty
      */
-    protected $orgUnit;
+    protected ?string $orgUnit = null;
 
     /**
-     * @var int|null
      * @Serializer\Type("int")
      * @Serializer\SkipWhenEmpty
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmRecipientOrgUnitNum")
      */
-    protected $orgUnitNum;
+    protected ?int $orgUnitNum = null;
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmToHands")
      */
-    protected $toHand;
+    protected string $toHand;
 
-    /**
-     * @return string
-     */
     public function getDataBoxId(): string
     {
         return $this->dataBoxId;
     }
 
-    /**
-     * @param string $dataBoxId
-     * @return Recipient
-     */
     public function setDataBoxId(string $dataBoxId): Recipient
     {
         $this->dataBoxId = $dataBoxId;
         return $this;
     }
 
-    /**
-     * @return null|string
-     */
     public function getOrgUnit(): ?string
     {
         return $this->orgUnit;
     }
 
-    /**
-     * @param null|string $orgUnit
-     * @return Recipient
-     */
     public function setOrgUnit(?string $orgUnit): Recipient
     {
         $this->orgUnit = $orgUnit;
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getOrgUnitNum(): ?int
     {
         return $this->orgUnitNum;
     }
 
-    /**
-     * @param int|null $orgUnitNum
-     * @return Recipient
-     */
     public function setOrgUnitNum(?int $orgUnitNum): Recipient
     {
         $this->orgUnitNum = $orgUnitNum;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getToHand(): string
     {
         return $this->toHand;
     }
 
-    /**
-     * @param string $toHand
-     * @return Recipient
-     */
     public function setToHand(string $toHand): Recipient
     {
         $this->toHand = $toHand;

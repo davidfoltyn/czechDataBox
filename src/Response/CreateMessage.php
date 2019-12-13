@@ -8,8 +8,10 @@
 namespace HelpPC\CzechDataBox\Response;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use HelpPC\CzechDataBox\IResponse;
 use HelpPC\CzechDataBox\Traits\DataMessageStatus;
+use HelpPC\CzechDataBox\Utils\MessageStatus;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -18,55 +20,40 @@ use JMS\Serializer\Annotation as Serializer;
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:CreateMultipleMessageResponse", namespace="http://isds.czechpoint.cz/v20")
  * @Serializer\AccessorOrder("custom",custom={"messageStatus","status"})
+ * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataMessageStatus>
  */
-class CreateMessage implements IResponse
+class CreateMessage extends IResponse
 {
     use DataMessageStatus;
     /**
-     * @var ArrayCollection
+     * @var Collection<int, MessageStatus>
      * @Serializer\Type("ArrayCollection<HelpPC\CzechDataBox\Entity\MessageStatus>")
      * @Serializer\XmlList(entry="dmSingleStatus", inline=false, namespace="http://isds.czechpoint.cz/v20")
      * @Serializer\SerializedName("dmMultipleStatus")
      * @Serializer\XmlElement(cdata=false,namespace="http://isds.czechpoint.cz/v20")
      */
-    protected $multipleStatus;
+    protected Collection $multipleStatus;
 
     /**
-     * @return ArrayCollection
+     * @return Collection<int, MessageStatus>
      */
-    public function getMultipleStatus(): ArrayCollection
+    public function getMultipleStatus(): Collection
     {
         return $this->multipleStatus;
     }
 
-    /**
-     * @param ArrayCollection $multipleStatus
-     * @return CreateMessage
-     */
-    public function setMultipleStatus(ArrayCollection $multipleStatus): CreateMessage
-    {
-        $this->multipleStatus = $multipleStatus;
-        return $this;
-    }
-
-
-    /**
-     * @param \HelpPC\CzechDataBox\Entity\DataMessageStatus $status
-     * @return CreateMessage
-     */
     public function setStatus(\HelpPC\CzechDataBox\Entity\DataMessageStatus $status): CreateMessage
     {
         $this->status = $status;
         return $this;
     }
 
-
     public function __construct()
     {
         $this->multipleStatus = new ArrayCollection();
     }
 
-    public function isOk()
+    public function isOk(): bool
     {
         return $this->getStatus()->isOk();
     }

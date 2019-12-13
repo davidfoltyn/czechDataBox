@@ -9,6 +9,8 @@ namespace HelpPC\CzechDataBox\Response;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use HelpPC\CzechDataBox\Entity\PersonalOwnerInfo;
 use HelpPC\CzechDataBox\IResponse;
 use HelpPC\CzechDataBox\Traits\DataBoxStatus;
 use JMS\Serializer\Annotation as Serializer;
@@ -18,13 +20,14 @@ use JMS\Serializer\Annotation as Serializer;
  * @package HelpPC\CzechDataBox\Response
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:FindPersonalDataBoxResponse", namespace="http://isds.czechpoint.cz/v20")
+ * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataBoxStatus>
  */
-class FindPersonalDataBox implements IResponse
+class FindPersonalDataBox extends IResponse
 {
     use DataBoxStatus;
 
     /**
-     * @var ArrayCollection
+     * @var Collection<int, PersonalOwnerInfo>
      * @Serializer\Type("ArrayCollection<HelpPC\CzechDataBox\Entity\PersonalOwnerInfo>")
      * @Serializer\SkipWhenEmpty()
      * @Serializer\XmlList(entry="dbOwnerInfo", inline=false, namespace="http://isds.czechpoint.cz/v20")
@@ -39,9 +42,9 @@ class FindPersonalDataBox implements IResponse
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection<int, PersonalOwnerInfo>
      */
-    public function getRecord(): ArrayCollection
+    public function getRecord(): Collection
     {
         return $this->record;
     }

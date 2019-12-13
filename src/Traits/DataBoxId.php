@@ -13,25 +13,17 @@ use JMS\Serializer\Annotation as Serializer;
 trait DataBoxId
 {
     /**
-     * @var string 7
      * @Serializer\Type("string")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dbID")
      */
-    protected $dataBoxId;
+    protected string $dataBoxId;
 
-    /**
-     * @return string
-     */
     public function getDataBoxId(): string
     {
         return $this->dataBoxId;
     }
 
-    /**
-     * @param string $dataBoxId
-     * @return self
-     */
     public function setDataBoxId(string $dataBoxId): self
     {
         $this->dataBoxId = $dataBoxId;

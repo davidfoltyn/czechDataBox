@@ -9,6 +9,7 @@ namespace HelpPC\CzechDataBox\Entity;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use HelpPC\CzechDataBox\Traits\DataMessageEnvelope;
 use HelpPC\CzechDataBox\Traits\GetMainFile;
 use JMS\Serializer\Annotation as Serializer;
@@ -24,13 +25,13 @@ class MessageEnvelope
     use GetMainFile;
     use DataMessageEnvelope;
     /**
-     * @var ArrayCollection
+     * @var Collection<int, File>
      * @Serializer\Type("ArrayCollection<HelpPC\CzechDataBox\Entity\File>")
      * @Serializer\XmlList(entry="dmFile", inline=false,namespace="http://isds.czechpoint.cz/v20")
      * @Serializer\SerializedName("dmFiles")
      * @Serializer\XmlElement(cdata=false,namespace="http://isds.czechpoint.cz/v20")
      */
-    protected $files;
+    protected Collection $files;
 
 
     public function __construct()
@@ -39,18 +40,18 @@ class MessageEnvelope
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection<int, File>
      */
-    public function getFiles(): ArrayCollection
+    public function getFiles(): Collection
     {
         return $this->files;
     }
 
     /**
-     * @param ArrayCollection $files
+     * @param Collection<int, File> $files
      * @return MessageEnvelope
      */
-    public function setFiles(ArrayCollection $files): MessageEnvelope
+    public function setFiles(Collection $files): MessageEnvelope
     {
         $this->files = $files;
         return $this;

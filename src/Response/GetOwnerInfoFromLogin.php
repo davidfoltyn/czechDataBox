@@ -17,35 +17,21 @@ use JMS\Serializer\Annotation as Serializer;
  * @package HelpPC\CzechDataBox\Response
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:GetOwnerInfoFromLoginResponse", namespace="http://isds.czechpoint.cz/v20")
+ * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataBoxStatus>
  */
-class GetOwnerInfoFromLogin implements IResponse
+class GetOwnerInfoFromLogin extends IResponse
 {
     use DataBoxStatus;
     /**
-     * @var OwnerInfo
      * @Serializer\Type("HelpPC\CzechDataBox\Entity\OwnerInfo")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dbOwnerInfo")
      */
-    protected $ownerInfo;
+    protected OwnerInfo $ownerInfo;
 
-    /**
-     * @return OwnerInfo
-     */
     public function getOwnerInfo(): OwnerInfo
     {
         return $this->ownerInfo;
     }
-
-    /**
-     * @param OwnerInfo $ownerInfo
-     * @return GetOwnerInfoFromLogin
-     */
-    public function setOwnerInfo(OwnerInfo $ownerInfo): GetOwnerInfoFromLogin
-    {
-        $this->ownerInfo = $ownerInfo;
-        return $this;
-    }
-
 
 }

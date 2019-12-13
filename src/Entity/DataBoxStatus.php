@@ -20,86 +20,61 @@ class DataBoxStatus
 {
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dbStatusCode")
      */
-    protected $code;
+    protected string $code;
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dbStatusMessage")
      */
-    protected $message;
+    protected string $message;
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SkipWhenEmpty()
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dbStatusRefNumber")
      */
-    protected $refNumber;
+    protected ?string $refNumber = null;
 
-    public function isOk()
-    {
-        return $this->getCode() === '0000';
-    }
-
-    /**
-     * @return string
-     */
     public function getCode(): string
     {
         return $this->code;
     }
 
-    /**
-     * @param string $code
-     * @return DataBoxStatus
-     */
     public function setCode(string $code): DataBoxStatus
     {
         $this->code = $code;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getMessage(): string
     {
         return $this->message;
     }
 
-    /**
-     * @param string $message
-     * @return DataBoxStatus
-     */
     public function setMessage(string $message): DataBoxStatus
     {
         $this->message = $message;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getRefNumber(): string
+    public function getRefNumber(): ?string
     {
         return $this->refNumber;
     }
 
-    /**
-     * @param string $refNumber
-     * @return DataBoxStatus
-     */
-    public function setRefNumber(string $refNumber): DataBoxStatus
+    public function setRefNumber(?string $refNumber): DataBoxStatus
     {
         $this->refNumber = $refNumber;
         return $this;
     }
 
+    public function isOk(): bool
+    {
+        return substr($this->getCode(), 0, 2) === '00';
+    }
 }
