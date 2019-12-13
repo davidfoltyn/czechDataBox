@@ -10,7 +10,7 @@ namespace HelpPC\CzechDataBox\Connector;
 
 class Dispatcher extends \GuzzleHttp\Client
 {
-    public function __construct(string $proxyHost = NULL, int $proxyPort = NULL, string $proxyLogin = NULL, string $proxyPassword = NULL)
+    public function __construct($proxyHost = NULL, $proxyPort = NULL, $proxyLogin = NULL, $proxyPassword = NULL)
     {
         $curl = [];
         $config['curl'] =& $curl;

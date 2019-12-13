@@ -19,34 +19,46 @@ use JMS\Serializer\Annotation as Serializer;
 class Period
 {
     /**
+     * @var \DateTimeImmutable
      * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:PeriodFrom")
      */
-    protected \DateTimeImmutable $from;
+    protected $from;
     /**
+     * @var \DateTimeImmutable
      * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:PeriodTo")
      */
-    protected \DateTimeImmutable $to;
+    protected $to;
     /**
+     * @var int
      * @Serializer\Type("int")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:DbState")
      */
-    protected int $state;
+    protected $state;
 
+    /**
+     * @return \DateTimeImmutable
+     */
     public function getFrom(): \DateTimeImmutable
     {
         return $this->from;
     }
 
+    /**
+     * @return \DateTimeImmutable
+     */
     public function getTo(): \DateTimeImmutable
     {
         return $this->to;
     }
 
+    /**
+     * @return int
+     */
     public function getState(): int
     {
         return $this->state;

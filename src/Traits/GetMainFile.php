@@ -7,22 +7,19 @@
 
 namespace HelpPC\CzechDataBox\Traits;
 
+
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use HelpPC\CzechDataBox\Entity\File;
 
 trait GetMainFile
 {
 
-    /**
-     * @return Collection<mixed,mixed>
-     */
-    public function getFiles(): Collection
+    public function getFiles()
     {
         return new ArrayCollection();
     }
 
-    public function getMainFile(): ?File
+    public function getMainFile()
     {
         /** @var File $file */
         foreach ($this->getFiles() as $file) {
@@ -30,6 +27,5 @@ trait GetMainFile
                 return $file;
             }
         }
-        return NULL;
     }
 }

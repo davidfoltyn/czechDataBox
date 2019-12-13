@@ -18,19 +18,25 @@ use JMS\Serializer\Annotation as Serializer;
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:SignedSentMessageDownloadResponse", namespace="http://isds.czechpoint.cz/v20")
  * @Serializer\AccessorOrder("custom",custom={"signature","status"})
- * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataMessageStatus>
  */
-class SignedSentMessageDownload extends IResponse
+class SignedSentMessageDownload implements IResponse
 {
 
     use DataMessageStatus;
     use Signature;
 
+    /**
+     * @return \HelpPC\CzechDataBox\Entity\DataMessageStatus
+     */
     public function getStatus(): \HelpPC\CzechDataBox\Entity\DataMessageStatus
     {
         return $this->status;
     }
 
+    /**
+     * @param \HelpPC\CzechDataBox\Entity\DataMessageStatus $status
+     * @return SignedSentMessageDownload
+     */
     public function setStatus(\HelpPC\CzechDataBox\Entity\DataMessageStatus $status): SignedSentMessageDownload
     {
         $this->status = $status;

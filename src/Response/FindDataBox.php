@@ -8,8 +8,6 @@
 namespace HelpPC\CzechDataBox\Response;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use HelpPC\CzechDataBox\Entity\OwnerInfo;
 use HelpPC\CzechDataBox\IResponse;
 use HelpPC\CzechDataBox\Traits\DataBoxStatus;
 use JMS\Serializer\Annotation as Serializer;
@@ -19,19 +17,18 @@ use JMS\Serializer\Annotation as Serializer;
  * @package HelpPC\CzechDataBox\Response
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:FindDataBoxResponse", namespace="http://isds.czechpoint.cz/v20")
- * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataBoxStatus>
  */
-class FindDataBox extends IResponse
+class FindDataBox implements IResponse
 {
     use DataBoxStatus;
     /**
-     * @var Collection<int, OwnerInfo>
+     * @var ArrayCollection
      * @Serializer\Type("ArrayCollection<HelpPC\CzechDataBox\Entity\OwnerInfo>")
      * @Serializer\XmlList(entry="dbOwnerInfo", inline=false,namespace="http://isds.czechpoint.cz/v20")
      * @Serializer\SerializedName("dbResults")
      * @Serializer\XmlElement(cdata=false,namespace="http://isds.czechpoint.cz/v20")
      */
-    protected Collection $result;
+    protected $result;
 
     public function __construct()
     {
@@ -39,9 +36,9 @@ class FindDataBox extends IResponse
     }
 
     /**
-     * @return Collection<int, OwnerInfo>
+     * @return ArrayCollection
      */
-    public function getResult(): Collection
+    public function getResult(): ArrayCollection
     {
         return $this->result;
     }

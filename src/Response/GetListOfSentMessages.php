@@ -9,8 +9,6 @@ namespace HelpPC\CzechDataBox\Response;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use HelpPC\CzechDataBox\Entity\MessageRecord;
 use HelpPC\CzechDataBox\IResponse;
 use HelpPC\CzechDataBox\Traits\DataMessageStatus;
 use JMS\Serializer\Annotation as Serializer;
@@ -20,20 +18,19 @@ use JMS\Serializer\Annotation as Serializer;
  * @package HelpPC\CzechDataBox\Response
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:GetListOfSentMessagesResponse", namespace="http://isds.czechpoint.cz/v20")
- * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataMessageStatus>
  */
-class GetListOfSentMessages extends IResponse
+class GetListOfSentMessages implements IResponse
 {
     use DataMessageStatus;
 
     /**
-     * @var Collection<int, MessageRecord>
+     * @var ArrayCollection
      * @Serializer\Type("ArrayCollection<HelpPC\CzechDataBox\Entity\MessageRecord>")
      * @Serializer\XmlList(entry="dmRecord", inline=false, namespace="http://isds.czechpoint.cz/v20")
      * @Serializer\SerializedName("dmRecords")
      * @Serializer\XmlElement(cdata=false,namespace="http://isds.czechpoint.cz/v20")
      */
-    protected Collection $records;
+    protected $records;
 
     public function __construct()
     {
@@ -41,9 +38,9 @@ class GetListOfSentMessages extends IResponse
     }
 
     /**
-     * @return Collection<int, MessageRecord>
+     * @return ArrayCollection
      */
-    public function getRecord(): Collection
+    public function getRecord(): ArrayCollection
     {
         return $this->records;
     }

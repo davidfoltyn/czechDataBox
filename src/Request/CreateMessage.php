@@ -8,7 +8,6 @@
 namespace HelpPC\CzechDataBox\Request;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use HelpPC\CzechDataBox\Entity\Envelope;
 use HelpPC\CzechDataBox\Entity\File;
 use HelpPC\CzechDataBox\Entity\Recipient;
@@ -27,28 +26,29 @@ class CreateMessage implements IRequest
 {
     use GetMainFile;
     /**
+     * @var Envelope
      * @Serializer\Type("HelpPC\CzechDataBox\Entity\Envelope")
      * @Serializer\SerializedName("p:dmEnvelope")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected Envelope $envelope;
+    protected $envelope;
 
     /**
-     * @var Collection<int,File>
+     * @var ArrayCollection
      * @Serializer\Type("ArrayCollection<HelpPC\CzechDataBox\Entity\File>")
      * @Serializer\XmlList(entry="dmFile", inline=false,namespace="http://isds.czechpoint.cz/v20")
      * @Serializer\SerializedName("dmFiles")
      * @Serializer\XmlElement(cdata=false,namespace="http://isds.czechpoint.cz/v20")
      */
-    protected Collection $files;
+    protected $files;
     /**
-     * @var Collection<int,Recipient>
+     * @var ArrayCollection
      * @Serializer\Type("ArrayCollection<HelpPC\CzechDataBox\Entity\Recipient>")
      * @Serializer\XmlList(entry="dmRecipient", inline=false,namespace="http://isds.czechpoint.cz/v20")
      * @Serializer\SerializedName("dmRecipients")
      * @Serializer\XmlElement(cdata=false,namespace="http://isds.czechpoint.cz/v20")
      */
-    protected Collection $recipients;
+    protected $recipients;
 
     public function __construct()
     {
@@ -75,36 +75,36 @@ class CreateMessage implements IRequest
     }
 
     /**
-     * @return Collection<int, File>
+     * @return ArrayCollection
      */
-    public function getFiles(): Collection
+    public function getFiles(): ArrayCollection
     {
         return $this->files;
     }
 
     /**
-     * @param Collection<int, File> $files
+     * @param ArrayCollection $files
      * @return CreateMessage
      */
-    public function setFiles(Collection $files): CreateMessage
+    public function setFiles(ArrayCollection $files): CreateMessage
     {
         $this->files = $files;
         return $this;
     }
 
     /**
-     * @return Collection<int, Recipient>
+     * @return ArrayCollection
      */
-    public function getRecipients(): Collection
+    public function getRecipients(): ArrayCollection
     {
         return $this->recipients;
     }
 
     /**
-     * @param Collection<int, Recipient> $recipients
+     * @param ArrayCollection $recipients
      * @return CreateMessage
      */
-    public function setRecipients(Collection $recipients): CreateMessage
+    public function setRecipients(ArrayCollection $recipients): CreateMessage
     {
         $this->recipients = $recipients;
         return $this;

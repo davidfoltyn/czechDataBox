@@ -16,9 +16,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @package HelpPC\CzechDataBox\Response
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:MarkMessageAsDownloadedResponse", namespace="http://isds.czechpoint.cz/v20")
- * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataMessageStatus>
  */
-class MarkMessageAsDownloaded extends IResponse
+class MarkMessageAsDownloaded implements IResponse
 {
 
     use DataMessageStatus;

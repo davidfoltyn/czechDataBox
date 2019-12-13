@@ -18,23 +18,31 @@ use JMS\Serializer\Annotation as Serializer;
 class DataMessageEvent
 {
     /**
+     * @var \DateTimeImmutable
      * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dnEventTime")
      */
-    protected \DateTimeImmutable $time;
+    protected $time;
     /**
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmEventDescr")
      */
-    protected string $description;
+    protected $description;
 
+    /**
+     * @return \DateTimeImmutable
+     */
     public function getTime(): \DateTimeImmutable
     {
         return $this->time;
     }
 
+    /**
+     * @return string
+     */
     public function getDescription(): string
     {
         return $this->description;

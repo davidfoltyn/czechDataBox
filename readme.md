@@ -1,7 +1,7 @@
 # PHP knihovna pro komunikaci s Informačním systémem datových schránek (ISDS) Ministerstva vnitra
 
-[![pipeline status](https://gitlab.com/helppc/czechDataBox/badges/master/pipeline.svg)](https://gitlab.com/helppc/czechDataBox/commits/master)
-[![coverage report](https://gitlab.com/helppc/czechDataBox/badges/master/coverage.svg)](https://gitlab.com/helppc/czechDataBox/commits/master) 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9603ec25b52742289f804caf03438efa)](https://www.codacy.com/app/Tirus91/czechDataBox?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=HelpPC/czechDataBox&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/HelpPC/czechDataBox.svg?branch=master)](https://travis-ci.org/HelpPC/czechDataBox) 
 ![CRAN](https://img.shields.io/cran/l/devtools.svg)
 ![PyPI - License](https://img.shields.io/pypi/l/Django.svg)
 [![Latest stable](https://img.shields.io/packagist/v/helppc/czech-data-box.svg)](https://packagist.org/packages/helppc/czech-data-box)

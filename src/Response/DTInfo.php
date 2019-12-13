@@ -17,127 +17,166 @@ use JMS\Serializer\Annotation as Serializer;
  * @package HelpPC\CzechDataBox\Response
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:DTInfoResponse", namespace="http://isds.czechpoint.cz/v20")
- * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataBoxStatus>
  */
-class DTInfo extends IResponse
+class DTInfo implements IResponse
 {
     use DataBoxStatus;
     /**
+     * @var int|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("int")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:ActDTType")
      */
-    protected ?int $ActDTType = null;
+    protected $ActDTType;
     /**
+     * @var int|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("int")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:ActDTCapacity")
      */
-    protected ?int $ActDTCapacity = null;
+    protected $ActDTCapacity;
     /**
+     * @var \DateTimeImmutable|null
      * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:ActDTFrom")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected ?\DateTimeImmutable $ActDTFrom = null;
+    protected $ActDTFrom;
     /**
+     * @var \DateTimeImmutable|null
      * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:ActDTTo")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected ?\DateTimeImmutable $ActDTTo = null;
+    protected $ActDTTo;
     /**
+     * @var int|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("int")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:ActDTCapUsed")
      */
-    protected ?int $ActDTCapUsed = null;
+    protected $ActDTCapUsed;
     /**
+     * @var int|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("int")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:FutDTType")
      */
-    protected ?int $FutDTType = null;
+    protected $FutDTType;
     /**
+     * @var int|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("int")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:FutDTCapacity")
      */
-    protected ?int $FutDTCapacity = null;
+    protected $FutDTCapacity;
     /**
+     * @var \DateTimeImmutable|null
      * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:FutDTFrom")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected ?\DateTimeImmutable $FutDTFrom = null;
+    protected $FutDTFrom;
     /**
+     * @var \DateTimeImmutable|null
      * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:FutDTTo")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected ?\DateTimeImmutable $FutDTTo = null;
+    protected $FutDTTo;
     /**
+     * @var int|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("int")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:FutDTPaid")
      */
-    protected ?int $FutDTPaid = null;
+    protected $FutDTPaid;
 
+    /**
+     * @return int|null
+     */
     public function getActDTType(): ?int
     {
         return $this->ActDTType;
     }
 
+    /**
+     * @return int|null
+     */
     public function getActDTCapacity(): ?int
     {
         return $this->ActDTCapacity;
     }
 
+    /**
+     * @return \DateTimeImmutable|null
+     */
     public function getActDTFrom(): ?\DateTimeImmutable
     {
         return $this->ActDTFrom;
     }
 
+    /**
+     * @return \DateTimeImmutable|null
+     */
     public function getActDTTo(): ?\DateTimeImmutable
     {
         return $this->ActDTTo;
     }
 
+    /**
+     * @return int|null
+     */
     public function getActDTCapUsed(): ?int
     {
         return $this->ActDTCapUsed;
     }
 
+    /**
+     * @return int|null
+     */
     public function getFutDTType(): ?int
     {
         return $this->FutDTType;
     }
 
+    /**
+     * @return int|null
+     */
     public function getFutDTCapacity(): ?int
     {
         return $this->FutDTCapacity;
     }
 
+    /**
+     * @return \DateTimeImmutable|null
+     */
     public function getFutDTFrom(): ?\DateTimeImmutable
     {
         return $this->FutDTFrom;
     }
 
+    /**
+     * @return \DateTimeImmutable|null
+     */
     public function getFutDTTo(): ?\DateTimeImmutable
     {
         return $this->FutDTTo;
     }
 
+    /**
+     * @return int|null
+     */
     public function getFutDTPaid(): ?int
     {
         return $this->FutDTPaid;

@@ -18,30 +18,38 @@ use JMS\Serializer\Annotation as Serializer;
  * @package HelpPC\CzechDataBox\Response
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:MessageDownloadResponse", namespace="http://isds.czechpoint.cz/v20")
- * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataMessageStatus>
  */
-class MessageDownload extends IResponse
+class MessageDownload implements IResponse
 {
 
     use DataMessageStatus;
 
     /**
+     * @var ReturnedMessage|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("HelpPC\CzechDataBox\Entity\ReturnedMessage")
      * @Serializer\SerializedName("p:dmReturnedMessage")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected ?ReturnedMessage $returnedMessage;
+    protected $returnedMessage;
 
+    /**
+     * @return ReturnedMessage|null
+     */
     public function getReturnedMessage(): ?ReturnedMessage
     {
         return $this->returnedMessage;
     }
 
+    /**
+     * @param ReturnedMessage|null $returnedMessage
+     * @return MessageDownload
+     */
     public function setReturnedMessage(?ReturnedMessage $returnedMessage): MessageDownload
     {
         $this->returnedMessage = $returnedMessage;
         return $this;
     }
+
 
 }

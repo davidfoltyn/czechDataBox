@@ -17,9 +17,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @package HelpPC\CzechDataBox\Response
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:ConfirmDeliveryResponse", namespace="http://isds.czechpoint.cz/v20")
- * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataMessageStatus>
  */
-class ConfirmDelivery extends IResponse
+class ConfirmDelivery implements IResponse
 {
     use DataMessageStatus;
 

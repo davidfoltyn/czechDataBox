@@ -18,20 +18,23 @@ use JMS\Serializer\Annotation as Serializer;
  * @package HelpPC\CzechDataBox\Response
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:GetDeliveryInfoResponse", namespace="http://isds.czechpoint.cz/v20")
- * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataMessageStatus>
  */
-class GetDeliveryInfo extends IResponse
+class GetDeliveryInfo implements IResponse
 {
 
     use DataMessageStatus;
     /**
+     * @var Delivery
      * @Serializer\Type("HelpPC\CzechDataBox\Entity\Delivery")
      * @Serializer\SerializedName("p:dmDelivery")
      * @Serializer\SkipWhenEmpty()
      * @Serializer\XmlElement(cdata=false)
      */
-    protected Delivery $delivery;
+    protected $delivery;
 
+    /**
+     * @return Delivery
+     */
     public function getDelivery(): Delivery
     {
         return $this->delivery;

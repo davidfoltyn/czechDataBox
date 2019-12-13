@@ -10,20 +10,26 @@ namespace HelpPC\CzechDataBox\Utils;
 
 class BinarySuffix
 {
-    public const CONVERT_THRESHOLD = 1024;
-    private int $number;
-    private string $locale;
+    const CONVERT_THRESHOLD = 1024;
     /**
-     * @var array<int,string>
+     * @var int
      */
-    private array $binaryPrefixes = [
+    private $number;
+    /**
+     * @var string
+     */
+    private $locale;
+    /**
+     * @var array
+     */
+    private $binaryPrefixes = array(
         1125899906842624 => '%d PB',
         1099511627776 => '%d TB',
         1073741824 => '%d GB',
         1048576 => '%d MB',
         1024 => '%d kB',
         0 => '%d bytes',
-    ];
+    );
 
     /**
      * @param int $number
@@ -45,20 +51,12 @@ class BinarySuffix
         krsort($this->binaryPrefixes);
     }
 
-    /**
-     * @param int|string $number
-     * @param string $locale
-     * @return int|string
-     */
     public static function convert($number, $locale = 'cs')
     {
-        $obj = new self($number, $locale);
+        $obj = new static($number, $locale);
         return $obj->doConvert();
     }
 
-    /**
-     * @return int|string
-     */
     public function doConvert()
     {
         if ($this->number < 0) {
@@ -66,7 +64,7 @@ class BinarySuffix
         }
         foreach ($this->binaryPrefixes as $size => $unitPattern) {
             if ($size <= $this->number) {
-                $value = ($this->number >= self::CONVERT_THRESHOLD) ? $this->number / (double) $size : $this->number;
+                $value = ($this->number >= self::CONVERT_THRESHOLD) ? $this->number / (double)$size : $this->number;
 
                 return sprintf($unitPattern, $value);
             }

@@ -20,37 +20,52 @@ use JMS\Serializer\Annotation as Serializer;
 class GetMessageStateChanges implements IRequest
 {
     /**
+     * @var \DateTimeImmutable|null
      * @Serializer\SkipWhenEmpty()
      * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\SerializedName("p:dmFromTime")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected ?\DateTimeImmutable $changesFrom = null;
+    protected $changesFrom;
     /**
+     * @var \DateTimeImmutable|null
      * @Serializer\SkipWhenEmpty()
      * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\SerializedName("p:dmToTime")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected ?\DateTimeImmutable $changesTo = null;
+    protected $changesTo;
 
-
+    /**
+     * @return \DateTimeImmutable|null
+     */
     public function getChangesFrom(): ?\DateTimeImmutable
     {
         return $this->changesFrom;
     }
 
+    /**
+     * @param \DateTimeImmutable|null $changesFrom
+     * @return GetMessageStateChanges
+     */
     public function setChangesFrom(?\DateTimeImmutable $changesFrom): GetMessageStateChanges
     {
         $this->changesFrom = $changesFrom;
         return $this;
     }
 
+    /**
+     * @return \DateTimeImmutable|null
+     */
     public function getChangesTo(): ?\DateTimeImmutable
     {
         return $this->changesTo;
     }
 
+    /**
+     * @param \DateTimeImmutable|null $changesTo
+     * @return GetMessageStateChanges
+     */
     public function setChangesTo(?\DateTimeImmutable $changesTo): GetMessageStateChanges
     {
         $this->changesTo = $changesTo;

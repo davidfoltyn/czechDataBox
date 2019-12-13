@@ -13,9 +13,10 @@ use JMS\Serializer\Annotation as Serializer;
 trait QTimestamp
 {
     /**
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmQTimestamp")
      */
-    protected string $qTimestamp;
+    protected $qTimestamp;
 }

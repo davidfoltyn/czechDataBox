@@ -22,17 +22,25 @@ class ResignISDSDocument implements IRequest
 {
 
     /**
+     * @var SplFileInfo
      * @Serializer\Type("base64File")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmDoc")
      */
-    protected SplFileInfo $document;
+    protected $document;
 
+    /**
+     * @return SplFileInfo
+     */
     public function getDocument(): SplFileInfo
     {
         return $this->document;
     }
 
+    /**
+     * @param SplFileInfo $document
+     * @return ResignISDSDocument
+     */
     public function setDocument(SplFileInfo $document): ResignISDSDocument
     {
         $this->document = $document;

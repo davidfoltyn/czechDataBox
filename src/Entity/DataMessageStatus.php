@@ -9,6 +9,7 @@ namespace HelpPC\CzechDataBox\Entity;
 
 
 use JMS\Serializer\Annotation as Serializer;
+use Nette\Utils\Strings;
 
 /**
  * Class DataMessageStatus
@@ -20,61 +21,85 @@ class DataMessageStatus
 {
 
     /**
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmStatusCode")
      */
-    protected string $code;
-
+    protected $code;
     /**
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmStatusMessage")
      */
-    protected string $message;
+    protected $message;
     /**
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SkipWhenEmpty()
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmStatusRefNumber")
      */
-    protected ?string $refNumber = null;
+    protected $refNumber;
 
+    /**
+     * @return string
+     */
     public function getCode(): string
     {
         return $this->code;
     }
 
+    /**
+     * @param string $code
+     * @return DataMessageStatus
+     */
     public function setCode(string $code): DataMessageStatus
     {
         $this->code = $code;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getMessage(): string
     {
         return $this->message;
     }
 
+    /**
+     * @param string $message
+     * @return DataMessageStatus
+     */
     public function setMessage(string $message): DataMessageStatus
     {
         $this->message = $message;
         return $this;
     }
 
-    public function getRefNumber(): ?string
+    /**
+     * @return string
+     */
+    public function getRefNumber(): string
     {
         return $this->refNumber;
     }
 
-    public function setRefNumber(?string $refNumber): DataMessageStatus
+    /**
+     * @param string $refNumber
+     * @return DataMessageStatus
+     */
+    public function setRefNumber(string $refNumber): DataMessageStatus
     {
         $this->refNumber = $refNumber;
         return $this;
     }
 
-    public function isOk(): bool
+
+    public function isOk()
     {
-        return substr($this->getCode(), 0, 2) === '00';
+        return Strings::startsWith($this->getCode(), '00');
     }
 }

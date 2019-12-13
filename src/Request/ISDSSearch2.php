@@ -20,105 +20,154 @@ use JMS\Serializer\Annotation as Serializer;
 class ISDSSearch2 implements IRequest
 {
 
+
     /**
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:searchText")
      */
-    private string $searchText;
+    private $searchText;
     /**
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:searchType")
      */
-    private string $searchType;
+    private $searchType;
     /**
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:searchScope")
      */
-    private string $searchScope;
+    private $searchScope;
 
     /**
+     * @var int
      * @Serializer\Type("int")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:page")
      */
-    private int $page = 1;
+    private $page = 1;
     /**
+     * @var int
      * @Serializer\Type("int")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:pageSize")
      */
-    private int $pageSize = 20;
+    private $pageSize = 20;
     /**
+     * @var bool|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("bool")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:highlighting")
      */
-    private ?bool $highlighting;
+    private $highlighting;
 
+    /**
+     * @return string
+     */
     public function getSearchText(): string
     {
         return $this->searchText;
     }
 
+    /**
+     * @param string $searchText
+     * @return ISDSSearch2
+     */
     public function setSearchText(string $searchText): ISDSSearch2
     {
         $this->searchText = $searchText;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getSearchType(): string
     {
         return $this->searchType;
     }
 
+    /**
+     * @param string $searchType
+     * @return ISDSSearch2
+     */
     public function setSearchType(string $searchType): ISDSSearch2
     {
         $this->searchType = $searchType;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getSearchScope(): string
     {
         return $this->searchScope;
     }
 
+    /**
+     * @param string $searchScope
+     * @return ISDSSearch2
+     */
     public function setSearchScope(string $searchScope): ISDSSearch2
     {
         $this->searchScope = $searchScope;
         return $this;
     }
 
+    /**
+     * @return int
+     */
     public function getPage(): int
     {
         return $this->page;
     }
 
+    /**
+     * @param int $page
+     * @return ISDSSearch2
+     */
     public function setPage(int $page): ISDSSearch2
     {
         $this->page = $page;
         return $this;
     }
 
+    /**
+     * @return int
+     */
     public function getPageSize(): int
     {
         return $this->pageSize;
     }
 
+    /**
+     * @param int $pageSize
+     * @return ISDSSearch2
+     */
     public function setPageSize(int $pageSize): ISDSSearch2
     {
         $this->pageSize = $pageSize;
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function isHighlighting(): ?bool
     {
         return $this->highlighting;
     }
 
+    /**
+     * @param bool $highlighting
+     * @return ISDSSearch2
+     */
     public function setHighlighting(bool $highlighting): ISDSSearch2
     {
         $this->highlighting = $highlighting;

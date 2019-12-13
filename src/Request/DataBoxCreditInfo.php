@@ -23,36 +23,52 @@ class DataBoxCreditInfo implements IRequest
 {
     use DataBoxId;
     /**
+     * @var \DateTimeImmutable|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:ciFromDate")
      */
-    private ?\DateTimeImmutable $fromDate;
+    private $fromDate;
     /**
+     * @var \DateTimeImmutable|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:ciTodate")
      */
-    private ?\DateTimeImmutable $toDate;
+    private $toDate;
 
+    /**
+     * @return \DateTimeImmutable|null
+     */
     public function getFromDate(): ?\DateTimeImmutable
     {
         return $this->fromDate;
     }
 
+    /**
+     * @param \DateTimeImmutable|null $fromDate
+     * @return DataBoxCreditInfo
+     */
     public function setFromDate(?\DateTimeImmutable $fromDate): DataBoxCreditInfo
     {
         $this->fromDate = $fromDate;
         return $this;
     }
 
+    /**
+     * @return \DateTimeImmutable|null
+     */
     public function getToDate(): ?\DateTimeImmutable
     {
         return $this->toDate;
     }
 
+    /**
+     * @param \DateTimeImmutable|null $toDate
+     * @return DataBoxCreditInfo
+     */
     public function setToDate(?\DateTimeImmutable $toDate): DataBoxCreditInfo
     {
         $this->toDate = $toDate;

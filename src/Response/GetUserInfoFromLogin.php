@@ -16,16 +16,16 @@ use JMS\Serializer\Annotation as Serializer;
  * @package HelpPC\CzechDataBox\Response
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:GetUserInfoFromLoginResponse", namespace="http://isds.czechpoint.cz/v20")
- * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataBoxStatus>
  */
-class GetUserInfoFromLogin extends IResponse
+class GetUserInfoFromLogin implements IResponse
 {
     use DataBoxStatus;
     /**
+     * @var string|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("string")
      * @Serializer\SerializedName("p:dbUserInfo")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected ?string $userInfo = null;
+    protected $userInfo;
 }

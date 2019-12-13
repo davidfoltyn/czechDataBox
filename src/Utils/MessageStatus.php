@@ -7,17 +7,17 @@ use HelpPC\CzechDataBox\Exception\BadOptionException;
 
 class MessageStatus
 {
-    public const FILTER_ALL = -1;
-    public const FILTER_SUBMITTED = 1;
-    public const FILTER_STAMPED = 2;
-    public const FILTER_ANTIVIRUS_FAILED = 3;
-    public const FILTER_DELIVERED = 4;
-    public const FILTER_DELIVERED_AFTER_TIME = 5;
-    public const FILTER_DELIVERED_BY_LOGIN = 6;
-    public const FILTER_READ = 7;
-    public const FILTER_UNDELIVERED = 8;
-    public const FILTER_DELETED = 9;
-    public const FILTER_IN_VAULT = 10;
+    const FILTER_ALL = -1;
+    const FILTER_SUBMITTED = 1;
+    const FILTER_STAMPED = 2;
+    const FILTER_ANTIVIRUS_FAILED = 3;
+    const FILTER_DELIVERED = 4;
+    const FILTER_DELIVERED_AFTER_TIME = 5;
+    const FILTER_DELIVERED_BY_LOGIN = 6;
+    const FILTER_READ = 7;
+    const FILTER_UNDELIVERED = 8;
+    const FILTER_DELETED = 9;
+    const FILTER_IN_VAULT = 10;
 
     public static function getDecEntryForStatus(int ...$statuses): float
     {
@@ -36,7 +36,7 @@ class MessageStatus
                 self::FILTER_READ,
                 self::FILTER_UNDELIVERED,
                 self::FILTER_DELETED,
-                self::FILTER_IN_VAULT,
+                self::FILTER_IN_VAULT
             ]))
                 throw new BadOptionException(sprintf('The value %s is not allowed. Use one of the %s::FILTER_*', $status, self::class));
 
@@ -46,12 +46,10 @@ class MessageStatus
         return $output;
     }
 
-    /**
-     * @return array<int,string>
-     */
-    public static function getStateList(): array
+
+    public static function getStateList()
     {
-        return [
+        return array(
             0 => 'Nelze zjístit stav zprávy',
             self::FILTER_SUBMITTED => 'Datová zpráva byla podána (vznikla v ISDS).',
             self::FILTER_STAMPED => 'Datová zpráva včetně písemností podepsána podacím časovým razítkem.',
@@ -62,16 +60,16 @@ class MessageStatus
             self::FILTER_READ => 'Zpráva byla přečtena (na portále nebo akcí ESS).',
             self::FILTER_UNDELIVERED => 'Zpráva byla označena jako nedoručitelná, protože schránka adresáta byla zpětně znepřístupněna; netýká se systémových zpráv.',
             self::FILTER_DELETED => 'Obsah zprávy byl smazán, obálka zprávy včetně hashů přesunuta do archivu (jen některé služby umí přistupovat k archivním obálkám zpráv)',
-            self::FILTER_IN_VAULT => 'Zpráva byla přesunuta do Datového trezoru odesílatele nebo adresáta (nebo obou); netýká se systémových zpráv.',
-        ];
+            self::FILTER_IN_VAULT => 'Zpráva byla přesunuta do Datového trezoru odesílatele nebo adresáta (nebo obou); netýká se systémových zpráv.'
+        );
     }
 
     /**
      * @param int|null $type
-     * @return string
+     * @return mixed
      * @throws BadOptionException
      */
-    public static function getMessageStateAsString(?int $type): string
+    public static function getMessageStateAsString(?int $type)
     {
 
         if (in_array($type, self::getStateList())) {

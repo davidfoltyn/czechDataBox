@@ -20,38 +20,55 @@ class Hash
 {
 
     /**
+     * @var SplFileInfo
      * @Serializer\Type("base64File")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\XmlValue()
      */
-    protected SplFileInfo $value;
+    protected $value;
     /**
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("algorithm")
      * @Serializer\XmlAttribute()
      */
-    protected string $algorithm;
+    protected $algorithm;
 
+    /**
+     * @return SplFileInfo
+     */
     public function getValue(): SplFileInfo
     {
         return $this->value;
     }
 
+    /**
+     * @param SplFileInfo $value
+     * @return Hash
+     */
     public function setValue(SplFileInfo $value): Hash
     {
         $this->value = $value;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getAlgorithm(): string
     {
         return $this->algorithm;
     }
 
+    /**
+     * @param string $algorithm
+     * @return Hash
+     */
     public function setAlgorithm(string $algorithm): Hash
     {
         $this->algorithm = $algorithm;
         return $this;
     }
+
 
 }

@@ -29,194 +29,302 @@ class Envelope
 
     use DataMessageEnvelopeSub;
     /**
+     * @var string
      * @Serializer\Type("string")
-     * @Serializer\SkipWhenEmpty()
      * @Serializer\SerializedName("dmType")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\XmlAttribute()
      */
-    protected ?string $type = null;
+    protected $type;
     /**
+     * @var bool|null
      * @Serializer\Type("bool")
      * @Serializer\SkipWhenEmpty
      * @Serializer\SerializedName("p:dmAllowSubstDelivery")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected ?bool $allowSubstDelivery = null;
+    protected $allowSubstDelivery;
     /**
+     * @var bool|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("bool")
      * @Serializer\SerializedName("p:dmOVM")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected ?bool $OVM = null;
+    protected $OVM;
     /**
+     * @var bool|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("bool")
      * @Serializer\SerializedName("p:dmPublishOwnID")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected ?bool $publishOwnID = null;
+    protected $publishOwnID;
 
+    /**
+     * @return string
+     */
     public function getType(): string
     {
         return $this->type;
     }
 
+    /**
+     * @param string $type
+     * @return Envelope
+     */
     public function setType(string $type): Envelope
     {
         $this->type = $type;
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getSenderOrgUnit(): ?string
     {
         return $this->senderOrgUnit;
     }
 
+    /**
+     * @param null|string $senderOrgUnit
+     * @return Envelope
+     */
     public function setSenderOrgUnit(?string $senderOrgUnit): Envelope
     {
         $this->senderOrgUnit = $senderOrgUnit;
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getSenderOrgUnitNum(): ?int
     {
         return $this->senderOrgUnitNum;
     }
 
+    /**
+     * @param int|null $senderOrgUnitNum
+     * @return Envelope
+     */
     public function setSenderOrgUnitNum(?int $senderOrgUnitNum): Envelope
     {
         $this->senderOrgUnitNum = $senderOrgUnitNum;
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getAnnotation(): ?string
     {
         return $this->annotation;
     }
 
+    /**
+     * @param null|string $annotation
+     * @return Envelope
+     */
     public function setAnnotation(?string $annotation): Envelope
     {
         $this->annotation = $annotation;
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getRecipientRefNumber(): ?string
     {
         return $this->recipientRefNumber;
     }
 
+    /**
+     * @param null|string $recipientRefNumber
+     * @return Envelope
+     */
     public function setRecipientRefNumber(?string $recipientRefNumber): Envelope
     {
         $this->recipientRefNumber = $recipientRefNumber;
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getSenderRefNumber(): ?string
     {
         return $this->senderRefNumber;
     }
 
+    /**
+     * @param null|string $senderRefNumber
+     * @return Envelope
+     */
     public function setSenderRefNumber(?string $senderRefNumber): Envelope
     {
         $this->senderRefNumber = $senderRefNumber;
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getRecipientIdent(): ?string
     {
         return $this->recipientIdent;
     }
 
+    /**
+     * @param null|string $recipientIdent
+     * @return Envelope
+     */
     public function setRecipientIdent(?string $recipientIdent): Envelope
     {
         $this->recipientIdent = $recipientIdent;
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getSenderIdent(): ?string
     {
         return $this->senderIdent;
     }
 
+    /**
+     * @param null|string $senderIdent
+     * @return Envelope
+     */
     public function setSenderIdent(?string $senderIdent): Envelope
     {
         $this->senderIdent = $senderIdent;
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getLegalTitleLaw(): ?int
     {
         return $this->legalTitleLaw;
     }
 
+    /**
+     * @param int|null $legalTitleLaw
+     * @return Envelope
+     */
     public function setLegalTitleLaw(?int $legalTitleLaw): Envelope
     {
         $this->legalTitleLaw = $legalTitleLaw;
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getLegalTitleYear(): ?int
     {
         return $this->legalTitleYear;
     }
 
+    /**
+     * @param int|null $legalTitleYear
+     * @return Envelope
+     */
     public function setLegalTitleYear(?int $legalTitleYear): Envelope
     {
         $this->legalTitleYear = $legalTitleYear;
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getLegalTitleSect(): ?string
     {
         return $this->legalTitleSect;
     }
 
+    /**
+     * @param null|string $legalTitleSect
+     * @return Envelope
+     */
     public function setLegalTitleSect(?string $legalTitleSect): Envelope
     {
         $this->legalTitleSect = $legalTitleSect;
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getLegalTitlePar(): ?string
     {
         return $this->legalTitlePar;
     }
 
+    /**
+     * @param null|string $legalTitlePar
+     * @return Envelope
+     */
     public function setLegalTitlePar(?string $legalTitlePar): Envelope
     {
         $this->legalTitlePar = $legalTitlePar;
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getLegalTitlePoint(): ?string
     {
         return $this->legalTitlePoint;
     }
 
+    /**
+     * @param null|string $legalTitlePoint
+     * @return Envelope
+     */
     public function setLegalTitlePoint(?string $legalTitlePoint): Envelope
     {
         $this->legalTitlePoint = $legalTitlePoint;
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getPersonalDelivery(): ?bool
     {
         return $this->personalDelivery;
     }
 
+    /**
+     * @param bool|null $personalDelivery
+     * @return Envelope
+     */
     public function setPersonalDelivery(?bool $personalDelivery): Envelope
     {
         $this->personalDelivery = $personalDelivery;
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getAllowSubstDelivery(): ?bool
     {
         return $this->allowSubstDelivery;
     }
 
+    /**
+     * @param bool|null $allowSubstDelivery
+     * @return Envelope
+     */
     public function setAllowSubstDelivery(?bool $allowSubstDelivery): Envelope
     {
         $this->allowSubstDelivery = $allowSubstDelivery;
@@ -243,55 +351,90 @@ class Envelope
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getPublishOwnID(): ?bool
     {
         return $this->publishOwnID;
     }
 
+    /**
+     * @param bool|null $publishOwnID
+     * @return Envelope
+     */
     public function setPublishOwnID(?bool $publishOwnID): Envelope
     {
         $this->publishOwnID = $publishOwnID;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getRecipientID(): string
     {
         return $this->recipientID;
     }
 
+    /**
+     * @param string $recipientID
+     * @return Envelope
+     */
     public function setRecipientID(string $recipientID): Envelope
     {
         $this->recipientID = $recipientID;
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getRecipientOrgUnit(): ?string
     {
         return $this->recipientOrgUnit;
     }
 
+    /**
+     * @param null|string $recipientOrgUnit
+     * @return Envelope
+     */
     public function setRecipientOrgUnit(?string $recipientOrgUnit): Envelope
     {
         $this->recipientOrgUnit = $recipientOrgUnit;
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getRecipientOrgUnitNum(): ?int
     {
         return $this->recipientOrgUnitNum;
     }
 
+    /**
+     * @param int|null $recipientOrgUnitNum
+     * @return Envelope
+     */
     public function setRecipientOrgUnitNum(?int $recipientOrgUnitNum): Envelope
     {
         $this->recipientOrgUnitNum = $recipientOrgUnitNum;
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getToHands(): ?string
     {
         return $this->toHands;
     }
 
+    /**
+     * @param null|string $toHands
+     * @return Envelope
+     */
     public function setToHands(?string $toHands): Envelope
     {
         $this->toHands = $toHands;

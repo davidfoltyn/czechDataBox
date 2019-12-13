@@ -29,9 +29,8 @@
     }
   ],
   "require": {
-    "php": ">=7.4",
+    "php": ">=7.3",
     "ext-xml": "*",
-    "ext-mbstring": "*",
     "ext-curl": "*",
     "ext-openssl": "*",
     "ext-dom": "*",
@@ -45,13 +44,17 @@
       "HelpPC\\CzechDataBox\\": "src/"
     }
   },
+  "scripts": {
+    "phpstan": "phpstan analyse -c phpstan.neon --memory-limit=1024M",
+    "tester": "tester -C tests/php.ini tests"
+  },
   "suggest": {
     "ext-curl": "for comunication with czech databox servers"
   },
   "require-dev": {
-    "nette/tester": "^2.0",
-    "phpstan/phpstan": "^0.12",
-    "phpstan/phpstan-nette": "^0.12"
+    "phpstan/phpstan": "^0.11.8",
+    "phpstan/phpstan-nette": "^0.11.1",
+    "nette/tester": "^2.0"
   },
   "archive": {
     "exclude": [

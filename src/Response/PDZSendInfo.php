@@ -16,22 +16,36 @@ use JMS\Serializer\Annotation as Serializer;
  * @package HelpPC\CzechDataBox\Response
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:PDZSendInfoResponse", namespace="http://isds.czechpoint.cz/v20")
- * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataBoxStatus>
  */
-class PDZSendInfo extends IResponse
+class PDZSendInfo implements IResponse
 {
 
     use DataBoxStatus;
     /**
+     * @var bool
      * @Serializer\Type("bool")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:PDZsiResult")
      */
-    protected bool $result;
+    protected $result;
 
+    /**
+     * @return bool
+     */
     public function isResult(): bool
     {
         return $this->result;
     }
+
+    /**
+     * @param bool $result
+     * @return PDZSendInfo
+     */
+    public function setResult(bool $result): PDZSendInfo
+    {
+        $this->result = $result;
+        return $this;
+    }
+
 
 }
