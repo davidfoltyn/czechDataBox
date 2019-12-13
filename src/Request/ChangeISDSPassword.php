@@ -20,64 +20,46 @@ use Nette\Utils\Strings;
 class ChangeISDSPassword implements IRequest
 {
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("p:dbOldPassword")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $oldPassword;
+    protected string $oldPassword;
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("p:dbNewPassword")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $newPassword;
+    protected string $newPassword;
 
-    /**
-     * @return string
-     */
     public function getOldPassword(): string
     {
         return $this->oldPassword;
     }
 
-    /**
-     * @param string $oldPassword
-     * @return ChangeISDSPassword
-     */
     public function setOldPassword(string $oldPassword): ChangeISDSPassword
     {
         $this->oldPassword = $oldPassword;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getNewPassword(): string
     {
         return $this->newPassword;
     }
 
-    /**
-     * @param string $newPassword
-     * @return ChangeISDSPassword
-     * @throws \Exception
-     */
     public function setNewPassword(string $newPassword): ChangeISDSPassword
     {
-        $pwdLen = Strings::length($newPassword);
+        $pwdLen = mb_strlen($newPassword);
         if (
             $pwdLen < 8 ||
             $pwdLen > 32 ||
-            preg_match("/^[a-z0-9\!\#\$\*\%\&\(\)\*\+\,\-\:\=\?\@\[\]\_\{\|\}\~]+$/i", $newPassword) == false ||
-            preg_match('/[A-Z]/', $newPassword) == false ||
-            preg_match('/[a-z]/', $newPassword) == false ||
-            preg_match('/[0-9]/', $newPassword) == false ||
-            Strings::startsWith($newPassword, 'qwert') ||
-            Strings::startsWith($newPassword, 'asdgf') ||
-            Strings::startsWith($newPassword, '123456')
+            preg_match("/^[a-z0-9\!\#\$\*\%\&\(\)\*\+\,\-\:\=\?\@\[\]\_\{\|\}\~]+$/i", $newPassword) == FALSE ||
+            preg_match('/[A-Z]/', $newPassword) == FALSE ||
+            preg_match('/[a-z]/', $newPassword) == FALSE ||
+            preg_match('/[0-9]/', $newPassword) == FALSE ||
+            in_array(\mb_substr($newPassword, 0, 5), ['qwert', 'asdgf']) ||
+            \mb_substr($newPassword, 0, 6) === '123456'
         ) {
             throw new \Exception('Password does not meet the requirements. Password must be between 8 and 32 chars and may not start with the following values "qwert", "asdgf", "123456". ');
         }

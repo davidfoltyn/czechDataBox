@@ -60,6 +60,7 @@ class CreateMessageTest extends TestCase
                     ->setMetaType(($i == 0 ? 'main' : 'enclosure'));
                 $createMessage->addFile($file);
             }
+            $createMessage->getEnvelope()->setAnnotation('');
             $recipient = new \HelpPC\CzechDataBox\Entity\Recipient();
             $recipient->setDataBoxId('pokus')
                 ->setToHand('toHandRec')

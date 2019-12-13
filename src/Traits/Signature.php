@@ -14,26 +14,18 @@ trait Signature
 {
 
     /**
-     * @var SplFileInfo|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("base64File")
      * @Serializer\SerializedName("p:dmSignature")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $signature;
+    protected ?SplFileInfo $signature = null;
 
-    /**
-     * @return null|SplFileInfo
-     */
     public function getSignature(): ?SplFileInfo
     {
         return $this->signature;
     }
 
-    /**
-     * @param SplFileInfo $signature
-     * @return self
-     */
     public function setSignature(SplFileInfo $signature): self
     {
         $this->signature = $signature;

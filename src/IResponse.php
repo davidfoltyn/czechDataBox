@@ -7,8 +7,14 @@
 
 namespace HelpPC\CzechDataBox;
 
-
-interface IResponse
+/**
+ * @phpstan-template TStatusClass
+ */
+abstract class IResponse
 {
 
+    /**
+     * @return TStatusClass
+     */
+    abstract public function getStatus();
 }

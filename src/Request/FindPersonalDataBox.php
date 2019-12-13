@@ -20,25 +20,17 @@ use JMS\Serializer\Annotation as Serializer;
 class FindPersonalDataBox implements IRequest
 {
     /**
-     * @var PersonalOwnerInfo
      * @Serializer\Type("HelpPC\CzechDataBox\Entity\PersonalOwnerInfo")
      * @Serializer\SerializedName("p:dbOwnerInfo")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $ownerInfo;
+    protected PersonalOwnerInfo $ownerInfo;
 
-    /**
-     * @return PersonalOwnerInfo
-     */
     public function getOwnerInfo(): PersonalOwnerInfo
     {
         return $this->ownerInfo;
     }
 
-    /**
-     * @param PersonalOwnerInfo $ownerInfo
-     * @return FindPersonalDataBox
-     */
     public function setOwnerInfo(PersonalOwnerInfo $ownerInfo): FindPersonalDataBox
     {
         $this->ownerInfo = $ownerInfo;

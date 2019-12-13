@@ -9,6 +9,8 @@ namespace HelpPC\CzechDataBox\Response;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use HelpPC\CzechDataBox\Entity\DataBoxResult;
 use HelpPC\CzechDataBox\IResponse;
 use HelpPC\CzechDataBox\Traits\DataBoxStatus;
 use JMS\Serializer\Annotation as Serializer;
@@ -18,123 +20,92 @@ use JMS\Serializer\Annotation as Serializer;
  * @package HelpPC\CzechDataBox\Response
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:ISDSSearch2Response", namespace="http://isds.czechpoint.cz/v20")
+ * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataBoxStatus>
  */
-class ISDSSearch2 implements IResponse
+class ISDSSearch2 extends IResponse
 {
 
     use DataBoxStatus;
     /**
-     * @var int|null
      * @Serializer\SkipWhenEmpty()
      * @Serializer\Type("int")
      * @Serializer\SerializedName("p:totalCount")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $totalCount;
+    protected ?int $totalCount = null;
     /**
-     * @var int|null
      * @Serializer\SkipWhenEmpty()
      * @Serializer\Type("int")
      * @Serializer\SerializedName("p:currentCount")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $currentCount;
+    protected ?int $currentCount = null;
     /**
-     * @var int|null
      * @Serializer\SkipWhenEmpty()
      * @Serializer\Type("int")
      * @Serializer\SerializedName("p:position")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $position;
+    protected ?int $position = null;
     /**
-     * @var bool|null
      * @Serializer\SkipWhenEmpty()
      * @Serializer\Type("bool")
      * @Serializer\SerializedName("p:lastPage")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $lastPage;
+    protected ?bool $lastPage = null;
     /**
-     * @var ArrayCollection
+     * @var Collection<int, DataBoxResult>
      * @Serializer\Type("ArrayCollection<HelpPC\CzechDataBox\Entity\DataBoxResult>")
      * @Serializer\XmlList(entry="dbResult", inline=false, namespace="http://isds.czechpoint.cz/v20")
      * @Serializer\SerializedName("dbResults")
      * @Serializer\XmlElement(cdata=false,namespace="http://isds.czechpoint.cz/v20")
      */
-    protected $result;
+    protected Collection $result;
 
     public function __construct()
     {
         $this->result = new ArrayCollection();
     }
 
-    /**
-     * @return int|null
-     */
     public function getTotalCount(): ?int
     {
         return $this->totalCount;
     }
 
-    /**
-     * @param int|null $totalCount
-     * @return ISDSSearch2
-     */
     public function setTotalCount(?int $totalCount): ISDSSearch2
     {
         $this->totalCount = $totalCount;
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getCurrentCount(): ?int
     {
         return $this->currentCount;
     }
 
-    /**
-     * @param int|null $currentCount
-     * @return ISDSSearch2
-     */
     public function setCurrentCount(?int $currentCount): ISDSSearch2
     {
         $this->currentCount = $currentCount;
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getPosition(): ?int
     {
         return $this->position;
     }
 
-    /**
-     * @param int|null $position
-     * @return ISDSSearch2
-     */
     public function setPosition(?int $position): ISDSSearch2
     {
         $this->position = $position;
         return $this;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getLastPage(): ?bool
     {
         return $this->lastPage;
     }
 
-    /**
-     * @param bool|null $lastPage
-     * @return ISDSSearch2
-     */
     public function setLastPage(?bool $lastPage): ISDSSearch2
     {
         $this->lastPage = $lastPage;
@@ -142,15 +113,15 @@ class ISDSSearch2 implements IResponse
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection<int, DataBoxResult>
      */
-    public function getResult(): ArrayCollection
+    public function getResult(): Collection
     {
         return $this->result;
     }
 
     /**
-     * @param ArrayCollection $result
+     * @param ArrayCollection<int, DataBoxResult> $result
      * @return ISDSSearch2
      */
     public function setResult(ArrayCollection $result): ISDSSearch2

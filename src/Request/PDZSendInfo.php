@@ -20,50 +20,34 @@ use JMS\Serializer\Annotation as Serializer;
 class PDZSendInfo implements IRequest
 {
     /**
-     * @var string 7
      * @Serializer\Type("string")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dbId")
      */
-    protected $dataBoxID;
+    protected string $dataBoxID;
     /**
-     * @var string 7
      * @Serializer\Type("string")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:PDZType")
      */
-    protected $type = 'Normal';
+    protected string $type = 'Normal';
 
-    /**
-     * @return string
-     */
     public function getDataBoxID(): string
     {
         return $this->dataBoxID;
     }
 
-    /**
-     * @param string $dataBoxID
-     * @return PDZSendInfo
-     */
     public function setDataBoxID(string $dataBoxID): PDZSendInfo
     {
         $this->dataBoxID = $dataBoxID;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     * @return PDZSendInfo
-     */
     public function setType(string $type): PDZSendInfo
     {
         $this->type = $type;

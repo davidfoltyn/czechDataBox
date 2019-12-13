@@ -10,12 +10,9 @@ use HelpPC\CzechDataBox\Exception\RecipientCountOverflow;
 
 class Manager
 {
-    /** @var DataBox */
-    private $dataBox;
-    /** @var DataMessage */
-    private $dataMessage;
-    /** @var SearchDataBox */
-    private $searchData;
+    private DataBox $dataBox;
+    private DataMessage $dataMessage;
+    private SearchDataBox $searchData;
 
     public function __construct(DataBox $dataBox, DataMessage $dataMessage, SearchDataBox $searchDataBox)
     {
@@ -258,7 +255,7 @@ class Manager
      */
     public function FindDataBox(Account $account, Request\FindDataBox $input): Response\FindDataBox
     {
-        return $this->searchData->FindDataBox($account,$input);
+        return $this->searchData->FindDataBox($account, $input);
     }
 
     /**

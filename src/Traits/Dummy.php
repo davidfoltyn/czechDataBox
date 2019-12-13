@@ -13,12 +13,12 @@ use JMS\Serializer\Annotation as Serializer;
 trait Dummy
 {
     /**
-     * @var null
+     * @Serializer\SkipWhenEmpty
      * @Serializer\Type("string")
      * @Serializer\SerializedName("p:dbDummy")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $dummy;
+    protected ?string $dummy = null;
 
     /**
      * @return null

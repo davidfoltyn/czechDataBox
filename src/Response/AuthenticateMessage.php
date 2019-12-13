@@ -16,35 +16,27 @@ use JMS\Serializer\Annotation as Serializer;
  * @package HelpPC\CzechDataBox\Response
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:AuthenticateMessageResponse", namespace="http://isds.czechpoint.cz/v20")
+ * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataMessageStatus>
  */
-class AuthenticateMessage implements IResponse
+class AuthenticateMessage extends IResponse
 {
     use DataMessageStatus;
 
     /**
-     * @var bool
      * @Serializer\Type("bool")
      * @Serializer\SerializedName("p:dmAuthResult")
      */
-    protected $authenticated;
+    protected bool $authenticated;
 
-    /**
-     * @return bool
-     */
     public function isAuthenticated(): bool
     {
         return $this->authenticated;
     }
 
-    /**
-     * @param bool $authenticated
-     * @return AuthenticateMessage
-     */
     public function setAuthenticated(bool $authenticated): AuthenticateMessage
     {
         $this->authenticated = $authenticated;
         return $this;
     }
-
 
 }

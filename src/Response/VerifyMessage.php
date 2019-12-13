@@ -19,49 +19,35 @@ use JMS\Serializer\Annotation as Serializer;
  * @package HelpPC\CzechDataBox\Response
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:VerifyMessageResponse", namespace="http://isds.czechpoint.cz/v20")
+ * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataMessageStatus>
  */
-class VerifyMessage implements IResponse
+class VerifyMessage extends IResponse
 {
     use DataMessageStatus;
 
     /**
-     * @var Hash
      * @Serializer\Type("HelpPC\CzechDataBox\Entity\Hash")
      * @Serializer\SerializedName("p:dmHash")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $hash;
+    protected Hash $hash;
 
-    /**
-     * @return \HelpPC\CzechDataBox\Entity\DataMessageStatus
-     */
     public function getStatus(): \HelpPC\CzechDataBox\Entity\DataMessageStatus
     {
         return $this->status;
     }
 
-    /**
-     * @param \HelpPC\CzechDataBox\Entity\DataMessageStatus $status
-     * @return VerifyMessage
-     */
     public function setStatus(\HelpPC\CzechDataBox\Entity\DataMessageStatus $status): VerifyMessage
     {
         $this->status = $status;
         return $this;
     }
 
-    /**
-     * @return Hash
-     */
     public function getHash(): Hash
     {
         return $this->hash;
     }
 
-    /**
-     * @param Hash $hash
-     * @return VerifyMessage
-     */
     public function setHash(Hash $hash): VerifyMessage
     {
         $this->hash = $hash;

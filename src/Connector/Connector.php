@@ -7,6 +7,7 @@
 
 namespace HelpPC\CzechDataBox\Connector;
 
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ServerException;
 use HelpPC\CzechDataBox\Exception\ConnectionException;
 use HelpPC\CzechDataBox\Exception\SystemExclusion;
@@ -17,17 +18,15 @@ use Psr\Http\Message\ResponseInterface;
 
 abstract class Connector
 {
-    /** @var \GuzzleHttp\Client */
-    private $guzzleHttp;
-    /** @var SerializerInterface */
-    private $serializer;
+    private Client $guzzleHttp;
+    private SerializerInterface $serializer;
 
     protected const OPERATIONSWS = 0;
     protected const INFOWS = 1;
     protected const SEARCHWS = 2;
     protected const SUPPLEMENTARYWS = 3;
     protected const ACCESSWS = 5;
-    private $connected = false;
+    private bool $connected = FALSE;
 
     public function __construct(SerializerInterface $serializer, \GuzzleHttp\Client $guzzleHttp)
     {
@@ -40,7 +39,7 @@ abstract class Connector
         return $this->connected;
     }
 
-    private function getServiceURL(string $portalType, int $ServiceType, string $LoginType)
+    private function getServiceURL(string $portalType, int $ServiceType, string $LoginType): string
     {
         $res = "https://ws1";
         if ($LoginType > Account::LOGIN_NAME_PASSWORD) {
@@ -70,10 +69,10 @@ abstract class Connector
         return $res;
     }
 
-    private function getXmlDocument(?string $xmlContent = null): \DOMDocument
+    private function getXmlDocument(?string $xmlContent = NULL): \DOMDocument
     {
         $document = new \DOMDocument('1.0', 'UTF-8');
-        if ($xmlContent !== null) {
+        if ($xmlContent !== NULL) {
             $document->loadXML($xmlContent);
             return $document;
         }
@@ -81,15 +80,15 @@ abstract class Connector
         return $document;
     }
 
-    private function getValueByXpath(\DOMDocument $document, string $xpath)
+    private function getValueByXpath(\DOMDocument $document, string $xpath): ?string
     {
         $domXpath = new \DOMXPath($document);
-        $result = null;
+        $result = NULL;
         $res = $domXpath->evaluate($xpath);
         if ($res instanceof \DOMNodeList) {
             foreach ($res as $node) {
                 if ($node instanceof \DOMElement || $node instanceof \DOMDocument) {
-                    $nodeValue = null;
+                    $nodeValue = NULL;
                     $children = $node->childNodes;
                     foreach ($children as $child) {
                         $nodeValue .= $document->saveXML($child);
@@ -117,7 +116,7 @@ abstract class Connector
     {
         $location = $this->getLocation($account, $operationType);
 
-        if (!in_array(IResponse::class, class_implements($responseClass))) {
+        if (is_subclass_of($responseClass, IResponse::class) === FALSE) {
             throw new ConnectionException();
         }
         $request = $this->serializer->serialize($request, 'xml');
@@ -128,7 +127,7 @@ abstract class Connector
         $requestDocumentXpath = new \DOMXPath($requestDocument);
 
         $bodyNode = $requestDocumentXpath->evaluate('//' . $requestDocument->documentElement->prefix . ':Body');
-        $new = $bodyNode[0]->ownerDocument->importNode($request->documentElement, true);
+        $new = $bodyNode[0]->ownerDocument->importNode($request->documentElement, TRUE);
         if ($bodyNode[0]->nextSibling) {
             $bodyNode[0]->insertBefore($new, $bodyNode[0]->nextSibling);
         } else {
@@ -161,7 +160,7 @@ abstract class Connector
             $response = $response->getBody()->getContents();
             $soapResponse = $this->getXmlDocument($response);
             $response = $this->getValueByXpath($soapResponse, '//' . $soapResponse->documentElement->prefix . ':Body');
-            $soapResponse = null;
+            $soapResponse = NULL;
             $dom = $this->getXmlDocument($response);
             $prefix = $dom->documentElement->prefix;
             if ($prefix !== 'p') {
@@ -186,7 +185,7 @@ abstract class Connector
         return $this->serializer->deserialize($response, $responseClass, 'xml');
     }
 
-    protected function getLocation(Account $account, $portalType)
+    protected function getLocation(Account $account, int $portalType): string
     {
         return $this->getServiceURL($account->getPortalType(), $portalType, $account->getLoginType());
     }

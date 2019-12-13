@@ -20,155 +20,107 @@ use JMS\Serializer\Annotation as Serializer;
 class GetListOfReceivedMessages implements IRequest
 {
     /**
-     * @var \DateTimeImmutable|null
      * @Serializer\SkipWhenEmpty()
      * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\SerializedName("p:dmFromTime")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $listFrom;
+    protected ?\DateTimeImmutable $listFrom = null;
     /**
-     * @var \DateTimeImmutable|null
      * @Serializer\SkipWhenEmpty()
      * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\SerializedName("p:dmToTime")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected $listTo;
+    protected ?\DateTimeImmutable $listTo = null;
     /**
-     * @var int|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("int")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmRecipientOrgUnitNum")
      */
-    protected $recipientOrgUnitNum;
+    protected ?int $recipientOrgUnitNum = null;
     /**
-     * @var float
      * @Serializer\Type("float")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmStatusFilter")
      */
-    protected $statusFilter;
+    protected float $statusFilter;
     /**
-     * @var int|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("int")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmOffset")
      */
-    protected $offset;
+    protected ?int $offset = null;
     /**
-     * @var int|null
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("int")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmLimit")
      */
-    protected $limit;
+    protected ?int $limit = null;
 
-    /**
-     * @return \DateTimeImmutable|null
-     */
     public function getListFrom(): ?\DateTimeImmutable
     {
         return $this->listFrom;
     }
 
-    /**
-     * @param \DateTimeImmutable|null $listFrom
-     * @return GetListOfReceivedMessages
-     */
     public function setListFrom(?\DateTimeImmutable $listFrom): GetListOfReceivedMessages
     {
         $this->listFrom = $listFrom;
         return $this;
     }
 
-    /**
-     * @return \DateTimeImmutable|null
-     */
     public function getListTo(): ?\DateTimeImmutable
     {
         return $this->listTo;
     }
 
-    /**
-     * @param \DateTimeImmutable|null $listTo
-     * @return GetListOfReceivedMessages
-     */
     public function setListTo(?\DateTimeImmutable $listTo): GetListOfReceivedMessages
     {
         $this->listTo = $listTo;
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getRecipientOrgUnitNum(): ?int
     {
         return $this->recipientOrgUnitNum;
     }
 
-    /**
-     * @param int|null $recipientOrgUnitNum
-     * @return GetListOfReceivedMessages
-     */
     public function setRecipientOrgUnitNum(?int $recipientOrgUnitNum): GetListOfReceivedMessages
     {
         $this->recipientOrgUnitNum = $recipientOrgUnitNum;
         return $this;
     }
 
-    /**
-     * @return float
-     */
     public function getStatusFilter(): float
     {
         return $this->statusFilter;
     }
 
-    /**
-     * @param float $statusFilter
-     * @return GetListOfReceivedMessages
-     */
     public function setStatusFilter(float $statusFilter): GetListOfReceivedMessages
     {
         $this->statusFilter = $statusFilter;
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getOffset(): ?int
     {
         return $this->offset;
     }
 
-    /**
-     * @param int|null $offset
-     * @return GetListOfReceivedMessages
-     */
     public function setOffset(?int $offset): GetListOfReceivedMessages
     {
         $this->offset = $offset;
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getLimit(): ?int
     {
         return $this->limit;
     }
 
-    /**
-     * @param int|null $limit
-     * @return GetListOfReceivedMessages
-     */
     public function setLimit(?int $limit): GetListOfReceivedMessages
     {
         $this->limit = $limit;

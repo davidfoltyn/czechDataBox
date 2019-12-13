@@ -21,12 +21,5 @@ use JMS\Serializer\Annotation as Serializer;
 class DTInfo implements IRequest
 {
     use DataBoxId;
-    /**
-     * @var string 7
-     * @Serializer\Type("string")
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:dbId")
-     */
-    protected $dataBoxId;
 
 }

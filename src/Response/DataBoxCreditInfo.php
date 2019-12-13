@@ -9,6 +9,8 @@ namespace HelpPC\CzechDataBox\Response;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use HelpPC\CzechDataBox\Entity\CreditRecord;
 use HelpPC\CzechDataBox\IResponse;
 use HelpPC\CzechDataBox\Traits\DataBoxStatus;
 use JMS\Serializer\Annotation as Serializer;
@@ -18,66 +20,58 @@ use JMS\Serializer\Annotation as Serializer;
  * @package HelpPC\CzechDataBox\Response
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:DataBoxCreditInfoResponse", namespace="http://isds.czechpoint.cz/v20")
+ * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataBoxStatus>
  */
-class DataBoxCreditInfo implements IResponse
+class DataBoxCreditInfo extends IResponse
 {
     use DataBoxStatus;
 
     /**
-     * @var int|null
      * @Serializer\Type("int")
      * @Serializer\SkipWhenEmpty
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:currentCredit")
      */
-    protected $currentCredit;
+    protected ?int $currentCredit = null;
 
     /**
-     * @var string|null
      * @Serializer\Type("string")
      * @Serializer\SkipWhenEmpty
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:notifEmail")
      */
-    protected $notifyEmail;
+    protected ?string $notifyEmail = null;
 
     /**
-     * @var ArrayCollection
+     * @var Collection<int, CreditRecord>
      * @Serializer\Type("ArrayCollection<HelpPC\CzechDataBox\Entity\CreditRecord>")
      * @Serializer\XmlList(entry="ciRecord", inline=false, namespace="http://isds.czechpoint.cz/v20")
      * @Serializer\SerializedName("ciRecords")
      * @Serializer\XmlElement(cdata=false,namespace="http://isds.czechpoint.cz/v20")
      */
-    protected $records;
+    protected Collection $records;
 
     public function __construct()
     {
         $this->records = new ArrayCollection();
     }
 
-    /**
-     * @return int|null
-     */
     public function getCurrentCredit(): ?int
     {
         return $this->currentCredit;
     }
 
-    /**
-     * @return null|string
-     */
     public function getNotifyEmail(): ?string
     {
         return $this->notifyEmail;
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection<int, CreditRecord>
      */
-    public function getRecords(): ArrayCollection
+    public function getRecords(): Collection
     {
         return $this->records;
     }
-
 
 }
