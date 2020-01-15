@@ -25,41 +25,41 @@ class GetListOfReceivedMessages implements IRequest
      * @Serializer\SerializedName("p:dmFromTime")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected ?\DateTimeImmutable $listFrom = null;
+    protected ?\DateTimeImmutable $listFrom = NULL;
     /**
      * @Serializer\SkipWhenEmpty()
      * @Serializer\Type("DateTimeImmutable<'Y-m-d\TH:i:s.uP','Europe/Prague'>")
      * @Serializer\SerializedName("p:dmToTime")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected ?\DateTimeImmutable $listTo = null;
+    protected ?\DateTimeImmutable $listTo = NULL;
     /**
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("int")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmRecipientOrgUnitNum")
      */
-    protected ?int $recipientOrgUnitNum = null;
+    protected ?int $recipientOrgUnitNum = NULL;
     /**
      * @Serializer\Type("float")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmStatusFilter")
      */
-    protected float $statusFilter;
+    protected ?float $statusFilter = NULL;
     /**
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("int")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmOffset")
      */
-    protected ?int $offset = null;
+    protected ?int $offset = NULL;
     /**
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("int")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dmLimit")
      */
-    protected ?int $limit = null;
+    protected ?int $limit = NULL;
 
     public function getListFrom(): ?\DateTimeImmutable
     {

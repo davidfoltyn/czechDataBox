@@ -28,14 +28,14 @@ class DataBoxCreditInfo implements IRequest
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:ciFromDate")
      */
-    private ?\DateTimeImmutable $fromDate;
+    private ?\DateTimeImmutable $fromDate = null;
     /**
      * @Serializer\SkipWhenEmpty
      * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:ciTodate")
      */
-    private ?\DateTimeImmutable $toDate;
+    private ?\DateTimeImmutable $toDate = null;
 
     public function getFromDate(): ?\DateTimeImmutable
     {

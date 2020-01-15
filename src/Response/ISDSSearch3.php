@@ -16,13 +16,13 @@ use HelpPC\CzechDataBox\Traits\DataBoxStatus;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Class ISDSSearch2
+ * Class ISDSSearch3
  * @package HelpPC\CzechDataBox\Response
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
- * @Serializer\XmlRoot(name="p:ISDSSearch2Response", namespace="http://isds.czechpoint.cz/v20")
+ * @Serializer\XmlRoot(name="p:ISDSSearch3Response", namespace="http://isds.czechpoint.cz/v20")
  * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataBoxStatus>
  */
-class ISDSSearch2 extends IResponse
+class ISDSSearch3 extends IResponse
 {
 
     use DataBoxStatus;
@@ -73,7 +73,7 @@ class ISDSSearch2 extends IResponse
         return $this->totalCount;
     }
 
-    public function setTotalCount(?int $totalCount): ISDSSearch2
+    public function setTotalCount(?int $totalCount): ISDSSearch3
     {
         $this->totalCount = $totalCount;
         return $this;
@@ -84,7 +84,7 @@ class ISDSSearch2 extends IResponse
         return $this->currentCount;
     }
 
-    public function setCurrentCount(?int $currentCount): ISDSSearch2
+    public function setCurrentCount(?int $currentCount): ISDSSearch3
     {
         $this->currentCount = $currentCount;
         return $this;
@@ -95,7 +95,7 @@ class ISDSSearch2 extends IResponse
         return $this->position;
     }
 
-    public function setPosition(?int $position): ISDSSearch2
+    public function setPosition(?int $position): ISDSSearch3
     {
         $this->position = $position;
         return $this;
@@ -106,7 +106,7 @@ class ISDSSearch2 extends IResponse
         return $this->lastPage;
     }
 
-    public function setLastPage(?bool $lastPage): ISDSSearch2
+    public function setLastPage(?bool $lastPage): ISDSSearch3
     {
         $this->lastPage = $lastPage;
         return $this;
@@ -122,9 +122,9 @@ class ISDSSearch2 extends IResponse
 
     /**
      * @param ArrayCollection<int, DataBoxResult> $result
-     * @return ISDSSearch2
+     * @return ISDSSearch3
      */
-    public function setResult(ArrayCollection $result): ISDSSearch2
+    public function setResult(ArrayCollection $result): ISDSSearch3
     {
         $this->result = $result;
         return $this;

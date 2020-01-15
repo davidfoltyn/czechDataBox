@@ -53,14 +53,14 @@ class SearchDataBox extends Connector
      * fulltextove vyhledavani
      *
      * @param Account $account
-     * @param Request\ISDSSearch2 $input
-     * @return Response\ISDSSearch2
+     * @param Request\ISDSSearch3 $input
+     * @return Response\ISDSSearch3
      * @throws \HelpPC\CzechDataBox\Exception\ConnectionException
      * @throws \HelpPC\CzechDataBox\Exception\SystemExclusion
      */
-    public function ISDSSearch2(Account $account, Request\ISDSSearch2 $input): Response\ISDSSearch2
+    public function ISDSSearch3(Account $account, Request\ISDSSearch3 $input): Response\ISDSSearch3
     {
-        return $this->send($account, self::SEARCHWS, $input, Response\ISDSSearch2::class);
+        return $this->send($account, self::SEARCHWS, $input, Response\ISDSSearch3::class);
     }
 
     /**

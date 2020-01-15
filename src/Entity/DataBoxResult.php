@@ -37,7 +37,7 @@ class DataBoxResult
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:dbAddress")
      */
-    protected string $dataBoxAddress;
+    protected ?string $dataBoxAddress = NULL;
     /**
      * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
      * @Serializer\XmlElement(cdata=false)
@@ -89,12 +89,12 @@ class DataBoxResult
         return $this;
     }
 
-    public function getDataBoxAddress(): string
+    public function getDataBoxAddress(): ?string
     {
         return $this->dataBoxAddress;
     }
 
-    public function setDataBoxAddress(string $dataBoxAddress): DataBoxResult
+    public function setDataBoxAddress(?string $dataBoxAddress): DataBoxResult
     {
         $this->dataBoxAddress = $dataBoxAddress;
         return $this;

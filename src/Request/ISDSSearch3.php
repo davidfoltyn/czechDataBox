@@ -12,12 +12,12 @@ use HelpPC\CzechDataBox\IRequest;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Class ISDSSearch2
+ * Class ISDSSearch3
  * @package HelpPC\CzechDataBox\Request
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
- * @Serializer\XmlRoot(name="p:ISDSSearch2",namespace="http://isds.czechpoint.cz/v20")
+ * @Serializer\XmlRoot(name="p:ISDSSearch3",namespace="http://isds.czechpoint.cz/v20")
  */
-class ISDSSearch2 implements IRequest
+class ISDSSearch3 implements IRequest
 {
 
     /**
@@ -57,14 +57,14 @@ class ISDSSearch2 implements IRequest
      * @Serializer\XmlElement(cdata=false)
      * @Serializer\SerializedName("p:highlighting")
      */
-    private ?bool $highlighting;
+    private ?bool $highlighting = null;
 
     public function getSearchText(): string
     {
         return $this->searchText;
     }
 
-    public function setSearchText(string $searchText): ISDSSearch2
+    public function setSearchText(string $searchText): ISDSSearch3
     {
         $this->searchText = $searchText;
         return $this;
@@ -75,7 +75,7 @@ class ISDSSearch2 implements IRequest
         return $this->searchType;
     }
 
-    public function setSearchType(string $searchType): ISDSSearch2
+    public function setSearchType(string $searchType): ISDSSearch3
     {
         $this->searchType = $searchType;
         return $this;
@@ -86,7 +86,7 @@ class ISDSSearch2 implements IRequest
         return $this->searchScope;
     }
 
-    public function setSearchScope(string $searchScope): ISDSSearch2
+    public function setSearchScope(string $searchScope): ISDSSearch3
     {
         $this->searchScope = $searchScope;
         return $this;
@@ -97,7 +97,7 @@ class ISDSSearch2 implements IRequest
         return $this->page;
     }
 
-    public function setPage(int $page): ISDSSearch2
+    public function setPage(int $page): ISDSSearch3
     {
         $this->page = $page;
         return $this;
@@ -108,7 +108,7 @@ class ISDSSearch2 implements IRequest
         return $this->pageSize;
     }
 
-    public function setPageSize(int $pageSize): ISDSSearch2
+    public function setPageSize(int $pageSize): ISDSSearch3
     {
         $this->pageSize = $pageSize;
         return $this;
@@ -119,7 +119,7 @@ class ISDSSearch2 implements IRequest
         return $this->highlighting;
     }
 
-    public function setHighlighting(bool $highlighting): ISDSSearch2
+    public function setHighlighting(bool $highlighting): ISDSSearch3
     {
         $this->highlighting = $highlighting;
         return $this;

@@ -31,7 +31,7 @@ class MessageStatus
      * @Serializer\SerializedName("p:dmID")
      * @Serializer\XmlElement(cdata=false)
      */
-    protected ?string $dataMessageId;
+    protected ?string $dataMessageId = null;
 
     public function getStatus(): DataMessageStatus
     {

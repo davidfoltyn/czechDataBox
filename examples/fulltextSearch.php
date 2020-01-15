@@ -7,12 +7,12 @@ $ownerInfo = new \HelpPC\CzechDataBox\Entity\OwnerInfo();
 $ownerInfo->setDataBoxId(($type == 'ovm' ? $config['fo']['id'] : $config['ovm']['id']));
 /***********************************/
 $console->write('   - Probiha fulltextove vyhledavani');
-$input = new \HelpPC\CzechDataBox\Request\ISDSSearch2();
+$input = new \HelpPC\CzechDataBox\Request\ISDSSearch3();
 $input->setSearchText('Ministerstvo')
     ->setSearchType(\HelpPC\CzechDataBox\Utils\DataBoxStatus::TYPE_GENERAL)
     ->setSearchScope(\HelpPC\CzechDataBox\Utils\DataBoxStatus::SCOPE_OVM);
-/** @var \HelpPC\CzechDataBox\Response\ISDSSearch2 */
-$res = $manager->ISDSSearch2($account, $input);
+/** @var \HelpPC\CzechDataBox\Response\ISDSSearch3 */
+$res = $manager->ISDSSearch3($account, $input);
 if ($res->getStatus()->isOk()) {
     $console->writeln(' -> OK ' . sprintf('Bylo nalezeno celkem %d zaznamu a nacteno je %d', $res->getTotalCount(), $res->getCurrentCount()));
     /** @var \HelpPC\CzechDataBox\Entity\DataBoxResult $result */

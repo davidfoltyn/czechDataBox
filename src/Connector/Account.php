@@ -13,12 +13,12 @@ use HelpPC\CzechDataBox\Exception\BadOptionException;
 
 class Account
 {
-    private ?string $loginName;
-    private ?string $password;
-    private ?string $loginType;
-    private ?string $portalType;
-    private ?string $certFileName;
-    private ?string $passPhrase;
+    private ?string $loginName = NULL;
+    private ?string $password = NULL;
+    private ?string $loginType = NULL;
+    private ?string $portalType = NULL;
+    private ?string $certFileName = NULL;
+    private ?string $passPhrase = NULL;
 
     const LOGIN_NAME_PASSWORD = 'password';
     const LOGIN_CERT = 'cert';
