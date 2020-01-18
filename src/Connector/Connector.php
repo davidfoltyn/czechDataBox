@@ -159,8 +159,6 @@ abstract class Connector
             /** @var ResponseInterface $response */
             $response = $this->guzzleHttp->post($location, ['curl' => $curl, 'headers' => $headers, 'body' => $requestDocument->saveXml()]);
             $response = $response->getBody()->getContents();
-            file_put_contents('ddds.xml',$requestDocument->saveXml());
-            file_put_contents('ddd.xml',$response);
             $soapResponse = $this->getXmlDocument($response);
             $response = $this->getValueByXpath($soapResponse, '//' . $soapResponse->documentElement->prefix . ':Body');
             $soapResponse = NULL;
