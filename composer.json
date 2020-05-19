@@ -37,7 +37,7 @@
     "ext-dom": "*",
     "guzzlehttp/guzzle": "^6.3",
     "doctrine/collections": "^1.5",
-    "symfony/yaml": "^4.2",
+    "symfony/yaml": "^5.0",
     "helppc/serializer": "^2.0"
   },
   "autoload": {
