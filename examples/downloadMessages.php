@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 require_once __DIR__ . '/credentials.php';
-$console->writeln(sprintf('Komunikovat bude probihat vuci %s za datovou schranku s id %s typu %s ', ($account->getPortalType() == $account::ENV_PROD ? 'mojedatovaschranka.cz' : 'czebox.cz'), ISDS_ID, $type));
+$console->writeln(sprintf('Komunikovat bude probihat vuci %s za datovou schranku s id %s typu %s ', ($account->getPortalType()->equalsValue(\HelpPC\CzechDataBox\Enum\PortalTypeEnum::MOJEDATOVASCHRANKA) ? 'mojedatovaschranka.cz' : 'czebox.cz'), ISDS_ID, $type));
 
 
 $messageStatus = new \HelpPC\CzechDataBox\Request\GetMessageStateChanges();
 $messageStatus->setChangesFrom((new \DateTimeImmutable())->modify('-3 month'))
     ->setChangesTo((new \DateTimeImmutable()));
 
-$a = $manager->GetMessageStateChanges($account, $messageStatus);
+$a = $manager->getMessageStateChanges($account, $messageStatus);
 
 
 /** @var \HelpPC\CzechDataBox\Manager $manager */
@@ -17,7 +17,7 @@ $listSended->setStatusFilter(\HelpPC\CzechDataBox\Utils\MessageStatus::getDecEnt
     ->setListTo(new \DateTimeImmutable())
     ->setListFrom((new \DateTimeImmutable())->modify('-3 month'));
 
-$listSendedRes = $manager->GetListOfSentMessages($account, $listSended);
+$listSendedRes = $manager->getListOfSentMessages($account, $listSended);
 
 if ($listSendedRes->getStatus()->isOk()) {
     $console->writeln('Stahovani seznamu odeslanych DZ bylo dokonceno uspesne');
@@ -37,7 +37,7 @@ if ($listSendedRes->getStatus()->isOk()) {
         /*********************************************************/
         $console->write('             : stahnuti podepsane dorucenky');
         /** @var \HelpPC\CzechDataBox\Response\GetSignedDeliveryInfo $res */
-        $res = $manager->GetSignedDeliveryInfo($account, (new \HelpPC\CzechDataBox\Request\GetSignedDeliveryInfo())->setDataMessageId($record->getDataMessageId()));
+        $res = $manager->getSignedDeliveryInfo($account, (new \HelpPC\CzechDataBox\Request\GetSignedDeliveryInfo())->setDataMessageId($record->getDataMessageId()));
         if ($res->getStatus()->isOk()) {
             $console->writeln(' -> OK');
         } else {
@@ -46,7 +46,7 @@ if ($listSendedRes->getStatus()->isOk()) {
         /*********************************************************/
         $console->write('             : ziskani hashe DZ');
         /** @var \HelpPC\CzechDataBox\Response\VerifyMessage $res */
-        $res = $manager->VerifyMessage($account, (new \HelpPC\CzechDataBox\Request\VerifyMessage())->setDataMessageId($record->getDataMessageId()));
+        $res = $manager->verifyMessage($account, (new \HelpPC\CzechDataBox\Request\VerifyMessage())->setDataMessageId($record->getDataMessageId()));
         if ($res->getStatus()->isOk()) {
             $console->writeln(' -> ' . $res->getHash()->getAlgorithm() . ' = ' . $res->getHash()->getValue()->getContents());
         } else {
@@ -55,7 +55,7 @@ if ($listSendedRes->getStatus()->isOk()) {
         /*********************************************************/
         $console->write('             : stahovani podepsane DZ podepsane XML dle XADES');
         /** @var \HelpPC\CzechDataBox\Response\SignedSentMessageDownload $res */
-        $res = $manager->SignedSentMessageDownload($account, (new \HelpPC\CzechDataBox\Request\SignedSentMessageDownload())->setDataMessageId($record->getDataMessageId()));
+        $res = $manager->signedSentMessageDownload($account, (new \HelpPC\CzechDataBox\Request\SignedSentMessageDownload())->setDataMessageId($record->getDataMessageId()));
         $sentBinary = $res->getSignature();
         if ($res->getStatus()->isOk()) {
             $console->writeln(' -> OK ');
@@ -66,7 +66,7 @@ if ($listSendedRes->getStatus()->isOk()) {
         $console->write('             : kontrola spravnosti DZ');
         /** @var \HelpPC\CzechDataBox\Response\AuthenticateMessage $res */
         // kontrola spravnosti DZ, zasila se binarka
-        $res = $manager->AuthenticateMessage($account, (new \HelpPC\CzechDataBox\Request\AuthenticateMessage())->setDataMessage($sentBinary));
+        $res = $manager->authenticateMessage($account, (new \HelpPC\CzechDataBox\Request\AuthenticateMessage())->setDataMessage($sentBinary));
         if ($res->getStatus()->isOk()) {
             $console->writeln(' -> DZ ' . ($res->isAuthenticated() ? 'je' : 'neni') . ' OK');
         } else {
@@ -75,7 +75,7 @@ if ($listSendedRes->getStatus()->isOk()) {
         /*********************************************************/
         $console->write('             : potvrzeni doruceni');
         /** @var \HelpPC\CzechDataBox\Response\ConfirmDelivery $res */
-        $res = $manager->ConfirmDelivery($account, (new \HelpPC\CzechDataBox\Request\ConfirmDelivery())->setDataMessageId($record->getDataMessageId()));
+        $res = $manager->confirmDelivery($account, (new \HelpPC\CzechDataBox\Request\ConfirmDelivery())->setDataMessageId($record->getDataMessageId()));
         if ($res->getStatus()->isOk()) {
             $console->writeln(' -> OK');
         } else {
@@ -84,7 +84,7 @@ if ($listSendedRes->getStatus()->isOk()) {
         /*********************************************************/
         $console->write('             : prerazitkovani DZ');
         /** @var \HelpPC\CzechDataBox\Response\ResignISDSDocument $res */
-        $res = $manager->ResignISDSDocument($account, (new \HelpPC\CzechDataBox\Request\ResignISDSDocument())->setDocument($sentBinary));
+        $res = $manager->resignIsdsDocument($account, (new \HelpPC\CzechDataBox\Request\ResignISDSDocument())->setDocument($sentBinary));
         if ($res->getStatus()->isOk()) {
             $console->writeln(' -> OK');
         } else {
@@ -103,7 +103,7 @@ $listrec->setStatusFilter(\HelpPC\CzechDataBox\Utils\MessageStatus::getDecEntryF
     ->setListTo(new \DateTimeImmutable())
     ->setListFrom((new \DateTimeImmutable())->modify('-3 month'));
 
-$listrecRes = $manager->GetListOfReceivedMessages($account, $listrec);
+$listrecRes = $manager->getListOfReceivedMessages($account, $listrec);
 if ($listrecRes->getStatus()->isOk()) {
     $console->writeln('Stahovani seznamu prijatych DZ bylo dokonceno uspesne');
     $console->writeln(' - seznam obsahuje ' . $listrecRes->getRecord()->count() . ' DZ');
@@ -121,7 +121,7 @@ if ($listrecRes->getStatus()->isOk()) {
         /*********************************************************/
         $console->write('             : stahnuti podepsane dorucenky');
         /** @var \HelpPC\CzechDataBox\Response\GetSignedDeliveryInfo $res */
-        $res = $manager->GetSignedDeliveryInfo($account, (new \HelpPC\CzechDataBox\Request\GetSignedDeliveryInfo())->setDataMessageId($record->getDataMessageId()));
+        $res = $manager->getSignedDeliveryInfo($account, (new \HelpPC\CzechDataBox\Request\GetSignedDeliveryInfo())->setDataMessageId($record->getDataMessageId()));
         if ($res->getStatus()->isOk()) {
             $console->writeln(' -> OK');
         } else {
@@ -130,7 +130,7 @@ if ($listrecRes->getStatus()->isOk()) {
         /*********************************************************/
         $console->write('             : ziskani hashe DZ');
         /** @var \HelpPC\CzechDataBox\Response\VerifyMessage $res */
-        $res = $manager->VerifyMessage($account, (new \HelpPC\CzechDataBox\Request\VerifyMessage())->setDataMessageId($record->getDataMessageId()));
+        $res = $manager->verifyMessage($account, (new \HelpPC\CzechDataBox\Request\VerifyMessage())->setDataMessageId($record->getDataMessageId()));
         if ($res->getStatus()->isOk()) {
             $console->writeln(' -> ' . $res->getHash()->getAlgorithm() . ' = ' . $res->getHash()->getValue());
         } else {
@@ -139,7 +139,7 @@ if ($listrecRes->getStatus()->isOk()) {
         /*********************************************************/
         $console->write('             : stahnuti podepsane DZ');
         /** @var \HelpPC\CzechDataBox\Response\SignedMessageDownload $res */
-        $res = $manager->SignedMessageDownload($account, (new \HelpPC\CzechDataBox\Request\SignedMessageDownload())->setDataMessageId($record->getDataMessageId()));
+        $res = $manager->signedMessageDownload($account, (new \HelpPC\CzechDataBox\Request\SignedMessageDownload())->setDataMessageId($record->getDataMessageId()));
         $sentBinary = $res->getSignature();
         if ($res->getStatus()->isOk()) {
             $console->writeln(' -> OK');
@@ -150,7 +150,7 @@ if ($listrecRes->getStatus()->isOk()) {
         $console->write('             : kontrola spravnosti DZ');
         /** @var \HelpPC\CzechDataBox\Response\AuthenticateMessage $res */
         // kontrola spravnosti DZ, zasila se binarka
-        $res = $manager->AuthenticateMessage($account, (new \HelpPC\CzechDataBox\Request\AuthenticateMessage())->setDataMessage($sentBinary));
+        $res = $manager->authenticateMessage($account, (new \HelpPC\CzechDataBox\Request\AuthenticateMessage())->setDataMessage($sentBinary));
         if ($res->getStatus()->isOk()) {
             $console->writeln(' -> DZ ' . ($res->isAuthenticated() ? 'je' : 'neni') . ' OK');
         } else {
@@ -159,7 +159,7 @@ if ($listrecRes->getStatus()->isOk()) {
         /*********************************************************/
         $console->write('             : potvrzeni doruceni');
         /** @var \HelpPC\CzechDataBox\Response\ConfirmDelivery $res */
-        $res = $manager->ConfirmDelivery($account, (new \HelpPC\CzechDataBox\Request\ConfirmDelivery())->setDataMessageId($record->getDataMessageId()));
+        $res = $manager->confirmDelivery($account, (new \HelpPC\CzechDataBox\Request\ConfirmDelivery())->setDataMessageId($record->getDataMessageId()));
         if ($res->getStatus()->isOk()) {
             $console->writeln(' -> OK');
         } else {
@@ -168,7 +168,7 @@ if ($listrecRes->getStatus()->isOk()) {
         /*********************************************************/
         $console->write('             : prerazitkovani DZ');
         /** @var \HelpPC\CzechDataBox\Response\ResignISDSDocument $res */
-        $res = $manager->ResignISDSDocument($account, (new \HelpPC\CzechDataBox\Request\ResignISDSDocument())->setDocument($sentBinary));
+        $res = $manager->resignIsdsDocument($account, (new \HelpPC\CzechDataBox\Request\ResignISDSDocument())->setDocument($sentBinary));
         if ($res->getStatus()->isOk()) {
             $console->writeln(' -> OK');
         } else {
@@ -177,7 +177,7 @@ if ($listrecRes->getStatus()->isOk()) {
         /*********************************************************/
         $console->write('             : stahnuti obalky DZ');
         /** @var \HelpPC\CzechDataBox\Response\MessageEnvelopeDownload $res */
-        $res = $manager->MessageEnvelopeDownload($account, (new \HelpPC\CzechDataBox\Request\MessageEnvelopeDownload())->setDataMessageId($record->getDataMessageId()));
+        $res = $manager->messageEnvelopeDownload($account, (new \HelpPC\CzechDataBox\Request\MessageEnvelopeDownload())->setDataMessageId($record->getDataMessageId()));
         if ($res->getStatus()->isOk()) {
             $console->writeln(' -> OK');
         } else {
@@ -186,7 +186,7 @@ if ($listrecRes->getStatus()->isOk()) {
         /*********************************************************/
         $console->write('             : oznaceni za stazenou');
         /** @var \HelpPC\CzechDataBox\Response\MarkMessageAsDownloaded $res */
-        $res = $manager->MarkMessageAsDownloaded($account, (new \HelpPC\CzechDataBox\Request\MarkMessageAsDownloaded())->setDataMessageId($record->getDataMessageId()));
+        $res = $manager->markMessageAsDownloaded($account, (new \HelpPC\CzechDataBox\Request\MarkMessageAsDownloaded())->setDataMessageId($record->getDataMessageId()));
         if ($res->getStatus()->isOk()) {
             $console->writeln(' -> OK');
         } else {
@@ -196,7 +196,7 @@ if ($listrecRes->getStatus()->isOk()) {
         $console->write('             : stazeni zpravy');
         /** @var \HelpPC\CzechDataBox\Response\MessageDownload $res */
         // kontrola spravnosti DZ, zasila se binarka
-        $res = $manager->MessageDownload($account, (new \HelpPC\CzechDataBox\Request\MessageDownload())->setDataMessageId($record->getDataMessageId()));
+        $res = $manager->messageDownload($account, (new \HelpPC\CzechDataBox\Request\MessageDownload())->setDataMessageId($record->getDataMessageId()));
         if ($res->getStatus()->isOk()) {
             $console->writeln(' -> OK ' . sprintf(' obsahuje %d priloh o celkove velikosti %d kb', $res->getReturnedMessage()->getDataMessage()->getFiles()->count(), $res->getReturnedMessage()->getAttachmentSize()));
         } else {

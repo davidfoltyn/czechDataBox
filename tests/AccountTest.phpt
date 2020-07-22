@@ -5,8 +5,9 @@ use HelpPC\CzechDataBox\Connector\DataBox;
 use HelpPC\CzechDataBox\Connector\DataMessage;
 use HelpPC\CzechDataBox\Connector\Dispatcher;
 use HelpPC\CzechDataBox\Connector\SearchDataBox;
+use HelpPC\CzechDataBox\Enum\LoginTypeEnum;
+use HelpPC\CzechDataBox\Enum\PortalTypeEnum;
 use HelpPC\Serializer\SerializerFactory;
-use HelpPC\Test\FakeConnector;
 use Tester\Assert;
 use Tester\TestCase;
 
@@ -20,8 +21,8 @@ class AccountTest extends TestCase
         $account = new \HelpPC\CzechDataBox\Connector\Account();
         $account->setPassword(getenv('ISDS_PASSWORD'))
             ->setLoginName(getenv('ISDS_LOGIN'))
-            ->setLoginType(\HelpPC\CzechDataBox\Connector\Account::LOGIN_NAME_PASSWORD)
-            ->setPortalType(\HelpPC\CzechDataBox\Connector\Account::ENV_TEST);
+			->setLoginType(LoginTypeEnum::get(LoginTypeEnum::LOGIN_NAME_PASSWORD))
+			->setPortalType(PortalTypeEnum::get(PortalTypeEnum::CZEBOX));
         $client = new Dispatcher();
         $serializer = SerializerFactory::create();
         $dataBox = new DataBox($serializer, $client);

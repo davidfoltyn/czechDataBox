@@ -1,61 +1,65 @@
 {
-  "name": "helppc/czech-data-box",
-  "homepage": "http://helppc.cz",
-  "description": "PHP library for connection to Integrated system of data box (ISDS) in Czech republic",
-  "keywords": [
-    "isds",
-    "datovky",
-    "czech"
-  ],
-  "time": "2018-09-08",
-  "type": "library",
-  "support": {
-    "email": "info@tirus.cz",
-    "issues": "https://gitlab.com/helppc/czechDataBox/issues",
-    "source": "https://gitlab.com/helppc/czechDataBox/"
-  },
-  "license": [
-    "BSD-3-Clause",
-    "GPL-2.0",
-    "GPL-3.0"
-  ],
-  "authors": [
-    {
-      "name": "Tomas Kulhanek",
-      "homepage": "http://tirus.cz"
-    },
-    {
-      "name": "Vojtech Krupka"
-    }
-  ],
-  "require": {
-    "php": ">=7.4",
-    "ext-xml": "*",
-    "ext-mbstring": "*",
-    "ext-curl": "*",
-    "ext-openssl": "*",
-    "ext-dom": "*",
-    "guzzlehttp/guzzle": "^6.3",
-    "doctrine/collections": "^1.5",
-    "symfony/yaml": "^5.0",
-    "helppc/serializer": "^2.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "HelpPC\\CzechDataBox\\": "src/"
-    }
-  },
-  "suggest": {
-    "ext-curl": "for comunication with czech databox servers"
-  },
-  "require-dev": {
-    "nette/tester": "^2.0",
-    "phpstan/phpstan": "^0.12",
-    "phpstan/phpstan-nette": "^0.12"
-  },
-  "archive": {
-    "exclude": [
-      "/tests"
-    ]
-  }
+	"name": "helppc/czech-data-box",
+	"homepage": "http://helppc.cz",
+	"description": "PHP library for connection to Integrated system of data box (ISDS) in Czech republic",
+	"keywords": [
+		"isds",
+		"datovky",
+		"czech"
+	],
+	"time": "2018-09-08",
+	"type": "library",
+	"support": {
+		"email": "info@tirus.cz",
+		"issues": "https://gitlab.com/helppc/czechDataBox/issues",
+		"source": "https://gitlab.com/helppc/czechDataBox/"
+	},
+	"license": [
+		"BSD-3-Clause",
+		"GPL-2.0",
+		"GPL-3.0"
+	],
+	"authors": [
+		{
+			"name": "Tomas Kulhanek",
+			"homepage": "http://tirus.cz"
+		},
+		{
+			"name": "Vojtech Krupka"
+		}
+	],
+	"require": {
+		"php": ">=7.4",
+		"ext-xml": "*",
+		"ext-mbstring": "*",
+		"ext-curl": "*",
+		"ext-openssl": "*",
+		"ext-dom": "*",
+		"consistence/consistence": "^2.0",
+		"guzzlehttp/guzzle": "^6.3",
+		"doctrine/collections": "^1.5",
+		"symfony/yaml": "^5.0",
+		"helppc/serializer": "^2.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"HelpPC\\CzechDataBox\\": "src/"
+		}
+	},
+	"suggest": {
+		"ext-curl": "for comunication with czech databox servers"
+	},
+	"require-dev": {
+		"nette/tester": "^2.0",
+		"ninjify/nunjuck": "^0.3.0",
+		"ninjify/qa": "^0.10.0",
+		"phpstan/phpstan": "^0.12.0",
+		"phpstan/phpstan-nette": "^0.12",
+		"symfony/console": "^5.1"
+	},
+	"archive": {
+		"exclude": [
+			"/tests"
+		]
+	}
 }

@@ -4,6 +4,8 @@ use HelpPC\CzechDataBox\Connector\DataBox;
 use HelpPC\CzechDataBox\Connector\DataMessage;
 use HelpPC\CzechDataBox\Connector\Dispatcher;
 use HelpPC\CzechDataBox\Connector\SearchDataBox;
+use HelpPC\CzechDataBox\Enum\LoginTypeEnum;
+use HelpPC\CzechDataBox\Enum\PortalTypeEnum;
 use HelpPC\Serializer\SerializerFactory;
 
 if(file_exists('../../../autoload.php')){
@@ -13,24 +15,15 @@ if(file_exists('../../../autoload.php')){
 }
 \Doctrine\Common\Annotations\AnnotationRegistry::registerLoader('class_exists');
 $console = new \Symfony\Component\Console\Output\ConsoleOutput();
-if (file_exists(__DIR__ . '/../tests/config.local.yaml')) {
-    $config = \Symfony\Component\Yaml\Yaml::parse(file_get_contents(__DIR__ . '/../tests/config.local.yaml'));
-} else {
-    $config = \Symfony\Component\Yaml\Yaml::parse(file_get_contents(__DIR__ . '/../tests/config.yaml'));
-}
-$type = 'fo';
-define('ISDS_USER', $config[$type]['login']);
-define('ISDS_PASS', $config[$type]['password']);
-define('ISDS_ID', $config[$type]['id']);
+
 $account = new \HelpPC\CzechDataBox\Connector\Account();
-try {
-    $account->setPassword(ISDS_PASS)
-        ->setLoginName(ISDS_USER)
-        ->setLoginType(\HelpPC\CzechDataBox\Connector\Account::LOGIN_NAME_PASSWORD)
-        ->setPortalType(\HelpPC\CzechDataBox\Connector\Account::ENV_TEST);
-} catch (\HelpPC\CzechDataBox\Exception\BadOptionException $exception) {
-    die($exception->getMessage());
-}
+$account->setPortalType(\HelpPC\CzechDataBox\Enum\PortalTypeEnum::get(\HelpPC\CzechDataBox\Enum\PortalTypeEnum::CZEBOX));
+$account->setLoginType(\HelpPC\CzechDataBox\Enum\LoginTypeEnum::get(\HelpPC\CzechDataBox\Enum\LoginTypeEnum::LOGIN_HOSTED_SPIS));
+$account->setCertPrivateFileName(realpath(__DIR__ . '/../../../temp/systemovy.key.pem'));
+$account->setCertPublicFileName(realpath(__DIR__ . '/../../../temp/systemovy.crt.pem'));
+$account->setDataBoxId('unhfjvx');
+$account->setPassPhrase('Admin123');
+
 $client = new Dispatcher();
 $serializer = SerializerFactory::create();
 $dataBox = new DataBox($serializer, $client);

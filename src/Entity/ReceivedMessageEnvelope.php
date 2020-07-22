@@ -1,48 +1,49 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace HelpPC\CzechDataBox\Entity;
 
-use Doctrine\Common\Collections\Collection;
-use JMS\Serializer\Annotation as Serializer;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use HelpPC\CzechDataBox\Traits\DataMessageEnvelope;
 use HelpPC\CzechDataBox\Traits\GetMainFile;
+use JMS\Serializer\Annotation as Serializer;
 
 class ReceivedMessageEnvelope
 {
 
-    use GetMainFile;
-    use DataMessageEnvelope;
-    /**
-     * @var Collection<int, File>
-     * @Serializer\Type("ArrayCollection<HelpPC\CzechDataBox\Entity\File>")
-     * @Serializer\XmlList(entry="dmFile", inline=false,namespace="http://isds.czechpoint.cz/v20")
-     * @Serializer\SerializedName("dmFiles")
-     * @Serializer\XmlElement(cdata=false,namespace="http://isds.czechpoint.cz/v20")
-     */
-    protected Collection $files;
+	use GetMainFile;
+	use DataMessageEnvelope;
 
-    public function __construct()
-    {
-        $this->files = new ArrayCollection();
-    }
+	/**
+	 * @var Collection<int, File>
+	 * @Serializer\Type("ArrayCollection<HelpPC\CzechDataBox\Entity\File>")
+	 * @Serializer\XmlList(entry="dmFile", inline=false,namespace="http://isds.czechpoint.cz/v20")
+	 * @Serializer\SerializedName("dmFiles")
+	 * @Serializer\XmlElement(cdata=false,namespace="http://isds.czechpoint.cz/v20")
+	 */
+	protected Collection $files;
 
-    /**
-     * @return Collection<int, File>
-     */
-    public function getFiles(): Collection
-    {
-        return $this->files;
-    }
+	public function __construct()
+	{
+		$this->files = new ArrayCollection();
+	}
 
-    /**
-     * @param Collection<int, File> $files
-     * @return ReceivedMessageEnvelope
-     */
-    public function setFiles(Collection $files): ReceivedMessageEnvelope
-    {
-        $this->files = $files;
-        return $this;
-    }
+	/**
+	 * @return Collection<int, File>
+	 */
+	public function getFiles(): Collection
+	{
+		return $this->files;
+	}
+
+	/**
+	 * @param Collection<int, File> $files
+	 * @return ReceivedMessageEnvelope
+	 */
+	public function setFiles(Collection $files): ReceivedMessageEnvelope
+	{
+		$this->files = $files;
+		return $this;
+	}
+
 }

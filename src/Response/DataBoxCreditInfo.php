@@ -1,12 +1,6 @@
 <?php declare(strict_types=1);
-/**
- * Created by PhpStorm.
- * User: Tomas Kulhanek
- * Email: info@tirus.cz
- */
 
 namespace HelpPC\CzechDataBox\Response;
-
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -17,61 +11,61 @@ use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class DataBoxCreditInfo
- * @package HelpPC\CzechDataBox\Response
+ *
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\XmlRoot(name="p:DataBoxCreditInfoResponse", namespace="http://isds.czechpoint.cz/v20")
- * @phpstan-extends IResponse<\HelpPC\CzechDataBox\Entity\DataBoxStatus>
  */
 class DataBoxCreditInfo extends IResponse
 {
-    use DataBoxStatus;
 
-    /**
-     * @Serializer\Type("int")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:currentCredit")
-     */
-    protected ?int $currentCredit = null;
+	use DataBoxStatus;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:notifEmail")
-     */
-    protected ?string $notifyEmail = null;
+	/**
+	 * @Serializer\Type("int")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\SerializedName("p:currentCredit")
+	 */
+	protected ?int $currentCredit = null;
 
-    /**
-     * @var Collection<int, CreditRecord>
-     * @Serializer\Type("ArrayCollection<HelpPC\CzechDataBox\Entity\CreditRecord>")
-     * @Serializer\XmlList(entry="ciRecord", inline=false, namespace="http://isds.czechpoint.cz/v20")
-     * @Serializer\SerializedName("ciRecords")
-     * @Serializer\XmlElement(cdata=false,namespace="http://isds.czechpoint.cz/v20")
-     */
-    protected Collection $records;
+	/**
+	 * @Serializer\Type("string")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\SerializedName("p:notifEmail")
+	 */
+	protected ?string $notifyEmail = null;
 
-    public function __construct()
-    {
-        $this->records = new ArrayCollection();
-    }
+	/**
+	 * @var Collection<int, CreditRecord>
+	 * @Serializer\Type("ArrayCollection<HelpPC\CzechDataBox\Entity\CreditRecord>")
+	 * @Serializer\XmlList(entry="ciRecord", inline=false, namespace="http://isds.czechpoint.cz/v20")
+	 * @Serializer\SerializedName("ciRecords")
+	 * @Serializer\XmlElement(cdata=false,namespace="http://isds.czechpoint.cz/v20")
+	 */
+	protected Collection $records;
 
-    public function getCurrentCredit(): ?int
-    {
-        return $this->currentCredit;
-    }
+	public function __construct()
+	{
+		$this->records = new ArrayCollection();
+	}
 
-    public function getNotifyEmail(): ?string
-    {
-        return $this->notifyEmail;
-    }
+	public function getCurrentCredit(): ?int
+	{
+		return $this->currentCredit;
+	}
 
-    /**
-     * @return Collection<int, CreditRecord>
-     */
-    public function getRecords(): Collection
-    {
-        return $this->records;
-    }
+	public function getNotifyEmail(): ?string
+	{
+		return $this->notifyEmail;
+	}
+
+	/**
+	 * @return Collection<int, CreditRecord>
+	 */
+	public function getRecords(): Collection
+	{
+		return $this->records;
+	}
 
 }

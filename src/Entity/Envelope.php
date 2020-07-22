@@ -1,19 +1,13 @@
 <?php declare(strict_types=1);
-/**
- * Created by PhpStorm.
- * User: Tomas Kulhanek
- * Email: info@tirus.cz
- */
 
 namespace HelpPC\CzechDataBox\Entity;
-
 
 use HelpPC\CzechDataBox\Traits\DataMessageEnvelopeSub;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class Envelope
- * @package HelpPC\CzechDataBox\Entity
+ *
  * @Serializer\XmlRoot(name="p:dmEnvelope")
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  * @Serializer\AccessorOrder("custom",custom={
@@ -22,281 +16,286 @@ use JMS\Serializer\Annotation as Serializer;
 "annotation",
 "recipientRefNumber",
 "senderRefNumber",
-"recipientIdent","senderIdent","legalTitleLaw","legalTitleYear","legalTitleSect","legalTitlePar","legalTitlePoint","personalDelivery","allowSubstDelivery","OVM","publishOwnID"})
+"recipientIdent","senderIdent","legalTitleLaw","legalTitleYear","legalTitleSect","legalTitlePar","legalTitlePoint","personalDelivery","allowSubstDelivery","ovm","publishOwnId"})
  */
 class Envelope
 {
 
-    use DataMessageEnvelopeSub;
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SkipWhenEmpty()
-     * @Serializer\SerializedName("dmType")
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\XmlAttribute()
-     */
-    protected ?string $type = null;
-    /**
-     * @Serializer\Type("bool")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\SerializedName("p:dmAllowSubstDelivery")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?bool $allowSubstDelivery = null;
-    /**
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\Type("bool")
-     * @Serializer\SerializedName("p:dmOVM")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?bool $OVM = null;
-    /**
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\Type("bool")
-     * @Serializer\SerializedName("p:dmPublishOwnID")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?bool $publishOwnID = null;
+	use DataMessageEnvelopeSub;
 
-    public function getType(): string
-    {
-        return $this->type;
-    }
+	/**
+	 * @Serializer\Type("string")
+	 * @Serializer\SkipWhenEmpty()
+	 * @Serializer\SerializedName("dmType")
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\XmlAttribute()
+	 */
+	protected ?string $type = null;
 
-    public function setType(string $type): Envelope
-    {
-        $this->type = $type;
-        return $this;
-    }
+	/**
+	 * @Serializer\Type("bool")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\SerializedName("p:dmAllowSubstDelivery")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?bool $allowSubstDelivery = null;
 
-    public function getSenderOrgUnit(): ?string
-    {
-        return $this->senderOrgUnit;
-    }
+	/**
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\Type("bool")
+	 * @Serializer\SerializedName("p:dmOVM")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?bool $ovm = null;
 
-    public function setSenderOrgUnit(?string $senderOrgUnit): Envelope
-    {
-        $this->senderOrgUnit = $senderOrgUnit;
-        return $this;
-    }
+	/**
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\Type("bool")
+	 * @Serializer\SerializedName("p:dmPublishOwnID")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?bool $publishOwnId = null;
 
-    public function getSenderOrgUnitNum(): ?int
-    {
-        return $this->senderOrgUnitNum;
-    }
+	public function getType(): string
+	{
+		return $this->type;
+	}
 
-    public function setSenderOrgUnitNum(?int $senderOrgUnitNum): Envelope
-    {
-        $this->senderOrgUnitNum = $senderOrgUnitNum;
-        return $this;
-    }
+	public function setType(string $type): Envelope
+	{
+		$this->type = $type;
+		return $this;
+	}
 
-    public function getAnnotation(): ?string
-    {
-        return $this->annotation;
-    }
+	public function getSenderOrgUnit(): ?string
+	{
+		return $this->senderOrgUnit;
+	}
 
-    public function setAnnotation(?string $annotation): Envelope
-    {
-        $this->annotation = $annotation;
-        return $this;
-    }
+	public function setSenderOrgUnit(?string $senderOrgUnit): Envelope
+	{
+		$this->senderOrgUnit = $senderOrgUnit;
+		return $this;
+	}
 
-    public function getRecipientRefNumber(): ?string
-    {
-        return $this->recipientRefNumber;
-    }
+	public function getSenderOrgUnitNum(): ?int
+	{
+		return $this->senderOrgUnitNum;
+	}
 
-    public function setRecipientRefNumber(?string $recipientRefNumber): Envelope
-    {
-        $this->recipientRefNumber = $recipientRefNumber;
-        return $this;
-    }
+	public function setSenderOrgUnitNum(?int $senderOrgUnitNum): Envelope
+	{
+		$this->senderOrgUnitNum = $senderOrgUnitNum;
+		return $this;
+	}
 
-    public function getSenderRefNumber(): ?string
-    {
-        return $this->senderRefNumber;
-    }
+	public function getAnnotation(): ?string
+	{
+		return $this->annotation;
+	}
 
-    public function setSenderRefNumber(?string $senderRefNumber): Envelope
-    {
-        $this->senderRefNumber = $senderRefNumber;
-        return $this;
-    }
+	public function setAnnotation(?string $annotation): Envelope
+	{
+		$this->annotation = $annotation;
+		return $this;
+	}
 
-    public function getRecipientIdent(): ?string
-    {
-        return $this->recipientIdent;
-    }
+	public function getRecipientRefNumber(): ?string
+	{
+		return $this->recipientRefNumber;
+	}
 
-    public function setRecipientIdent(?string $recipientIdent): Envelope
-    {
-        $this->recipientIdent = $recipientIdent;
-        return $this;
-    }
+	public function setRecipientRefNumber(?string $recipientRefNumber): Envelope
+	{
+		$this->recipientRefNumber = $recipientRefNumber;
+		return $this;
+	}
 
-    public function getSenderIdent(): ?string
-    {
-        return $this->senderIdent;
-    }
+	public function getSenderRefNumber(): ?string
+	{
+		return $this->senderRefNumber;
+	}
 
-    public function setSenderIdent(?string $senderIdent): Envelope
-    {
-        $this->senderIdent = $senderIdent;
-        return $this;
-    }
+	public function setSenderRefNumber(?string $senderRefNumber): Envelope
+	{
+		$this->senderRefNumber = $senderRefNumber;
+		return $this;
+	}
 
-    public function getLegalTitleLaw(): ?int
-    {
-        return $this->legalTitleLaw;
-    }
+	public function getRecipientIdent(): ?string
+	{
+		return $this->recipientIdent;
+	}
 
-    public function setLegalTitleLaw(?int $legalTitleLaw): Envelope
-    {
-        $this->legalTitleLaw = $legalTitleLaw;
-        return $this;
-    }
+	public function setRecipientIdent(?string $recipientIdent): Envelope
+	{
+		$this->recipientIdent = $recipientIdent;
+		return $this;
+	}
 
-    public function getLegalTitleYear(): ?int
-    {
-        return $this->legalTitleYear;
-    }
+	public function getSenderIdent(): ?string
+	{
+		return $this->senderIdent;
+	}
 
-    public function setLegalTitleYear(?int $legalTitleYear): Envelope
-    {
-        $this->legalTitleYear = $legalTitleYear;
-        return $this;
-    }
+	public function setSenderIdent(?string $senderIdent): Envelope
+	{
+		$this->senderIdent = $senderIdent;
+		return $this;
+	}
 
-    public function getLegalTitleSect(): ?string
-    {
-        return $this->legalTitleSect;
-    }
+	public function getLegalTitleLaw(): ?int
+	{
+		return $this->legalTitleLaw;
+	}
 
-    public function setLegalTitleSect(?string $legalTitleSect): Envelope
-    {
-        $this->legalTitleSect = $legalTitleSect;
-        return $this;
-    }
+	public function setLegalTitleLaw(?int $legalTitleLaw): Envelope
+	{
+		$this->legalTitleLaw = $legalTitleLaw;
+		return $this;
+	}
 
-    public function getLegalTitlePar(): ?string
-    {
-        return $this->legalTitlePar;
-    }
+	public function getLegalTitleYear(): ?int
+	{
+		return $this->legalTitleYear;
+	}
 
-    public function setLegalTitlePar(?string $legalTitlePar): Envelope
-    {
-        $this->legalTitlePar = $legalTitlePar;
-        return $this;
-    }
+	public function setLegalTitleYear(?int $legalTitleYear): Envelope
+	{
+		$this->legalTitleYear = $legalTitleYear;
+		return $this;
+	}
 
-    public function getLegalTitlePoint(): ?string
-    {
-        return $this->legalTitlePoint;
-    }
+	public function getLegalTitleSect(): ?string
+	{
+		return $this->legalTitleSect;
+	}
 
-    public function setLegalTitlePoint(?string $legalTitlePoint): Envelope
-    {
-        $this->legalTitlePoint = $legalTitlePoint;
-        return $this;
-    }
+	public function setLegalTitleSect(?string $legalTitleSect): Envelope
+	{
+		$this->legalTitleSect = $legalTitleSect;
+		return $this;
+	}
 
-    public function getPersonalDelivery(): ?bool
-    {
-        return $this->personalDelivery;
-    }
+	public function getLegalTitlePar(): ?string
+	{
+		return $this->legalTitlePar;
+	}
 
-    public function setPersonalDelivery(?bool $personalDelivery): Envelope
-    {
-        $this->personalDelivery = $personalDelivery;
-        return $this;
-    }
+	public function setLegalTitlePar(?string $legalTitlePar): Envelope
+	{
+		$this->legalTitlePar = $legalTitlePar;
+		return $this;
+	}
 
-    public function getAllowSubstDelivery(): ?bool
-    {
-        return $this->allowSubstDelivery;
-    }
+	public function getLegalTitlePoint(): ?string
+	{
+		return $this->legalTitlePoint;
+	}
 
-    public function setAllowSubstDelivery(?bool $allowSubstDelivery): Envelope
-    {
-        $this->allowSubstDelivery = $allowSubstDelivery;
-        return $this;
-    }
+	public function setLegalTitlePoint(?string $legalTitlePoint): Envelope
+	{
+		$this->legalTitlePoint = $legalTitlePoint;
+		return $this;
+	}
 
-    /**
-     * Schránky typu FO, PO a PFO, které mají povoleno vystupovat jako OVM (podle § 5a) musejí již při vytváření DZ určit, v jakém režimu (OVM x ne-OVM) odesílají. Význam to má z procesních (a účetních) důvodů.
-     * @return bool|null
-     */
-    public function getOVM(): ?bool
-    {
-        return $this->OVM;
-    }
+	public function getPersonalDelivery(): ?bool
+	{
+		return $this->personalDelivery;
+	}
 
-    /**
-     * Schránky typu FO, PO a PFO, které mají povoleno vystupovat jako OVM (podle § 5a) musejí již při vytváření DZ určit, v jakém režimu (OVM x ne-OVM) odesílají. Význam to má z procesních (a účetních) důvodů.
-     * @param bool|null $OVM
-     * @return Envelope
-     */
-    public function setOVM(?bool $OVM): Envelope
-    {
-        $this->OVM = $OVM;
-        return $this;
-    }
+	public function setPersonalDelivery(?bool $personalDelivery): Envelope
+	{
+		$this->personalDelivery = $personalDelivery;
+		return $this;
+	}
 
-    public function getPublishOwnID(): ?bool
-    {
-        return $this->publishOwnID;
-    }
+	public function getAllowSubstDelivery(): ?bool
+	{
+		return $this->allowSubstDelivery;
+	}
 
-    public function setPublishOwnID(?bool $publishOwnID): Envelope
-    {
-        $this->publishOwnID = $publishOwnID;
-        return $this;
-    }
+	public function setAllowSubstDelivery(?bool $allowSubstDelivery): Envelope
+	{
+		$this->allowSubstDelivery = $allowSubstDelivery;
+		return $this;
+	}
 
-    public function getRecipientID(): string
-    {
-        return $this->recipientID;
-    }
+	/**
+	 * Schránky typu FO, PO a PFO, které mají povoleno vystupovat jako OVM (podle § 5a) musejí již při vytváření DZ určit, v jakém režimu (OVM x ne-OVM) odesílají. Význam to má z procesních (a účetních) důvodů.
+	 *
+	 * @return bool|null
+	 */
+	public function getOvm(): ?bool
+	{
+		return $this->ovm;
+	}
 
-    public function setRecipientID(string $recipientID): Envelope
-    {
-        $this->recipientID = $recipientID;
-        return $this;
-    }
+	/**
+	 * Schránky typu FO, PO a PFO, které mají povoleno vystupovat jako OVM (podle § 5a) musejí již při vytváření DZ určit, v jakém režimu (OVM x ne-OVM) odesílají. Význam to má z procesních (a účetních) důvodů.
+	 *
+	 * @param bool|null $ovm
+	 * @return Envelope
+	 */
+	public function setOvm(?bool $ovm): Envelope
+	{
+		$this->ovm = $ovm;
+		return $this;
+	}
 
-    public function getRecipientOrgUnit(): ?string
-    {
-        return $this->recipientOrgUnit;
-    }
+	public function getPublishOwnId(): ?bool
+	{
+		return $this->publishOwnId;
+	}
 
-    public function setRecipientOrgUnit(?string $recipientOrgUnit): Envelope
-    {
-        $this->recipientOrgUnit = $recipientOrgUnit;
-        return $this;
-    }
+	public function setPublishOwnId(?bool $publishOwnId): Envelope
+	{
+		$this->publishOwnId = $publishOwnId;
+		return $this;
+	}
 
-    public function getRecipientOrgUnitNum(): ?int
-    {
-        return $this->recipientOrgUnitNum;
-    }
+	public function getRecipientId(): string
+	{
+		return $this->recipientId;
+	}
 
-    public function setRecipientOrgUnitNum(?int $recipientOrgUnitNum): Envelope
-    {
-        $this->recipientOrgUnitNum = $recipientOrgUnitNum;
-        return $this;
-    }
+	public function setRecipientId(string $recipientId): Envelope
+	{
+		$this->recipientId = $recipientId;
+		return $this;
+	}
 
-    public function getToHands(): ?string
-    {
-        return $this->toHands;
-    }
+	public function getRecipientOrgUnit(): ?string
+	{
+		return $this->recipientOrgUnit;
+	}
 
-    public function setToHands(?string $toHands): Envelope
-    {
-        $this->toHands = $toHands;
-        return $this;
-    }
+	public function setRecipientOrgUnit(?string $recipientOrgUnit): Envelope
+	{
+		$this->recipientOrgUnit = $recipientOrgUnit;
+		return $this;
+	}
 
+	public function getRecipientOrgUnitNum(): ?int
+	{
+		return $this->recipientOrgUnitNum;
+	}
+
+	public function setRecipientOrgUnitNum(?int $recipientOrgUnitNum): Envelope
+	{
+		$this->recipientOrgUnitNum = $recipientOrgUnitNum;
+		return $this;
+	}
+
+	public function getToHands(): ?string
+	{
+		return $this->toHands;
+	}
+
+	public function setToHands(?string $toHands): Envelope
+	{
+		$this->toHands = $toHands;
+		return $this;
+	}
 
 }

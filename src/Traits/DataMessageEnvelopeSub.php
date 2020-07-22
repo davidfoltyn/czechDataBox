@@ -1,342 +1,352 @@
 <?php declare(strict_types=1);
-/**
- * Created by PhpStorm.
- * User: Tomas Kulhanek
- * Email: info@tirus.cz
- */
 
 namespace HelpPC\CzechDataBox\Traits;
-
 
 use JMS\Serializer\Annotation as Serializer;
 
 trait DataMessageEnvelopeSub
 {
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\SerializedName("p:dmSenderOrgUnit")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?string $senderOrgUnit = null;
-    /**
-     * @Serializer\Type("int")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\SerializedName("p:dmSenderOrgUnitNum")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?int $senderOrgUnitNum = null;
-    /**
-     * @Serializer\SkipWhenEmpty()
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("p:dbIDRecipient")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?string $recipientID = null;
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\SerializedName("p:dmRecipientOrgUnit")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?string $recipientOrgUnit = null;
-    /**
-     * @Serializer\Type("int")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\SerializedName("p:dmRecipientOrgUnitNum")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?int $recipientOrgUnitNum = null;
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\SerializedName("p:dmToHands")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?string $toHands = null;
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\SerializedName("p:dmAnnotation")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?string $annotation = null;
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\SerializedName("p:dmRecipientRefNumber")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?string $recipientRefNumber = null;
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\SerializedName("p:dmSenderRefNumber")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?string $senderRefNumber = null;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\SerializedName("p:dmRecipientIdent")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?string $recipientIdent = null;
+	/**
+	 * @Serializer\Type("string")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\SerializedName("p:dmSenderOrgUnit")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?string $senderOrgUnit = null;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\SerializedName("p:dmSenderIdent")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?string $senderIdent = null;
-    /**
-     * @Serializer\Type("int")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\SerializedName("p:dmLegalTitleLaw")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?int $legalTitleLaw = null;
-    /**
-     * @Serializer\Type("int")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\SerializedName("p:dmLegalTitleYear")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?int $legalTitleYear = null;
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\SerializedName("p:dmLegalTitleSect")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?string $legalTitleSect = null;
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\SerializedName("p:dmLegalTitlePar")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?string $legalTitlePar = null;
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\SerializedName("p:dmLegalTitlePoint")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?string $legalTitlePoint = null;
-    /**
-     * @Serializer\Type("bool")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\SerializedName("p:dmPersonalDelivery")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?bool $personalDelivery = null;
-    /**
-     * @Serializer\Type("bool")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\SerializedName("p:dmAllowSubstDelivery")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected ?bool $allowSubstDelivery = null;
+	/**
+	 * @Serializer\Type("int")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\SerializedName("p:dmSenderOrgUnitNum")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?int $senderOrgUnitNum = null;
 
-    public function getSenderOrgUnit(): ?string
-    {
-        return $this->senderOrgUnit;
-    }
+	/**
+	 * @Serializer\SkipWhenEmpty()
+	 * @Serializer\Type("string")
+	 * @Serializer\SerializedName("p:dbIDRecipient")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?string $recipientId = null;
 
-    public function setSenderOrgUnit(?string $senderOrgUnit): self
-    {
-        $this->senderOrgUnit = $senderOrgUnit;
-        return $this;
-    }
+	/**
+	 * @Serializer\Type("string")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\SerializedName("p:dmRecipientOrgUnit")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?string $recipientOrgUnit = null;
 
-    public function getSenderOrgUnitNum(): ?int
-    {
-        return $this->senderOrgUnitNum;
-    }
+	/**
+	 * @Serializer\Type("int")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\SerializedName("p:dmRecipientOrgUnitNum")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?int $recipientOrgUnitNum = null;
 
-    public function setSenderOrgUnitNum(?int $senderOrgUnitNum): self
-    {
-        $this->senderOrgUnitNum = $senderOrgUnitNum;
-        return $this;
-    }
+	/**
+	 * @Serializer\Type("string")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\SerializedName("p:dmToHands")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?string $toHands = null;
 
-    public function getRecipientID(): string
-    {
-        return $this->recipientID;
-    }
+	/**
+	 * @Serializer\Type("string")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\SerializedName("p:dmAnnotation")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?string $annotation = null;
 
-    public function setRecipientID(string $recipientID): self
-    {
-        $this->recipientID = $recipientID;
-        return $this;
-    }
+	/**
+	 * @Serializer\Type("string")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\SerializedName("p:dmRecipientRefNumber")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?string $recipientRefNumber = null;
 
-    public function getRecipientOrgUnit(): ?string
-    {
-        return $this->recipientOrgUnit;
-    }
+	/**
+	 * @Serializer\Type("string")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\SerializedName("p:dmSenderRefNumber")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?string $senderRefNumber = null;
 
-    public function setRecipientOrgUnit(?string $recipientOrgUnit): self
-    {
-        $this->recipientOrgUnit = $recipientOrgUnit;
-        return $this;
-    }
+	/**
+	 * @Serializer\Type("string")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\SerializedName("p:dmRecipientIdent")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?string $recipientIdent = null;
 
-    public function getRecipientOrgUnitNum(): ?int
-    {
-        return $this->recipientOrgUnitNum;
-    }
+	/**
+	 * @Serializer\Type("string")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\SerializedName("p:dmSenderIdent")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?string $senderIdent = null;
 
-    public function setRecipientOrgUnitNum(?int $recipientOrgUnitNum): self
-    {
-        $this->recipientOrgUnitNum = $recipientOrgUnitNum;
-        return $this;
-    }
+	/**
+	 * @Serializer\Type("int")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\SerializedName("p:dmLegalTitleLaw")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?int $legalTitleLaw = null;
 
-    public function getToHands(): ?string
-    {
-        return $this->toHands;
-    }
+	/**
+	 * @Serializer\Type("int")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\SerializedName("p:dmLegalTitleYear")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?int $legalTitleYear = null;
 
-    public function setToHands(?string $toHands): self
-    {
-        $this->toHands = $toHands;
-        return $this;
-    }
+	/**
+	 * @Serializer\Type("string")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\SerializedName("p:dmLegalTitleSect")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?string $legalTitleSect = null;
 
-    public function getAnnotation(): ?string
-    {
-        return $this->annotation;
-    }
+	/**
+	 * @Serializer\Type("string")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\SerializedName("p:dmLegalTitlePar")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?string $legalTitlePar = null;
 
-    public function setAnnotation(?string $annotation): self
-    {
-        $this->annotation = $annotation;
-        return $this;
-    }
+	/**
+	 * @Serializer\Type("string")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\SerializedName("p:dmLegalTitlePoint")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?string $legalTitlePoint = null;
 
-    public function getRecipientRefNumber(): ?string
-    {
-        return $this->recipientRefNumber;
-    }
+	/**
+	 * @Serializer\Type("bool")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\SerializedName("p:dmPersonalDelivery")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?bool $personalDelivery = null;
 
-    public function setRecipientRefNumber(?string $recipientRefNumber): self
-    {
-        $this->recipientRefNumber = $recipientRefNumber;
-        return $this;
-    }
+	/**
+	 * @Serializer\Type("bool")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\SerializedName("p:dmAllowSubstDelivery")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected ?bool $allowSubstDelivery = null;
 
-    public function getSenderRefNumber(): ?string
-    {
-        return $this->senderRefNumber;
-    }
+	public function getSenderOrgUnit(): ?string
+	{
+		return $this->senderOrgUnit;
+	}
 
-    public function setSenderRefNumber(?string $senderRefNumber): self
-    {
-        $this->senderRefNumber = $senderRefNumber;
-        return $this;
-    }
+	public function setSenderOrgUnit(?string $senderOrgUnit): self
+	{
+		$this->senderOrgUnit = $senderOrgUnit;
+		return $this;
+	}
 
-    public function getRecipientIdent(): ?string
-    {
-        return $this->recipientIdent;
-    }
+	public function getSenderOrgUnitNum(): ?int
+	{
+		return $this->senderOrgUnitNum;
+	}
 
-    public function setRecipientIdent(?string $recipientIdent): self
-    {
-        $this->recipientIdent = $recipientIdent;
-        return $this;
-    }
+	public function setSenderOrgUnitNum(?int $senderOrgUnitNum): self
+	{
+		$this->senderOrgUnitNum = $senderOrgUnitNum;
+		return $this;
+	}
 
-    public function getSenderIdent(): ?string
-    {
-        return $this->senderIdent;
-    }
+	public function getRecipientId(): string
+	{
+		return $this->recipientId;
+	}
 
-    public function setSenderIdent(?string $senderIdent): self
-    {
-        $this->senderIdent = $senderIdent;
-        return $this;
-    }
+	public function setRecipientId(string $recipientId): self
+	{
+		$this->recipientId = $recipientId;
+		return $this;
+	}
 
-    public function getLegalTitleLaw(): ?int
-    {
-        return $this->legalTitleLaw;
-    }
+	public function getRecipientOrgUnit(): ?string
+	{
+		return $this->recipientOrgUnit;
+	}
 
-    public function setLegalTitleLaw(?int $legalTitleLaw): self
-    {
-        $this->legalTitleLaw = $legalTitleLaw;
-        return $this;
-    }
+	public function setRecipientOrgUnit(?string $recipientOrgUnit): self
+	{
+		$this->recipientOrgUnit = $recipientOrgUnit;
+		return $this;
+	}
 
-    public function getLegalTitleYear(): ?int
-    {
-        return $this->legalTitleYear;
-    }
+	public function getRecipientOrgUnitNum(): ?int
+	{
+		return $this->recipientOrgUnitNum;
+	}
 
-    public function setLegalTitleYear(?int $legalTitleYear): self
-    {
-        $this->legalTitleYear = $legalTitleYear;
-        return $this;
-    }
+	public function setRecipientOrgUnitNum(?int $recipientOrgUnitNum): self
+	{
+		$this->recipientOrgUnitNum = $recipientOrgUnitNum;
+		return $this;
+	}
 
-    public function getLegalTitleSect(): ?string
-    {
-        return $this->legalTitleSect;
-    }
+	public function getToHands(): ?string
+	{
+		return $this->toHands;
+	}
 
-    public function setLegalTitleSect(?string $legalTitleSect): self
-    {
-        $this->legalTitleSect = $legalTitleSect;
-        return $this;
-    }
+	public function setToHands(?string $toHands): self
+	{
+		$this->toHands = $toHands;
+		return $this;
+	}
 
-    public function getLegalTitlePar(): ?string
-    {
-        return $this->legalTitlePar;
-    }
+	public function getAnnotation(): ?string
+	{
+		return $this->annotation;
+	}
 
-    public function setLegalTitlePar(?string $legalTitlePar): self
-    {
-        $this->legalTitlePar = $legalTitlePar;
-        return $this;
-    }
+	public function setAnnotation(?string $annotation): self
+	{
+		$this->annotation = $annotation;
+		return $this;
+	}
 
-    public function getLegalTitlePoint(): ?string
-    {
-        return $this->legalTitlePoint;
-    }
+	public function getRecipientRefNumber(): ?string
+	{
+		return $this->recipientRefNumber;
+	}
 
-    public function setLegalTitlePoint(?string $legalTitlePoint): self
-    {
-        $this->legalTitlePoint = $legalTitlePoint;
-        return $this;
-    }
+	public function setRecipientRefNumber(?string $recipientRefNumber): self
+	{
+		$this->recipientRefNumber = $recipientRefNumber;
+		return $this;
+	}
 
-    public function getPersonalDelivery(): ?bool
-    {
-        return $this->personalDelivery;
-    }
+	public function getSenderRefNumber(): ?string
+	{
+		return $this->senderRefNumber;
+	}
 
-    public function setPersonalDelivery(?bool $personalDelivery): self
-    {
-        $this->personalDelivery = $personalDelivery;
-        return $this;
-    }
+	public function setSenderRefNumber(?string $senderRefNumber): self
+	{
+		$this->senderRefNumber = $senderRefNumber;
+		return $this;
+	}
 
-    public function getAllowSubstDelivery(): ?bool
-    {
-        return $this->allowSubstDelivery;
-    }
+	public function getRecipientIdent(): ?string
+	{
+		return $this->recipientIdent;
+	}
 
-    public function setAllowSubstDelivery(?bool $allowSubstDelivery): self
-    {
-        $this->allowSubstDelivery = $allowSubstDelivery;
-        return $this;
-    }
+	public function setRecipientIdent(?string $recipientIdent): self
+	{
+		$this->recipientIdent = $recipientIdent;
+		return $this;
+	}
+
+	public function getSenderIdent(): ?string
+	{
+		return $this->senderIdent;
+	}
+
+	public function setSenderIdent(?string $senderIdent): self
+	{
+		$this->senderIdent = $senderIdent;
+		return $this;
+	}
+
+	public function getLegalTitleLaw(): ?int
+	{
+		return $this->legalTitleLaw;
+	}
+
+	public function setLegalTitleLaw(?int $legalTitleLaw): self
+	{
+		$this->legalTitleLaw = $legalTitleLaw;
+		return $this;
+	}
+
+	public function getLegalTitleYear(): ?int
+	{
+		return $this->legalTitleYear;
+	}
+
+	public function setLegalTitleYear(?int $legalTitleYear): self
+	{
+		$this->legalTitleYear = $legalTitleYear;
+		return $this;
+	}
+
+	public function getLegalTitleSect(): ?string
+	{
+		return $this->legalTitleSect;
+	}
+
+	public function setLegalTitleSect(?string $legalTitleSect): self
+	{
+		$this->legalTitleSect = $legalTitleSect;
+		return $this;
+	}
+
+	public function getLegalTitlePar(): ?string
+	{
+		return $this->legalTitlePar;
+	}
+
+	public function setLegalTitlePar(?string $legalTitlePar): self
+	{
+		$this->legalTitlePar = $legalTitlePar;
+		return $this;
+	}
+
+	public function getLegalTitlePoint(): ?string
+	{
+		return $this->legalTitlePoint;
+	}
+
+	public function setLegalTitlePoint(?string $legalTitlePoint): self
+	{
+		$this->legalTitlePoint = $legalTitlePoint;
+		return $this;
+	}
+
+	public function getPersonalDelivery(): ?bool
+	{
+		return $this->personalDelivery;
+	}
+
+	public function setPersonalDelivery(?bool $personalDelivery): self
+	{
+		$this->personalDelivery = $personalDelivery;
+		return $this;
+	}
+
+	public function getAllowSubstDelivery(): ?bool
+	{
+		return $this->allowSubstDelivery;
+	}
+
+	public function setAllowSubstDelivery(?bool $allowSubstDelivery): self
+	{
+		$this->allowSubstDelivery = $allowSubstDelivery;
+		return $this;
+	}
 
 }

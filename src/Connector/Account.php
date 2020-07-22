@@ -1,104 +1,115 @@
 <?php declare(strict_types=1);
-/**
- * Created by PhpStorm.
- * User: tomas
- * Date: 06.01.2018
- * Time: 23:13
- */
 
 namespace HelpPC\CzechDataBox\Connector;
 
-
-use HelpPC\CzechDataBox\Exception\BadOptionException;
+use HelpPC\CzechDataBox\Enum\LoginTypeEnum;
+use HelpPC\CzechDataBox\Enum\PortalTypeEnum;
 
 class Account
 {
-    private ?string $loginName = NULL;
-    private ?string $password = NULL;
-    private ?string $loginType = NULL;
-    private ?string $portalType = NULL;
-    private ?string $certFileName = NULL;
-    private ?string $passPhrase = NULL;
 
-    const LOGIN_NAME_PASSWORD = 'password';
-    const LOGIN_CERT = 'cert';
-    const LOGIN_HOSTED_SPIS = 'hosted';
+	private ?string $loginName = null;
 
-    const ENV_PROD = 'mojedatovaschranka.cz';
-    const ENV_TEST = 'czebox.cz';
-    const ENV_FAKE = 'isds.helppc.cz';
+	private ?string $dataBoxId = null;
 
-    public function getLoginName(): ?string
-    {
-        return $this->loginName;
-    }
+	private ?string $password = null;
 
-    public function setLoginName(string $loginName): Account
-    {
-        $this->loginName = $loginName;
-        return $this;
-    }
+	private LoginTypeEnum $loginType;
 
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
+	private PortalTypeEnum $portalType;
 
-    public function setPassword(string $password): Account
-    {
-        $this->password = $password;
-        return $this;
-    }
+	private ?string $certPublicFileName = null;
 
-    public function getLoginType(): ?string
-    {
-        return $this->loginType;
-    }
+	private ?string $certPrivateFileName = null;
 
-    public function setLoginType(string $loginType): Account
-    {
-        if (!in_array($loginType, [self::LOGIN_CERT, self::LOGIN_HOSTED_SPIS, self::LOGIN_NAME_PASSWORD])) {
-            throw  new BadOptionException(sprintf('The value %s is not allowed. Use one of Account::LOGIN_CERT Account::LOGIN_HOSTED_SPIS Account::LOGIN_NAME_PASSWORD', $loginType));
-        }
-        $this->loginType = $loginType;
-        return $this;
-    }
+	private ?string $passPhrase = null;
 
-    public function getPortalType(): ?string
-    {
-        return $this->portalType;
-    }
+	public function getLoginName(): ?string
+	{
+		return $this->loginName;
+	}
 
-    public function setPortalType(string $portalType): Account
-    {
-        if (!in_array($portalType, [self::ENV_PROD, self::ENV_TEST, self::ENV_FAKE])) {
-            throw  new BadOptionException(sprintf('The value %s is not allowed. Use one of Account::ENV_PROD Account::ENV_TEST', $portalType));
-        }
-        $this->portalType = $portalType;
-        return $this;
-    }
+	public function setLoginName(string $loginName): Account
+	{
+		$this->loginName = $loginName;
+		return $this;
+	}
 
-    public function getCertFileName(): ?string
-    {
-        return $this->certFileName;
-    }
+	public function getPassword(): ?string
+	{
+		return $this->password;
+	}
 
-    public function setCertFileName(string $certFileName): Account
-    {
-        $this->certFileName = $certFileName;
-        return $this;
-    }
+	public function setPassword(string $password): Account
+	{
+		$this->password = $password;
+		return $this;
+	}
 
-    public function getPassPhrase(): ?string
-    {
-        return $this->passPhrase;
-    }
+	public function getLoginType(): LoginTypeEnum
+	{
+		return $this->loginType;
+	}
 
-    public function setPassPhrase(string $passPhrase): Account
-    {
-        $this->passPhrase = $passPhrase;
-        return $this;
-    }
+	public function setLoginType(LoginTypeEnum $loginType): Account
+	{
+		$this->loginType = $loginType;
+		return $this;
+	}
 
+	public function getPortalType(): PortalTypeEnum
+	{
+		return $this->portalType;
+	}
+
+	public function setPortalType(PortalTypeEnum $portalType): Account
+	{
+		$this->portalType = $portalType;
+		return $this;
+	}
+
+	public function getCertPublicFileName(): ?string
+	{
+		return $this->certPublicFileName;
+	}
+
+	public function getCertPrivateFileName(): ?string
+	{
+		return $this->certPrivateFileName;
+	}
+
+	public function setCertPublicFileName(string $certPublicFileName): Account
+	{
+		$this->certPublicFileName = $certPublicFileName;
+		return $this;
+	}
+
+	public function setCertPrivateFileName(string $certPrivateFileName): Account
+	{
+		$this->certPrivateFileName = $certPrivateFileName;
+		return $this;
+	}
+
+	public function getPassPhrase(): ?string
+	{
+		return $this->passPhrase;
+	}
+
+	public function setPassPhrase(string $passPhrase): Account
+	{
+		$this->passPhrase = $passPhrase;
+		return $this;
+	}
+
+	public function getDataBoxId(): ?string
+	{
+		return $this->dataBoxId;
+	}
+
+	public function setDataBoxId(?string $dataBoxId): Account
+	{
+		$this->dataBoxId = $dataBoxId;
+		return $this;
+	}
 
 }

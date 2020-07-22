@@ -1,15 +1,11 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: tomas
- * Date: 08.01.2018
- * Time: 18:46
- */
+<?php declare(strict_types=1);
 
 namespace HelpPC\CzechDataBox\Exception;
 
+use Exception;
+use Throwable;
 
-class MissingRequiredPropertyException extends \Exception implements \Throwable
+class MissingRequiredPropertyException extends Exception implements Throwable
 {
 
 }

@@ -1,35 +1,29 @@
 <?php declare(strict_types=1);
-/**
- * Created by PhpStorm.
- * User: Tomas Kulhanek
- * Email: info@tirus.cz
- */
 
 namespace HelpPC\CzechDataBox\Traits;
 
-
+use HelpPC\CzechDataBox\IResponseStatus;
 use JMS\Serializer\Annotation as Serializer;
 
 trait DataMessageStatus
 {
 
-    /**
-     * @Serializer\Type("HelpPC\CzechDataBox\Entity\DataMessageStatus")
-     * @Serializer\SerializedName("p:dmStatus")
-     * @Serializer\XmlElement(cdata=false)
-     */
-    protected \HelpPC\CzechDataBox\Entity\DataMessageStatus $status;
+	/**
+	 * @Serializer\Type("HelpPC\CzechDataBox\Entity\DataMessageStatus")
+	 * @Serializer\SerializedName("p:dmStatus")
+	 * @Serializer\XmlElement(cdata=false)
+	 */
+	protected IResponseStatus $status;
 
-    public function getStatus(): \HelpPC\CzechDataBox\Entity\DataMessageStatus
-    {
-        return $this->status;
-    }
+	public function getStatus(): IResponseStatus
+	{
+		return $this->status;
+	}
 
-    public function setStatus(\HelpPC\CzechDataBox\Entity\DataMessageStatus $status): self
-    {
-        $this->status = $status;
-        return $this;
-    }
-
+	public function setStatus(IResponseStatus $status): self
+	{
+		$this->status = $status;
+		return $this;
+	}
 
 }

@@ -1,14 +1,10 @@
 <?php declare(strict_types=1);
-/**
- * Created by PhpStorm.
- * User: Tomas Kulhanek
- * Email: info@tirus.cz
- */
 
 namespace HelpPC\CzechDataBox\Exception;
 
+use RuntimeException;
 
-class ConnectionNotEstablish extends \RuntimeException
+class ConnectionNotEstablish extends RuntimeException
 {
 
 }

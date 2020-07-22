@@ -1,7 +1,7 @@
 # PHP knihovna pro komunikaci s Informačním systémem datových schránek (ISDS) Ministerstva vnitra
 
 [![pipeline status](https://gitlab.com/helppc/czechDataBox/badges/master/pipeline.svg)](https://gitlab.com/helppc/czechDataBox/commits/master)
-[![coverage report](https://gitlab.com/helppc/czechDataBox/badges/master/coverage.svg)](https://gitlab.com/helppc/czechDataBox/commits/master) 
+[![coverage report](https://gitlab.com/helppc/czechDataBox/badges/master/coverage.svg)](https://gitlab.com/helppc/czechDataBox/commits/master)
 ![CRAN](https://img.shields.io/cran/l/devtools.svg)
 ![PyPI - License](https://img.shields.io/pypi/l/Django.svg)
 [![Latest stable](https://img.shields.io/packagist/v/helppc/czech-data-box.svg)](https://packagist.org/packages/helppc/czech-data-box)
@@ -20,7 +20,7 @@ composer require helppc/czech-data-box
 ## Popis
 Tato knihovna slouží k základní komunikaci s Informačním systémem datových scrhánek [ISDS](https://mojedatovaschranka.cz) nebo [ISDS test](https://czebox.cz)
 
-Veškeré ukázky, jak pracovat s knihovnou naleznete v examples. Jediná podmínka ke zprovoznění je ta, že musíte vlastnit své přístupové údaje. 
+Veškeré ukázky, jak pracovat s knihovnou naleznete v examples. Jediná podmínka ke zprovoznění je ta, že musíte vlastnit své přístupové údaje.
 
 ## Základní použití
 Pro každou operaci je potřebné zadat přístupové údaje
@@ -30,8 +30,8 @@ $account = new \HelpPC\CzechDataBox\Connector\Account();
 try {
     $account->setPassword('mojeTajneHeslo')
         ->setLoginName('mujLogin')
-        ->setLoginType(\HelpPC\CzechDataBox\Connector\Account::LOGIN_NAME_PASSWORD)
-        ->setPortalType(\HelpPC\CzechDataBox\Connector\Account::ENV_TEST);
+            ->setLoginType(\HelpPC\CzechDataBox\Enum\LoginTypeEnum::get(\HelpPC\CzechDataBox\Enum\LoginTypeEnum::LOGIN_NAME_PASSWORD))
+            ->setPortalType(\HelpPC\CzechDataBox\Enum\PortalTypeEnum::get(\HelpPC\CzechDataBox\Enum\PortalTypeEnum::CZEBOX));
 } catch (\HelpPC\CzechDataBox\Exception\BadOptionException $exception) {
     die($exception->getMessage());
 }
@@ -40,7 +40,7 @@ Prostředí ke kterému se připojuje je definováno pomocí ``\HelpPC\CzechData
 
 ## Pomoc a řešní chyb
 
-V případě že potřebujete poradit, nebo při implementaci Vám třída zobrazuje chybu vytvořte prosím nové Issues. 
+V případě že potřebujete poradit, nebo při implementaci Vám třída zobrazuje chybu vytvořte prosím nové Issues.
 Základní pomoc je poskytována zcela zdarma pomocí Issues.
 
 ## Odkazy
@@ -61,7 +61,3 @@ Základní pomoc je poskytována zcela zdarma pomocí Issues.
 ## Časté otázky
 ### Proč CURL a ne SoapClient?
 Důvod je jednoduchý. Jelikož PHP nedokázalo správně zpracovávat pomocí ClassMap request/response viz [bug](https://bugs.php.net/bug.php?id=45404). Z toho důvodu, jsme zvolili využití curl a serializeru. Problém byl například v CreateMessage a proto jsme na internetu nikde nenašli knihovnu, která by umožňovala odesílání datových zpráv.
-
-## Donations
-
-[<img src="http://icons.iconarchive.com/icons/designbolts/credit-card-payment/256/Paypal-icon.png" width="120">](https://paypal.me/helppc)

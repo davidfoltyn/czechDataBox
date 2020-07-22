@@ -1,9 +1,4 @@
 <?php declare(strict_types=1);
-/**
- * Created by PhpStorm.
- * User: Tomas Kulhanek
- * Email: info@tirus.cz
- */
 
 namespace HelpPC\CzechDataBox\Entity;
 
@@ -11,84 +6,85 @@ use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class Recipient
- * @package HelpPC\CzechDataBox\Entity
+ *
  * @Serializer\XmlRoot(name="p:dmRecipient")
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  */
 class Recipient
 {
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:dbIDRecipient")
-     */
-    protected string $dataBoxId;
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:dmRecipientOrgUnit")
-     * @Serializer\SkipWhenEmpty
-     */
-    protected ?string $orgUnit = null;
+	/**
+	 * @Serializer\Type("string")
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\SerializedName("p:dbIDRecipient")
+	 */
+	protected string $dataBoxId;
 
-    /**
-     * @Serializer\Type("int")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:dmRecipientOrgUnitNum")
-     */
-    protected ?int $orgUnitNum = null;
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:dmToHands")
-     */
-    protected string $toHand;
+	/**
+	 * @Serializer\Type("string")
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\SerializedName("p:dmRecipientOrgUnit")
+	 * @Serializer\SkipWhenEmpty
+	 */
+	protected ?string $orgUnit = null;
 
-    public function getDataBoxId(): string
-    {
-        return $this->dataBoxId;
-    }
+	/**
+	 * @Serializer\Type("int")
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\SerializedName("p:dmRecipientOrgUnitNum")
+	 */
+	protected ?int $orgUnitNum = null;
 
-    public function setDataBoxId(string $dataBoxId): Recipient
-    {
-        $this->dataBoxId = $dataBoxId;
-        return $this;
-    }
+	/**
+	 * @Serializer\Type("string")
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\SerializedName("p:dmToHands")
+	 */
+	protected string $toHand;
 
-    public function getOrgUnit(): ?string
-    {
-        return $this->orgUnit;
-    }
+	public function getDataBoxId(): string
+	{
+		return $this->dataBoxId;
+	}
 
-    public function setOrgUnit(?string $orgUnit): Recipient
-    {
-        $this->orgUnit = $orgUnit;
-        return $this;
-    }
+	public function setDataBoxId(string $dataBoxId): Recipient
+	{
+		$this->dataBoxId = $dataBoxId;
+		return $this;
+	}
 
-    public function getOrgUnitNum(): ?int
-    {
-        return $this->orgUnitNum;
-    }
+	public function getOrgUnit(): ?string
+	{
+		return $this->orgUnit;
+	}
 
-    public function setOrgUnitNum(?int $orgUnitNum): Recipient
-    {
-        $this->orgUnitNum = $orgUnitNum;
-        return $this;
-    }
+	public function setOrgUnit(?string $orgUnit): Recipient
+	{
+		$this->orgUnit = $orgUnit;
+		return $this;
+	}
 
-    public function getToHand(): string
-    {
-        return $this->toHand;
-    }
+	public function getOrgUnitNum(): ?int
+	{
+		return $this->orgUnitNum;
+	}
 
-    public function setToHand(string $toHand): Recipient
-    {
-        $this->toHand = $toHand;
-        return $this;
-    }
+	public function setOrgUnitNum(?int $orgUnitNum): Recipient
+	{
+		$this->orgUnitNum = $orgUnitNum;
+		return $this;
+	}
 
+	public function getToHand(): string
+	{
+		return $this->toHand;
+	}
+
+	public function setToHand(string $toHand): Recipient
+	{
+		$this->toHand = $toHand;
+		return $this;
+	}
 
 }

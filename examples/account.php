@@ -1,12 +1,12 @@
 <?php
 require 'credentials.php';
-$console->writeln(sprintf('Komunikovat bude probihat vuci %s za datovou schranku s id %s typu %s ', ($account->getPortalType() == $account::ENV_PROD ? 'mojedatovaschranka.cz' : 'czebox.cz'), ISDS_ID, $type));
+$console->writeln(sprintf('Komunikovat bude probihat vuci %s za datovou schranku s id %s ', ($account->getPortalType()->equalsValue(\HelpPC\CzechDataBox\Enum\PortalTypeEnum::MOJEDATOVASCHRANKA) ? 'mojedatovaschranka.cz' : 'czebox.cz'), $account->getDataBoxId()));
 /** @var \HelpPC\CzechDataBox\Manager $manager */
 
 /***********************************/
 $console->write('   - Probiha ziskavani informaci dle loginu');
 /** @var \HelpPC\CzechDataBox\Response\GetOwnerInfoFromLogin */
-$res = $manager->GetOwnerInfoFromLogin($account);
+$res = $manager->getOwnerInfoFromLogin($account);
 if ($res->getStatus()->isOk()) {
     $console->writeln(' -> OK ' . sprintf('DS "%s" typ subjektu "%s"', $res->getOwnerInfo()->getFirmName(), $res->getOwnerInfo()->getDataBoxType()));
 } else {
@@ -16,7 +16,7 @@ if ($res->getStatus()->isOk()) {
 /***********************************/
 $console->write('   - Probiha ziskavani informaci o expiraci hesla');
 /** @var \HelpPC\CzechDataBox\Response\GetPasswordExpirationInfo */
-$res = $manager->GetPasswordExpirationInfo($account);
+$res = $manager->getPasswordExpirationInfo($account);
 if ($res->getStatus()->isOk()) {
     $console->write(' -> OK ');
     if ($res->getPasswordExpiry() === null) {

@@ -19,5 +19,7 @@ my_app:7.4:
     - pipelines
     - pushes
   script:
+    - vendor/bin/codesniffer src tests
+    - vendor/bin/linter src tests
     - vendor/bin/tester -C tests/php.ini tests
     - vendor/bin/phpstan analyse -c phpstan.neon --memory-limit=1024M

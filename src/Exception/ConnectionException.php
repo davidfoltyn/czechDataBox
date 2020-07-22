@@ -1,15 +1,10 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: tomas
- * Date: 06.01.2018
- * Time: 18:54
- */
+<?php declare(strict_types=1);
 
 namespace HelpPC\CzechDataBox\Exception;
 
+use Exception;
 
-class ConnectionException extends \Exception
+class ConnectionException extends Exception
 {
 
 }

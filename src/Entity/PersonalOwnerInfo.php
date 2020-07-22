@@ -1,312 +1,321 @@
 <?php declare(strict_types=1);
-/**
- * Created by PhpStorm.
- * User: Tomas Kulhanek
- * Email: info@tirus.cz
- */
 
 namespace HelpPC\CzechDataBox\Entity;
 
+use DateTimeImmutable;
 use HelpPC\CzechDataBox\Traits\DataBoxId;
 use HelpPC\CzechDataBox\Traits\PersonName;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class PersonalOwnerInfo
- * @package HelpPC\CzechDataBox\Entity
+ *
  * @Serializer\XmlRoot(name="p:dbOwnerInfo")
  * @Serializer\XmlNamespace(uri="http://isds.czechpoint.cz/v20",prefix="p")
  */
 class PersonalOwnerInfo
 {
-    use DataBoxId;
-    use PersonName;
 
-    /**
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\Type("bool")
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:aifoIsds")
-     */
-    protected ?bool $aifoIsds = null;
-    /**
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
-     * @Serializer\SerializedName("p:biDate")
-     */
-    protected ?\DateTimeImmutable $biDate = null;
-    /**
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\Type("string")
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:biCity")
-     */
-    protected ?string $biCity = null;
-    /**
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\Type("string")
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:biCounty")
-     */
-    protected ?string $biCounty = null;
-    /**
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\Type("string")
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:biState")
-     */
-    protected ?string $biState = null;
-    /**
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\Type("int")
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:adCode")
-     */
-    protected ?int $adCode = null;
-    /**
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\Type("string")
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:adCity")
-     */
-    protected ?string $adCity = null;
-    /**
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\Type("string")
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:adStreet")
-     */
-    protected ?string $adDistrict = null;
-    /**
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\Type("string")
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:adStreet")
-     */
-    protected ?string $adStreet = null;
-    /**
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\Type("string")
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:adNumberInStreet")
-     */
-    protected ?string $adNumberInStreet = null;
-    /**
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\Type("string")
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:adNumberInMunicipality")
-     */
-    protected ?string $adNumberInMunicipality = null;
-    /**
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\Type("string")
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:adZipCode")
-     */
-    protected ?string $adZipCode = null;
-    /**
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\Type("string")
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:adState")
-     */
-    protected ?string $adState = null;
-    /**
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\Type("string")
-     * @Serializer\XmlElement(cdata=false)
-     * @Serializer\SerializedName("p:nationality")
-     */
-    protected ?string $nationality = null;
+	use DataBoxId;
+	use PersonName;
 
-    public function getAifoIsds(): ?bool
-    {
-        return $this->aifoIsds;
-    }
+	/**
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\Type("bool")
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\SerializedName("p:aifoIsds")
+	 */
+	protected ?bool $aifoIsds = null;
 
-    public function setAifoIsds(?bool $aifoIsds): PersonalOwnerInfo
-    {
-        $this->aifoIsds = $aifoIsds;
-        return $this;
-    }
+	/**
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\Type("DateTimeImmutable<'Y-m-d'>")
+	 * @Serializer\SerializedName("p:biDate")
+	 */
+	protected ?DateTimeImmutable $biDate = null;
 
-    public function getBiDate(): ?\DateTimeImmutable
-    {
-        return $this->biDate;
-    }
+	/**
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\Type("string")
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\SerializedName("p:biCity")
+	 */
+	protected ?string $biCity = null;
 
-    public function setBiDate(?\DateTimeImmutable $biDate): PersonalOwnerInfo
-    {
-        $this->biDate = $biDate;
-        return $this;
-    }
+	/**
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\Type("string")
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\SerializedName("p:biCounty")
+	 */
+	protected ?string $biCounty = null;
 
-    public function getBiCity(): ?string
-    {
-        return $this->biCity;
-    }
+	/**
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\Type("string")
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\SerializedName("p:biState")
+	 */
+	protected ?string $biState = null;
 
-    public function setBiCity(?string $biCity): PersonalOwnerInfo
-    {
-        $this->biCity = $biCity;
-        return $this;
-    }
+	/**
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\Type("int")
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\SerializedName("p:adCode")
+	 */
+	protected ?int $adCode = null;
 
-    public function getBiCounty(): ?string
-    {
-        return $this->biCounty;
-    }
+	/**
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\Type("string")
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\SerializedName("p:adCity")
+	 */
+	protected ?string $adCity = null;
 
-    public function setBiCounty(?string $biCounty): PersonalOwnerInfo
-    {
-        $this->biCounty = $biCounty;
-        return $this;
-    }
+	/**
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\Type("string")
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\SerializedName("p:adStreet")
+	 */
+	protected ?string $adDistrict = null;
 
-    public function getBiState(): ?string
-    {
-        return $this->biState;
-    }
+	/**
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\Type("string")
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\SerializedName("p:adStreet")
+	 */
+	protected ?string $adStreet = null;
 
-    public function setBiState(?string $biState): PersonalOwnerInfo
-    {
-        $this->biState = $biState;
-        return $this;
-    }
+	/**
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\Type("string")
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\SerializedName("p:adNumberInStreet")
+	 */
+	protected ?string $adNumberInStreet = null;
 
-    public function getAdCode(): ?int
-    {
-        return $this->adCode;
-    }
+	/**
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\Type("string")
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\SerializedName("p:adNumberInMunicipality")
+	 */
+	protected ?string $adNumberInMunicipality = null;
 
-    public function setAdCode(?int $adCode): PersonalOwnerInfo
-    {
-        $this->adCode = $adCode;
-        return $this;
-    }
+	/**
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\Type("string")
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\SerializedName("p:adZipCode")
+	 */
+	protected ?string $adZipCode = null;
 
-    public function getAdCity(): ?string
-    {
-        return $this->adCity;
-    }
+	/**
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\Type("string")
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\SerializedName("p:adState")
+	 */
+	protected ?string $adState = null;
 
-    public function setAdCity(?string $adCity): PersonalOwnerInfo
-    {
-        $this->adCity = $adCity;
-        return $this;
-    }
+	/**
+	 * @Serializer\SkipWhenEmpty
+	 * @Serializer\Type("string")
+	 * @Serializer\XmlElement(cdata=false)
+	 * @Serializer\SerializedName("p:nationality")
+	 */
+	protected ?string $nationality = null;
 
-    public function getAdDistrict(): ?string
-    {
-        return $this->adDistrict;
-    }
+	public function getAifoIsds(): ?bool
+	{
+		return $this->aifoIsds;
+	}
 
-    public function setAdDistrict(?string $adDistrict): PersonalOwnerInfo
-    {
-        $this->adDistrict = $adDistrict;
-        return $this;
-    }
+	public function setAifoIsds(?bool $aifoIsds): PersonalOwnerInfo
+	{
+		$this->aifoIsds = $aifoIsds;
+		return $this;
+	}
 
-    public function getAdStreet(): ?string
-    {
-        return $this->adStreet;
-    }
+	public function getBiDate(): ?DateTimeImmutable
+	{
+		return $this->biDate;
+	}
 
-    public function setAdStreet(?string $adStreet): PersonalOwnerInfo
-    {
-        $this->adStreet = $adStreet;
-        return $this;
-    }
+	public function setBiDate(?DateTimeImmutable $biDate): PersonalOwnerInfo
+	{
+		$this->biDate = $biDate;
+		return $this;
+	}
 
-    public function getAdNumberInStreet(): ?string
-    {
-        return $this->adNumberInStreet;
-    }
+	public function getBiCity(): ?string
+	{
+		return $this->biCity;
+	}
 
-    public function setAdNumberInStreet(?string $adNumberInStreet): PersonalOwnerInfo
-    {
-        $this->adNumberInStreet = $adNumberInStreet;
-        return $this;
-    }
+	public function setBiCity(?string $biCity): PersonalOwnerInfo
+	{
+		$this->biCity = $biCity;
+		return $this;
+	}
 
-    public function getAdNumberInMunicipality(): ?string
-    {
-        return $this->adNumberInMunicipality;
-    }
+	public function getBiCounty(): ?string
+	{
+		return $this->biCounty;
+	}
 
-    public function setAdNumberInMunicipality(?string $adNumberInMunicipality): PersonalOwnerInfo
-    {
-        $this->adNumberInMunicipality = $adNumberInMunicipality;
-        return $this;
-    }
+	public function setBiCounty(?string $biCounty): PersonalOwnerInfo
+	{
+		$this->biCounty = $biCounty;
+		return $this;
+	}
 
-    public function getAdZipCode(): ?string
-    {
-        return $this->adZipCode;
-    }
+	public function getBiState(): ?string
+	{
+		return $this->biState;
+	}
 
-    public function setAdZipCode(?string $adZipCode): PersonalOwnerInfo
-    {
-        $this->adZipCode = $adZipCode;
-        return $this;
-    }
+	public function setBiState(?string $biState): PersonalOwnerInfo
+	{
+		$this->biState = $biState;
+		return $this;
+	}
 
-    public function getAdState(): ?string
-    {
-        return $this->adState;
-    }
+	public function getAdCode(): ?int
+	{
+		return $this->adCode;
+	}
 
-    public function setAdState(?string $adState): PersonalOwnerInfo
-    {
-        $this->adState = $adState;
-        return $this;
-    }
+	public function setAdCode(?int $adCode): PersonalOwnerInfo
+	{
+		$this->adCode = $adCode;
+		return $this;
+	}
 
-    public function getNationality(): ?string
-    {
-        return $this->nationality;
-    }
+	public function getAdCity(): ?string
+	{
+		return $this->adCity;
+	}
 
-    public function setNationality(?string $nationality): PersonalOwnerInfo
-    {
-        $this->nationality = $nationality;
-        return $this;
-    }
+	public function setAdCity(?string $adCity): PersonalOwnerInfo
+	{
+		$this->adCity = $adCity;
+		return $this;
+	}
 
-    public function getFirstName(): ?string
-    {
-        return $this->firstName;
-    }
+	public function getAdDistrict(): ?string
+	{
+		return $this->adDistrict;
+	}
 
-    public function setFirstName(?string $firstName): PersonalOwnerInfo
-    {
-        $this->firstName = $firstName;
-        return $this;
-    }
+	public function setAdDistrict(?string $adDistrict): PersonalOwnerInfo
+	{
+		$this->adDistrict = $adDistrict;
+		return $this;
+	}
 
-    public function getMiddleName(): ?string
-    {
-        return $this->middleName;
-    }
+	public function getAdStreet(): ?string
+	{
+		return $this->adStreet;
+	}
 
-    public function setMiddleName(?string $middleName): PersonalOwnerInfo
-    {
-        $this->middleName = $middleName;
-        return $this;
-    }
+	public function setAdStreet(?string $adStreet): PersonalOwnerInfo
+	{
+		$this->adStreet = $adStreet;
+		return $this;
+	}
 
-    public function getLastName(): ?string
-    {
-        return $this->lastName;
-    }
+	public function getAdNumberInStreet(): ?string
+	{
+		return $this->adNumberInStreet;
+	}
 
-    public function setLastName(?string $lastName): PersonalOwnerInfo
-    {
-        $this->lastName = $lastName;
-        return $this;
-    }
+	public function setAdNumberInStreet(?string $adNumberInStreet): PersonalOwnerInfo
+	{
+		$this->adNumberInStreet = $adNumberInStreet;
+		return $this;
+	}
 
+	public function getAdNumberInMunicipality(): ?string
+	{
+		return $this->adNumberInMunicipality;
+	}
+
+	public function setAdNumberInMunicipality(?string $adNumberInMunicipality): PersonalOwnerInfo
+	{
+		$this->adNumberInMunicipality = $adNumberInMunicipality;
+		return $this;
+	}
+
+	public function getAdZipCode(): ?string
+	{
+		return $this->adZipCode;
+	}
+
+	public function setAdZipCode(?string $adZipCode): PersonalOwnerInfo
+	{
+		$this->adZipCode = $adZipCode;
+		return $this;
+	}
+
+	public function getAdState(): ?string
+	{
+		return $this->adState;
+	}
+
+	public function setAdState(?string $adState): PersonalOwnerInfo
+	{
+		$this->adState = $adState;
+		return $this;
+	}
+
+	public function getNationality(): ?string
+	{
+		return $this->nationality;
+	}
+
+	public function setNationality(?string $nationality): PersonalOwnerInfo
+	{
+		$this->nationality = $nationality;
+		return $this;
+	}
+
+	public function getFirstName(): ?string
+	{
+		return $this->firstName;
+	}
+
+	public function setFirstName(?string $firstName): PersonalOwnerInfo
+	{
+		$this->firstName = $firstName;
+		return $this;
+	}
+
+	public function getMiddleName(): ?string
+	{
+		return $this->middleName;
+	}
+
+	public function setMiddleName(?string $middleName): PersonalOwnerInfo
+	{
+		$this->middleName = $middleName;
+		return $this;
+	}
+
+	public function getLastName(): ?string
+	{
+		return $this->lastName;
+	}
+
+	public function setLastName(?string $lastName): PersonalOwnerInfo
+	{
+		$this->lastName = $lastName;
+		return $this;
+	}
 
 }

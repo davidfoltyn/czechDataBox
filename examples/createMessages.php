@@ -1,6 +1,6 @@
 <?php
 require 'credentials.php';
-$console->writeln(sprintf('Komunikovat bude probihat vuci %s za datovou schranku s id %s typu %s ', ($account->getPortalType() == $account::ENV_PROD ? 'mojedatovaschranka.cz' : 'czebox.cz'), ISDS_ID, $type));
+$console->writeln(sprintf('Komunikovat bude probihat vuci %s za datovou schranku s id %s typu %s ', ($account->getPortalType()->equalsValue(\HelpPC\CzechDataBox\Enum\PortalTypeEnum::MOJEDATOVASCHRANKA) ? 'mojedatovaschranka.cz' : 'czebox.cz'), ISDS_ID, $type));
 /** @var \HelpPC\CzechDataBox\Manager $manager */
 
 
@@ -9,7 +9,7 @@ $createMessage
     ->setEnvelope((new \HelpPC\CzechDataBox\Entity\Envelope()));
 $createMessage->getEnvelope()
     ->setPersonalDelivery(false)
-    ->setOVM(false)
+    ->setOvm(false)
     ->setLegalTitleSect('legalTitleSect')
     ->setLegalTitlePoint('legalTitlePoint')
     ->setLegalTitlePar('legalTitlePar')
@@ -17,9 +17,9 @@ $createMessage->getEnvelope()
     ->setAllowSubstDelivery(true)
     ->setAnnotation('Test message - ' . date('Y-m-d'))
     ->setLegalTitleYear(date('Y'))
-    ->setPublishOwnID(false)
+    ->setPublishOwnId(false)
     ->setRecipientIdent('recipientIdent')
-    ->setRecipientID(($type == 'ovm' ? $config['fo']['id'] : $config['ovm']['id']))
+    ->setRecipientId('ju8fjv4')
     ->setRecipientOrgUnit('recipientOrgUnit')
     ->setRecipientOrgUnitNum(777)
     ->setRecipientRefNumber('recipientRefNumber')
@@ -42,20 +42,20 @@ for ($i = 0; $i <= 3; $i++) {
 
 
 $recipient = new \HelpPC\CzechDataBox\Entity\Recipient();
-$recipient->setDataBoxId(($type == 'ovm' ? $config['fo']['id'] : $config['ovm']['id']))
+$recipient->setDataBoxId('ju8fjv4')
     ->setToHand('toHandRec')
     ->setOrgUnitNum(1000)
     ->setOrgUnit('orgUnitRec');
 $createMessage->addRecipient($recipient);
 $recipient = new \HelpPC\CzechDataBox\Entity\Recipient();
-$recipient->setDataBoxId(($type == 'fo' ? $config['fo']['id'] : $config['ovm']['id']))
+$recipient->setDataBoxId('ju8fjv4')
     ->setToHand('toHandRec')
     ->setOrgUnitNum(1000)
     ->setOrgUnit('orgUnitRec');
 $createMessage->addRecipient($recipient);
 for ($i = 0; $i <= 1; $i++) {
     $recipient = new \HelpPC\CzechDataBox\Entity\Recipient();
-    $recipient->setDataBoxId(($type == 'fo' ? $config['fo']['id'] : $config['ovm']['id']))
+    $recipient->setDataBoxId('unhfjvx')
         ->setToHand('toHandRec')
         ->setOrgUnitNum(1000)
         ->setOrgUnit('orgUnitRec');
@@ -64,7 +64,7 @@ for ($i = 0; $i <= 1; $i++) {
 
 $console->write('Probiha odesilani DZ');
 /** @var \HelpPC\CzechDataBox\Response\CreateMessage $res */
-$res = $manager->CreateMessage($account, $createMessage);
+$res = $manager->createMessage($account, $createMessage);
 if ($res->isOk()) {
     $console->writeln(' -> OK');
     /** @var \HelpPC\CzechDataBox\Entity\MessageStatus $messageStatus */
