@@ -165,16 +165,16 @@ abstract class Connector
 		switch ($account->getLoginType()->getValue()) {
 			case LoginTypeEnum::LOGIN_CERT_LOGIN_NAME_PASSWORD:
 				$requestOptions['curl'][CURLOPT_USERPWD] = $account->getLoginName() . ':' . $account->getPassword();
-				$requestOptions['cert'] = [$account->getCertPublicFileName(), $account->getPassphrase()];
+				$requestOptions['cert'] = $account->getCertPublicFileName();
 				$requestOptions['ssl_key'] = [$account->getCertPrivateFileName(), $account->getPassphrase()];
 				break;
 			case LoginTypeEnum::LOGIN_SPIS_CERT:
-				$requestOptions['cert'] = [$account->getCertPublicFileName(), $account->getPassphrase()];
+				$requestOptions['cert'] = $account->getCertPublicFileName();
 				$requestOptions['ssl_key'] = [$account->getCertPrivateFileName(), $account->getPassphrase()];
 				break;
 			case LoginTypeEnum::LOGIN_HOSTED_SPIS:
 				$requestOptions['curl'][CURLOPT_USERPWD] = $account->getDataBoxId();
-				$requestOptions['cert'] = [$account->getCertPublicFileName(), $account->getPassphrase()];
+				$requestOptions['cert'] = $account->getCertPublicFileName();
 				$requestOptions['ssl_key'] = [$account->getCertPrivateFileName(), $account->getPassphrase()];
 				break;
 			case LoginTypeEnum::LOGIN_NAME_PASSWORD:
