@@ -13,6 +13,8 @@ use HelpPC\CzechDataBox\Enum\LoginTypeEnum;
 use HelpPC\CzechDataBox\Enum\PortalTypeEnum;
 use HelpPC\CzechDataBox\Enum\ServiceTypeEnum;
 use HelpPC\CzechDataBox\Exception\ConnectionException;
+use HelpPC\CzechDataBox\Exception\FileSystemException;
+use HelpPC\CzechDataBox\Exception\MissingRequiredField;
 use HelpPC\CzechDataBox\Exception\SystemExclusion;
 use HelpPC\CzechDataBox\IRequest;
 use HelpPC\CzechDataBox\IResponse;
@@ -171,9 +173,21 @@ abstract class Connector
 				$requestOptions['curl'][CURLOPT_USERPWD] = $account->getLoginName() . ':' . $account->getPassword();
 				break;
 		}
+		$publicCert = null;
+		$privateKey = null;
 		if ($account->usingCertificate()) {
+			if (empty($account->getPublicKey()) || empty($account->getPrivateKey())) {
+				throw new MissingRequiredField('Missing PEM data');
+			}
 			$publicCert = tmpfile();
+			if (!$publicCert) {
+				throw new FileSystemException('Failed to create temp file for public certificate.');
+			}
 			$privateKey = tmpfile();
+			if (!$privateKey) {
+				fclose($publicCert);
+				throw new FileSystemException('Failed to create temp file for private key.');
+			}
 			fwrite($publicCert, $account->getPublicKey());
 			fwrite($privateKey, $account->getPrivateKey());
 			$requestOptions['curl'][CURLOPT_SSLCERT] = stream_get_meta_data($publicCert)['uri'];
@@ -210,8 +224,12 @@ abstract class Connector
 			throw new ConnectionException($ex->getMessage(), $ex->getCode(), $ex);
 		} finally {
 			if ($account->usingCertificate()) {
-				fclose($publicCert);
-				fclose($privateKey);
+				if (is_resource($publicCert)) {
+					fclose($publicCert);
+				}
+				if (is_resource($privateKey)) {
+					fclose($privateKey);
+				}
 			}
 		}
 		return $this->serializer->deserialize($response, $responseClass, 'xml');
