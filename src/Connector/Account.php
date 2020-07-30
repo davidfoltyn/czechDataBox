@@ -4,6 +4,7 @@ namespace HelpPC\CzechDataBox\Connector;
 
 use HelpPC\CzechDataBox\Enum\LoginTypeEnum;
 use HelpPC\CzechDataBox\Enum\PortalTypeEnum;
+use HelpPC\CzechDataBox\Exception\PkcsCertificateException;
 
 class Account
 {
@@ -18,11 +19,11 @@ class Account
 
 	private PortalTypeEnum $portalType;
 
-	private ?string $certPublicFileName = null;
+	private ?string $publicKey = null;
 
-	private ?string $certPrivateFileName = null;
+	private ?string $privateKey = null;
 
-	private ?string $passPhrase = null;
+	private ?string $privateKeyPassPhrase = null;
 
 	public function getLoginName(): ?string
 	{
@@ -68,36 +69,36 @@ class Account
 		return $this;
 	}
 
-	public function getCertPublicFileName(): ?string
+	public function getPublicKey(): ?string
 	{
-		return $this->certPublicFileName;
+		return $this->publicKey;
 	}
 
-	public function getCertPrivateFileName(): ?string
+	public function getPrivateKey(): ?string
 	{
-		return $this->certPrivateFileName;
+		return $this->privateKey;
 	}
 
-	public function setCertPublicFileName(string $certPublicFileName): Account
+	public function setPublicKey(string $publicKey): Account
 	{
-		$this->certPublicFileName = $certPublicFileName;
+		$this->publicKey = $publicKey;
 		return $this;
 	}
 
-	public function setCertPrivateFileName(string $certPrivateFileName): Account
+	public function setPrivateKey(string $privateKey): Account
 	{
-		$this->certPrivateFileName = $certPrivateFileName;
+		$this->privateKey = $privateKey;
 		return $this;
 	}
 
-	public function getPassPhrase(): ?string
+	public function getPrivateKeyPassPhrase(): ?string
 	{
-		return $this->passPhrase;
+		return $this->privateKeyPassPhrase;
 	}
 
-	public function setPassPhrase(string $passPhrase): Account
+	public function setPrivateKeyPassPhrase(string $privateKeyPassPhrase): Account
 	{
-		$this->passPhrase = $passPhrase;
+		$this->privateKeyPassPhrase = $privateKeyPassPhrase;
 		return $this;
 	}
 
@@ -110,6 +111,25 @@ class Account
 	{
 		$this->dataBoxId = $dataBoxId;
 		return $this;
+	}
+
+	public function setPkcs12Certificate(string $pkcsContent, string $passPhrase): Account
+	{
+		$cert_array = [];
+		if (!openssl_pkcs12_read($pkcsContent, $cert_array, $passPhrase)) {
+			throw new PkcsCertificateException('Invalid PKCS12');
+		}
+
+		$this->setPublicKey($cert_array['cert'])
+			->setPrivateKey($cert_array['pkey'])
+			->setPrivateKeyPassPhrase($passPhrase);
+
+		return $this;
+	}
+
+	public function usingCertificate(): bool
+	{
+		return in_array($this->getLoginType()->getValue(), [LoginTypeEnum::LOGIN_HOSTED_SPIS, LoginTypeEnum::LOGIN_SPIS_CERT, LoginTypeEnum::LOGIN_CERT_LOGIN_NAME_PASSWORD]);
 	}
 
 }

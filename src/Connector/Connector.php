@@ -163,23 +163,22 @@ abstract class Connector
 			'body' => $requestDocument->saveXml(),
 		];
 		switch ($account->getLoginType()->getValue()) {
-			case LoginTypeEnum::LOGIN_CERT_LOGIN_NAME_PASSWORD:
-				$requestOptions['curl'][CURLOPT_USERPWD] = $account->getLoginName() . ':' . $account->getPassword();
-				$requestOptions['cert'] = $account->getCertPublicFileName();
-				$requestOptions['ssl_key'] = [$account->getCertPrivateFileName(), $account->getPassphrase()];
-				break;
-			case LoginTypeEnum::LOGIN_SPIS_CERT:
-				$requestOptions['cert'] = $account->getCertPublicFileName();
-				$requestOptions['ssl_key'] = [$account->getCertPrivateFileName(), $account->getPassphrase()];
-				break;
 			case LoginTypeEnum::LOGIN_HOSTED_SPIS:
 				$requestOptions['curl'][CURLOPT_USERPWD] = $account->getDataBoxId();
-				$requestOptions['cert'] = $account->getCertPublicFileName();
-				$requestOptions['ssl_key'] = [$account->getCertPrivateFileName(), $account->getPassphrase()];
 				break;
 			case LoginTypeEnum::LOGIN_NAME_PASSWORD:
+			case LoginTypeEnum::LOGIN_CERT_LOGIN_NAME_PASSWORD:
 				$requestOptions['curl'][CURLOPT_USERPWD] = $account->getLoginName() . ':' . $account->getPassword();
 				break;
+		}
+		if ($account->usingCertificate()) {
+			$publicCert = tmpfile();
+			$privateKey = tmpfile();
+			fwrite($publicCert, $account->getPublicKey());
+			fwrite($privateKey, $account->getPrivateKey());
+			$requestOptions['curl'][CURLOPT_SSLCERT] = stream_get_meta_data($publicCert)['uri'];
+			$requestOptions['curl'][CURLOPT_SSLKEY] = stream_get_meta_data($privateKey)['uri'];
+			$requestOptions['curl'][CURLOPT_SSLKEYPASSWD] = $account->getPrivateKeyPassPhrase();
 		}
 
 		try {
@@ -209,6 +208,11 @@ abstract class Connector
 			throw new ConnectionException($ex->getMessage(), $ex->getCode(), $ex);
 		} catch (Throwable $ex) {
 			throw new ConnectionException($ex->getMessage(), $ex->getCode(), $ex);
+		} finally {
+			if ($account->usingCertificate()) {
+				fclose($publicCert);
+				fclose($privateKey);
+			}
 		}
 		return $this->serializer->deserialize($response, $responseClass, 'xml');
 	}
