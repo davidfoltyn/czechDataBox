@@ -127,10 +127,12 @@ abstract class Connector
 	 * @param IRequest $request
 	 * @param string $responseClass
 	 * @return IResponse
+	 * @throws ConnectionException
+	 * @throws FileSystemException
+	 * @throws MissingRequiredField
+	 * @throws SystemExclusion
 	 * @phpstan-param class-string<T> $responseClass
 	 * @phpstan-return T
-	 * @throws ConnectionException
-	 * @throws SystemExclusion
 	 */
 	protected function send(Account $account, int $serviceType, IRequest $request, string $responseClass): IResponse
 	{
