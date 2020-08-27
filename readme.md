@@ -47,8 +47,8 @@ Základní pomoc je poskytována zcela zdarma pomocí Issues.
 - Produkční ISDS - https://mojedatoveschranky.cz
 - Testovací ISDS - https://czebox.cz
 - Software602, a.s. - https://602.cz
-- Provozní řád ISDS - https://www.datoveschranky.info/dulezite-informace/provozni-rad-isds
-- Oznamované změny - https://www.datoveschranky.info/dulezite-informace/aplikacni-rozhrani
+- Provozní řád ISDS - https://www.datoveschranky.info/dulezite-informace/provozni-rad
+- Oznamované změny - https://www.datoveschranky.info/
 
 ## Žádosti o zřízení datové schránky
 ### Produkční prostředí
