@@ -219,8 +219,6 @@ abstract class Connector
 			if ($exception->getCode() === 503) {
 				throw new SystemExclusion($exception->getMessage(), $exception->getCode(), $exception);
 			}
-			throw $exception;
-		} catch (Exception $ex) {
 			throw new ConnectionException($ex->getMessage(), $ex->getCode(), $ex);
 		} catch (Throwable $ex) {
 			throw new ConnectionException($ex->getMessage(), $ex->getCode(), $ex);
