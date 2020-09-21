@@ -214,13 +214,13 @@ abstract class Connector
 				$response = preg_replace($regex, $replace, $response);
 			}
 
-		} catch (ServerException $exception) {
-			if ($exception->getCode() === 503) {
+		} catch (Throwable $exception) {
+			if (is_a($exception, ServerException::class) && $exception->getCode() === 503) {
+
 				throw new SystemExclusion($exception->getMessage(), $exception->getCode(), $exception);
 			}
-			throw new ConnectionException($ex->getMessage(), $ex->getCode(), $ex);
-		} catch (Throwable $ex) {
-			throw new ConnectionException($ex->getMessage(), $ex->getCode(), $ex);
+
+			throw new ConnectionException($exception->getMessage(), $exception->getCode(), $exception);
 		} finally {
 			if ($account->usingCertificate()) {
 				if (is_resource($publicCert)) {
