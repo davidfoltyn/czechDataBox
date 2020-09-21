@@ -6,7 +6,6 @@ use DOMDocument;
 use DOMElement;
 use DOMNodeList;
 use DOMXPath;
-use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ServerException;
 use HelpPC\CzechDataBox\Enum\LoginTypeEnum;
