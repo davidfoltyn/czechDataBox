@@ -18,20 +18,19 @@ use HelpPC\CzechDataBox\Exception\SystemExclusion;
 use HelpPC\CzechDataBox\IRequest;
 use HelpPC\CzechDataBox\IResponse;
 use JMS\Serializer\SerializerInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Symfony\Contracts\HttpClient\ResponseInterface;
+use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
 abstract class Connector
 {
 
-	private HttpClientInterface $httpClient;
+	private Client $guzzleHttp;
 
 	private SerializerInterface $serializer;
 
-	public function __construct(SerializerInterface $serializer, HttpClientInterface $httpClient)
+	public function __construct(SerializerInterface $serializer, Client $guzzleHttp)
 	{
-		$this->httpClient = $httpClient;
+		$this->guzzleHttp = $guzzleHttp;
 		$this->serializer = $serializer;
 	}
 
@@ -156,6 +155,7 @@ abstract class Connector
 		}
 
 		$requestOptions = [
+			'curl' => [],
 			'headers' => [
 				'Connection' => 'Keep-Alive',
 				'Accept-Encoding' => 'gzip,deflate',
@@ -167,11 +167,11 @@ abstract class Connector
 		];
 		switch ($account->getLoginType()->getValue()) {
 			case LoginTypeEnum::LOGIN_HOSTED_SPIS:
-				$requestOptions['auth_basic'] = $account->getDataBoxId();
+				$requestOptions['curl'][CURLOPT_USERPWD] = $account->getDataBoxId();
 				break;
 			case LoginTypeEnum::LOGIN_NAME_PASSWORD:
 			case LoginTypeEnum::LOGIN_CERT_LOGIN_NAME_PASSWORD:
-				$requestOptions['auth_basic'] = $account->getLoginName() . ':' . $account->getPassword();
+				$requestOptions['curl'][CURLOPT_USERPWD] = $account->getLoginName() . ':' . $account->getPassword();
 				break;
 		}
 		$publicCert = null;
@@ -191,15 +191,15 @@ abstract class Connector
 			}
 			fwrite($publicCert, $account->getPublicKey());
 			fwrite($privateKey, $account->getPrivateKey());
-			$requestOptions['local_cert'] = stream_get_meta_data($publicCert)['uri'];
-			$requestOptions['local_pk'] = stream_get_meta_data($privateKey)['uri'];
-			$requestOptions['passphrase'] = $account->getPrivateKeyPassPhrase();
+			$requestOptions['curl'][CURLOPT_SSLCERT] = stream_get_meta_data($publicCert)['uri'];
+			$requestOptions['curl'][CURLOPT_SSLKEY] = stream_get_meta_data($privateKey)['uri'];
+			$requestOptions['curl'][CURLOPT_SSLKEYPASSWD] = $account->getPrivateKeyPassPhrase();
 		}
 
 		try {
 			/** @var ResponseInterface $response */
-			$response = $this->httpClient->request('POST', $location, $requestOptions);
-			$response = $response->getContent();
+			$response = $this->guzzleHttp->post($location, $requestOptions);
+			$response = $response->getBody()->getContents();
 			$soapResponse = $this->getXmlDocument($response);
 			$response = $this->getValueByXpath($soapResponse, '//' . $soapResponse->documentElement->prefix . ':Body');
 			$soapResponse = null;

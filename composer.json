@@ -36,7 +36,7 @@
 		"ext-openssl": "*",
 		"ext-dom": "*",
 		"consistence/consistence": "^2.0",
-		"symfony/http-client": "5.1.*",
+		"guzzlehttp/guzzle": "^7.0",
 		"doctrine/collections": "^1.6",
 		"symfony/yaml": "^5.1",
 		"helppc/serializer": "^2.0"
