@@ -23,7 +23,7 @@ $account->setCertPublicFileName(realpath(__DIR__ . '/../../../temp/systemovy.crt
 $account->setDataBoxId('unhfjvx');
 $account->setPassPhrase('Admin123');
 
-$client = new \Symfony\Component\HttpClient\HttpClient();
+$client = \Symfony\Component\HttpClient\HttpClient::create();
 $serializer = SerializerFactory::create();
 $dataBox = new DataBox($serializer, $client);
 $dataMessage = new DataMessage($serializer, $client);

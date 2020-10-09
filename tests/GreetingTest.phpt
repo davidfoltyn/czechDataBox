@@ -25,7 +25,7 @@ class GreetingTest extends TestCase
                 ->setLoginName(getenv('ISDS_LOGIN'))
                 ->setLoginType(LoginTypeEnum::get(LoginTypeEnum::LOGIN_NAME_PASSWORD))
                 ->setPortalType(PortalTypeEnum::get(PortalTypeEnum::CZEBOX));
-            $client = new \Symfony\Component\HttpClient\HttpClient();
+            $client = \Symfony\Component\HttpClient\HttpClient::create();
             $serializer = SerializerFactory::create();
             $dataBox = new DataBox($serializer, $client);
             $dataMessage = new DataMessage($serializer, $client);
