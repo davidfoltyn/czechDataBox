@@ -3,7 +3,6 @@ namespace HelpPC\Test\CzechDataBox;
 
 use HelpPC\CzechDataBox\Connector\DataBox;
 use HelpPC\CzechDataBox\Connector\DataMessage;
-use HelpPC\CzechDataBox\Connector\Dispatcher;
 use HelpPC\CzechDataBox\Connector\SearchDataBox;
 use HelpPC\CzechDataBox\Enum\LoginTypeEnum;
 use HelpPC\CzechDataBox\Enum\PortalTypeEnum;
@@ -23,7 +22,7 @@ class AccountTest extends TestCase
             ->setLoginName(getenv('ISDS_LOGIN'))
 			->setLoginType(LoginTypeEnum::get(LoginTypeEnum::LOGIN_NAME_PASSWORD))
 			->setPortalType(PortalTypeEnum::get(PortalTypeEnum::CZEBOX));
-        $client = new Dispatcher();
+        $client = new \Symfony\Component\HttpClient\HttpClient();
         $serializer = SerializerFactory::create();
         $dataBox = new DataBox($serializer, $client);
         $dataMessage = new DataMessage($serializer, $client);
