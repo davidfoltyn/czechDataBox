@@ -6,8 +6,6 @@ use DOMDocument;
 use DOMElement;
 use DOMNodeList;
 use DOMXPath;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ServerException;
 use HelpPC\CzechDataBox\Enum\LoginTypeEnum;
 use HelpPC\CzechDataBox\Enum\PortalTypeEnum;
 use HelpPC\CzechDataBox\Enum\ServiceTypeEnum;
@@ -18,6 +16,7 @@ use HelpPC\CzechDataBox\Exception\SystemExclusion;
 use HelpPC\CzechDataBox\IRequest;
 use HelpPC\CzechDataBox\IResponse;
 use JMS\Serializer\SerializerInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Throwable;
@@ -161,7 +160,6 @@ abstract class Connector
 				'Accept-Encoding' => 'gzip,deflate',
 				'Content-Type' => 'text/xml; charset=utf-8',
 				'SOAPAction' => '""',
-				// 'User-Agent' => 'HelpPC PHP Client'
 			],
 			'body' => $requestDocument->saveXml(),
 		];
@@ -215,7 +213,8 @@ abstract class Connector
 			}
 
 		} catch (Throwable $exception) {
-			if (is_a($exception, ServerException::class) && $exception->getCode() === 503) {
+			/** @var TransportExceptionInterface $exception */
+			if (is_a($exception, TransportExceptionInterface::class) && $exception->getCode() === 503) {
 
 				throw new SystemExclusion($exception->getMessage(), $exception->getCode(), $exception);
 			}
